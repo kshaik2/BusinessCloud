@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd"
+       default-lazy-init="true">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.infor.cloudsuite"/>
+
+    <jaxrs:server id="CloudSuiteService" address="/">
+        <jaxrs:serviceBeans>
+            <bean class="com.infor.cloudsuite.service.UserService"/>
+            <bean class="com.infor.cloudsuite.service.RegistrationService"/>
+            <bean class="com.infor.cloudsuite.service.PasswordResetService"/>
+            <bean class="com.infor.cloudsuite.service.ProductService"/>
+            <bean class="com.infor.cloudsuite.service.TrialService"/>
+            <bean class="com.infor.cloudsuite.service.BuyService"/>
+            <bean class="com.infor.cloudsuite.service.AdminService"/>
+            <bean class="com.infor.cloudsuite.service.BDRAdminService"/>
+            <bean class="com.infor.cloudsuite.service.DeploymentService"/>
+            <bean class="com.infor.cloudsuite.service.EdgeService"/>
+            <bean class="com.infor.cloudsuite.service.SuperAdminService"/>
+            <bean class="com.infor.cloudsuite.service.CompanyService"/>
+            <bean class="com.infor.cloudsuite.service.UserAdminService"/>
+            <bean class="com.infor.cloudsuite.service.InstanceService"/>
+            <bean class="com.infor.cloudsuite.service.DashboardService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="jacksonProvider"/>
+        </jaxrs:providers>
+   </jaxrs:server>
+
+    <bean id="objectMapper" class="com.infor.cloudsuite.platform.json.CSObjectMapper"/>
+
+    <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+        <property name="mapper" ref="objectMapper"/>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="i18n.cloudsuite"/>
+    </bean>
+
+    <!-- Validation -->
+    <bean id="validatorFactory" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <!-- Freemarker -->
+    <bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
+    </bean>
+
+    <!-- Amazon Factory -->
+    <bean id="amazonFactory" class="com.infor.cloudsuite.platform.amazon.AmazonFactory">
+        <property name="accessKey" value="${AWS_ACCESS_KEY_ID}"/>
+        <property name="secretKey" value="${AWS_SECRET_KEY}"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/task
+   http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+    <!-- References:
+   Task Scheduling Simplifications in Spring 3.0
+   - http://blog.springsource.com/2010/01/05/task-scheduling-simplifications-in-spring-3-0/
+   Spring Framework 3 Reference;
+   - http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/scheduling.html-->
+
+    <!-- XML way of adding Spring's scheduling support.
+This is managed by a given TaskScheduler. -->
+    <task:scheduled-tasks scheduler="businessCloudScheduler">
+        <!--<task:scheduled ref="validationCleanerScheduleProcessor" method="process" fixed-delay="5000"/>-->
+        <!--<task:scheduled ref="validationCleanerScheduleProcessor" method="process" cron="*/5 * * * * ?"/>-->
+        <!-- cron job at 12:15 am daily -->
+        <task:scheduled ref="validationCleanerScheduleProcessor" method="process" cron="0 15 00 ? * *"/>
+        <task:scheduled ref="staleRequestScheduleProcessor" method="process" cron="0 0 00 ? * MON-FRI"/>
+    </task:scheduled-tasks>
+
+    <!--<task:scheduler id="taskScheduler" pool-size="1"/>-->
+    <!--<task:executor id="taskExecutor" pool-size="5" rejection-policy="CALLER_RUNS" queue-capacity="100"/>-->
+
+    <!-- The annotation driven way to schedule -->
+    <!--<context:component-scan base-package="com.infor.cloudsuite.task"/>-->
+    <!-- TODO: cannot get annotation driven tasks(@Scheduled) to work, but this is still needed for @Async to work. -->
+    <task:annotation-driven executor="businessCloudExecutor" scheduler="businessCloudScheduler"/>
+    <task:executor id="businessCloudExecutor" pool-size="0-25" keep-alive="600" rejection-policy="CALLER_RUNS"/>
+    <task:scheduler id="businessCloudScheduler" pool-size="3"/>
+
+</beans>

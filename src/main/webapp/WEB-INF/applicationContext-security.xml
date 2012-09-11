@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:oauth="http://www.springframework.org/schema/security/oauth"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/security/oauth
+       http://www.springframework.org/schema/security/spring-security-oauth.xsd">
+
+
+    <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled"
+                                     access-decision-manager-ref="accessDecisionManager"/>
+
+
+    <security:http pattern="/index.jsp" security="none"/>
+    <security:http pattern="/robots.txt" security="none"/>
+    <security:http pattern="/favicon.ico" security="none"/>
+    <security:http pattern="/css/**" security="none"/>
+    <security:http pattern="/js/**" security="none"/>
+    <security:http pattern="/i18n/**" security="none"/>
+
+    <security:http auto-config="true" disable-url-rewriting="false"
+                   access-decision-manager-ref="accessDecisionManager">
+
+        <security:port-mappings>
+            <security:port-mapping http="8080" https="8443"/>
+        </security:port-mappings>
+
+        <security:form-login login-page="/index.jsp"
+                             always-use-default-target="true"
+                             default-target-url="/cloud.jsp"
+                             authentication-failure-url="/index.jsp#/login"/>
+
+        <security:session-management session-fixation-protection="none"/>
+
+        <!-- Make sure you are not sending login/password in plain text on open channel. Use SSL (https) instead -->
+        <!--IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_REMEMBERED, IS_AUTHENTICATED_FULLY-->
+        <security:intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/services/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/t/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/m/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/accountsetup.jsp" access="ROLE_VALIDATED" requires-channel="any"/>
+        <security:intercept-url pattern="/validation/**" access="ROLE_VALIDATED" requires-channel="any"/>
+        <security:intercept-url pattern="/cloud.jsp" access="ROLE_EXTERNAL" requires-channel="any"/>
+        <security:intercept-url pattern="/oauth/**" access="ROLE_EXTERNAL"/>
+        <security:intercept-url pattern="/**" access="ROLE_EXTERNAL" requires-channel="any"/>
+
+        <!-- logout -->
+        <security:logout logout-url="/j_spring_security_logout" logout-success-url="/index.jsp"/>
+
+        <!-- remember me -->
+        <!--<security:remember-me key="rememberMeKey" user-service-ref="CSUserDetailsService"/>-->
+    </security:http>
+
+    <bean id="authenticationSuccessListener"
+          class="com.infor.cloudsuite.platform.security.AuthenticationSuccessListener"/>
+    <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
+    <bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+        <property name="userPropertyToUse" value="createTime"/>
+    </bean>
+    <bean id="validationAuthenticationProvider"
+          class="com.infor.cloudsuite.platform.security.ValidationAuthenticationProvider"/>
+    <bean id="runAsAuthenticationProvider"
+          class="org.springframework.security.access.intercept.RunAsImplAuthenticationProvider">
+        <property name="key" value="validationKey"/>
+    </bean>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="runAsAuthenticationProvider"/>
+        <!-- Support for Xtreme Authentication Provider -->
+        <!--<security:authentication-provider ref="xtremeAuhenticationProvider"/>-->
+        <security:authentication-provider user-service-ref="CSUserDetailsService">
+            <security:password-encoder ref="passwordEncoder">
+                <security:salt-source ref="saltSource"/>
+            </security:password-encoder>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="accessDecisionManager"
+          class="org.springframework.security.access.vote.AffirmativeBased">
+        <constructor-arg>
+            <list>
+                <ref bean="roleVoter"/>
+                <bean class="org.springframework.security.access.vote.RoleVoter"/>
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">
+        <constructor-arg ref="roleHierarchy"/>
+    </bean>
+    <bean id="roleHierarchy"
+          class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <property name="hierarchy">
+            <value>
+                ROLE_SUPERADMIN > ROLE_ADMIN
+                ROLE_ADMIN > ROLE_SALES
+                ROLE_SALES > ROLE_EXTERNAL
+                ROLE_ADMIN > ROLE_I24_ADMIN
+                ROLE_I24_ADMIN > ROLE_SALES
+            </value>
+        </property>
+    </bean>
+
+    <oauth:provider consumer-details-service-ref="consumerDetails"
+                    token-services-ref="tokenServices"
+                    request-token-url="/oauth/request_token"
+                    authenticate-token-url="/oauth/authorize"
+                    token-id-param="oauth_token"
+                    callback-url-param="oauth_callback"
+                    access-token-url="/oauth/access_token"
+                    require10a="false"/>
+
+    <oauth:consumer-details-service id="consumerDetails">
+        <oauth:consumer name="osqa.businesscloud.infor.com" key="osqaConsumerKey" secret="OSQASecret!!"
+                        resourceName="OSQA"
+                        resourceDescription="Quentsions And Answers"
+                        authorities="ROLE_OSQA"/>
+        <oauth:consumer name="Edge Consumer" key="edgeConsumerKey" secret="Turk3yF00t!"
+                        resourceName="EdgeServices"
+                        requiredToObtainAuthenticatedToken="false"
+                        authorities="SERVICEROLE_BASIC_EDGE"/>
+        <!--<oauth:consumer name="iGoogle" key="www.google.com"-->
+        <!--secret="classpath:/org/springframework/security/oauth/examples/sparklr/certs/igoogle.cert"-->
+        <!--typeOfSecret="rsa-cert" resourceName="Your Photos"-->
+        <!--resourceDescription="Your photos that you have uploaded to sparklr.com."/>-->
+    </oauth:consumer-details-service>
+
+    <bean id="tokenServices" class="com.infor.cloudsuite.platform.security.BCTokenServices"/>
+</beans>

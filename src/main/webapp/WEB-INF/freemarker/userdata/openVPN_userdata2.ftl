@@ -1,0 +1,288 @@
+#!/bin/bash
+IPTABLESSYSCONFIG=/etc/sysconfig/iptables-config
+OVPNUDP=/etc/openvpn/openvpn_udp.conf
+OVPNTCP=/etc/openvpn/openvpn_tcp.conf
+UDPOVPNCLIENT=/u00/openvpn/client_udp.ovpn
+TCPOVPNCLIENT=/u00/openvpn/client_tcp.ovpn
+SCRIPTFILE1=/var/ec2/greeneggs.py
+SCRIPTFILE2=/var/ec2/s3.py
+# -----------------------------------------------------------
+(
+cat <<'IPTSCEOF'
+IPTABLES_MODULES=""
+IPTABLES_MODULES_UNLOAD="yes"
+IPTABLES_SAVE_ON_STOP="yes"
+IPTABLES_SAVE_ON_RESTART="yes"
+IPTABLES_SAVE_COUNTER="no"
+IPTABLES_STATUS_NUMERIC="yes"
+IPTABLES_STATUS_VERBOSE="no"
+IPTABLES_STATUS_LINENUMBERS="yes"
+IPTSCEOF
+) > $IPTABLESSYSCONFIG
+# -----------------------------------------------------------
+(
+cat <<'OVPNUDPEOF'
+port 1194
+proto udp
+dev tun
+fragment 1400
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+server 5.5.16.0 255.255.240.0
+push "route ${VPC_NET_IP} ${VPC_IP_NET_MASK}"
+cipher AES-256-CBC
+auth md5
+keepalive 10 120
+max-clients 10
+comp-lzo
+user nobody
+group users
+persist-key
+persist-tun
+status /var/log/openvpn-status.log
+verb 3
+#duplicate-cn # (this means several users can use the same key)
+OVPNUDPEOF
+) > $OVPNUDP
+# -----------------------------------------------------------
+(
+cat <<'OVPNTCPEOF'
+port 443
+proto tcp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+server 5.5.32.0 255.255.240.0
+push "route ${VPC_NET_IP} ${VPC_IP_NET_MASK}"
+cipher AES-256-CBC
+auth md5
+keepalive 10 120
+max-clients 10
+comp-lzo
+user nobody
+group users
+persist-key
+persist-tun
+status /var/log/openvpn-status-tcp.log
+verb 3
+#duplicate-cn # (this means several users can use the same key)
+OVPNTCPEOF
+) > $OVPNTCP
+# -----------------------------------------------------------
+chkconfig openvpn on
+chkconfig iptables on
+sed -i -e 's/net\.ipv4\.ip_forward = 0/net\.ipv4\.ip_forward = 1/' /etc/sysctl.conf
+sysctl -p
+iptables -t nat -A POSTROUTING -j MASQUERADE
+mkdir -p /u00/openvpn
+cp -R /usr/share/openvpn/easy-rsa /u00/openvpn/
+cd /u00/openvpn/easy-rsa/2.0/
+sed -i -e 's/KEY_SIZE=1024/KEY_SIZE=2048/' -e 's/KEY_PROVINCE=\"CA\"/KEY_PROVINCE=\"GA\"/' -e 's/KEY_CITY=\"SanFrancisco\"/KEY_CITY=\"Alpharetta\"/' -e 's/KEY_ORG=\"Fort-Funston\"/KEY_ORG=\"Infor\"/' -e 's/KEY_EMAIL=\"me\@myhost\.mydomain\"/KEY_EMAIL=\"noreply\@infor\.com\"/' /u00/openvpn/easy-rsa/2.0/vars
+. ./vars
+./clean-all
+export EASY_RSA="${r"${EASY_RSA:-.}"}"
+"$EASY_RSA/pkitool" --initca $*
+"$EASY_RSA/pkitool" --server server
+./build-dh
+chown -R openvpn.openvpn /u00/openvpn
+cp keys/{ca.crt,ca.key,server.crt,server.key,dh2048.pem} /etc/openvpn/
+"$EASY_RSA/pkitool" firstlight
+# -----------------------------------------------------------
+(
+cat <<'UDPOVPNEOF'
+remote ${OPEN_VPN_EIP_ADDR} 1194 udp
+<ca>
+UDPOVPNEOF
+) > $UDPOVPNCLIENT
+cat /etc/openvpn/ca.crt >> $UDPOVPNCLIENT
+(
+cat <<'UDPOVPNEOF'
+</ca>
+<cert>
+UDPOVPNEOF
+) >> $UDPOVPNCLIENT
+sed -n '/BEGIN/,$p' /u00/openvpn/easy-rsa/2.0/keys/firstlight.crt >> $UDPOVPNCLIENT
+(
+cat <<'UDPOVPNEOF'
+</cert>
+<key>
+UDPOVPNEOF
+) >> $UDPOVPNCLIENT
+cat /u00/openvpn/easy-rsa/2.0/keys/firstlight.key >> $UDPOVPNCLIENT
+(
+cat <<'UDPOVPNEOF'
+</key>
+setenv FORWARD_COMPATIBLE 1
+client
+proto udp
+fragment 1400
+mssfix
+server-poll-timeout 4
+nobind
+dev tun
+dev-type tun
+ns-cert-type server
+reneg-sec 604800
+sndbuf 100000
+rcvbuf 100000
+#auth-user-pass
+auth MD5
+cipher AES-256-CBC
+comp-lzo
+verb 3
+pull
+UDPOVPNEOF
+) >> $UDPOVPNCLIENT
+# -----------------------------------------------------------
+(
+cat <<'TCPOVPNEOF'
+remote 107.23.12.81 443 tcp
+<ca>
+TCPOVPNEOF
+) > $TCPOVPNCLIENT
+cat /etc/openvpn/ca.crt >> $TCPOVPNCLIENT
+(
+cat <<'TCPOVPNEOF'
+</ca>
+<cert>
+TCPOVPNEOF
+) > $TCPOVPNCLIENT
+sed -n '/BEGIN/,$p' /u00/openvpn/easy-rsa/2.0/keys/firstlight.crt >> $TCPOVPNCLIENT
+(
+cat <<'TCPOVPNEOF'
+</cert>
+<key>
+TCPOVPNEOF
+) > $TCPOVPNCLIENT
+cat /u00/openvpn/easy-rsa/2.0/keys/firstlight.key >> $TCPOVPNCLIENT
+(
+cat <<'TCPOVPNEOF'
+</key>
+setenv FORWARD_COMPATIBLE 1
+client
+proto tcp
+mssfix
+server-poll-timeout 4
+nobind
+dev tun
+dev-type tun
+ns-cert-type server
+reneg-sec 604800
+sndbuf 100000
+rcvbuf 100000
+#auth-user-pass
+auth MD5
+cipher AES-256-CBC
+comp-lzo
+verb 3
+pull
+TCPOVPNEOF
+) >> $TCPOVPNCLIENT
+# -----------------------------------------------------------
+(
+cat <<'EOPS1'
+#!/usr/bin/python26
+from Crypto.Cipher import ARC4
+
+keyid='${AWS_ACCESS_KEY}'
+secretkey='${AWS_SECRET_KEY}'
+
+outcreds="/var/ec2/samiam"
+fwrite = open(outcreds, 'w')
+fwrite.write('AWSAccessKeyId='+keyid+'\n')
+fwrite.write('AWSSecretKey='+secretkey+'\n')
+fwrite.close()
+EOPS1
+) > $SCRIPTFILE1
+# -----------------------------------------------------------
+(
+cat <<'EOPS2'
+#!/usr/bin/python26
+import os, sys, time, types
+import subprocess
+from socket import gethostbyaddr
+from os.path import isfile
+import httplib, urllib
+from urlparse import urlparse
+import logging
+
+debug=1 # Set to 1 to turn on logging
+force=0   # Set to 1 to force run at every startup
+
+def replace_all(text, dic):
+    for i, j in dic.iteritems():
+        text = text.replace(i, j)
+    return text
+
+def nslooky(ip):
+      try:
+           output = gethostbyaddr(ip)
+           return output[0]
+      except:
+           output = "not found"
+           return output
+
+log_file = '/var/ec2/initscript.log'
+log = logging.getLogger()
+ch  = logging.StreamHandler()
+
+if os.path.exists(os.path.dirname(log_file)):
+    fh = logging.FileHandler(log_file)
+else:
+    raise "log directory does not exist (" + os.path.dirname(log_file) + ")"
+    sys.exit(1)
+
+log.addHandler(ch)
+log.addHandler(fh)
+
+if debug:
+    log.setLevel(logging.DEBUG)
+else:
+    log.setLevel(logging.INFO)
+
+sigurl='https://cloudformation-waitcondition-us-east-1.s3.amazonaws.com/arn%3Aaws%3Acloudformation%3Aus-east-1%3A970259117238%3Astack%2FOvpnTemp1%2Fb26d7c30-affa-11e1-afe1-5017c2aa8c86%2FOpenVPNinitWaitHandle?Expires=1339089151&AWSAccessKeyId=AKIAJN5FJFF5L4PFJV7Q&Signature=5LHw5Ajinsae28QorzmVkwlpPZw%3D'
+awsregion='${AWS_REGION}'
+vpcid=''${VPC_ID}'
+
+import boto
+import boto.ec2
+from boto.ec2.connection import EC2Connection
+import re
+from boto.s3.connection import S3Connection
+from boto.s3.connection import Location
+from boto.s3.key import Key
+regions = boto.ec2.regions()
+for index in range(len(regions)):
+    if regions[index].__dict__['name'] == awsregion:
+        regioninput = index
+regioninput = int(regioninput)
+regionconn = regions[regioninput]
+
+S3conn = S3Connection()
+S3bucketname = 'ovpn-'+vpcid
+b = S3conn.create_bucket(S3bucketname, location=Location.DEFAULT)
+from boto.s3.key import Key
+k = Key(b)
+k.key = vpcid+'_client_udp.ovpn'
+k.set_contents_from_filename('/u00/openvpn/client_udp.ovpn')
+k.set_acl('public-read')
+s3url = 'https://s3.amazonaws.com/'+S3bucketname+'/'+vpcid+'_client_udp.ovpn'
+EOPS2
+) > $SCRIPTFILE2
+# -----------------------------------------------------------
+if [ -f "$SCRIPTFILE1" ]; then
+  chmod 755 $SCRIPTFILE1
+fi
+if [ -f "$SCRIPTFILE2" ]; then
+  chmod 755 $SCRIPTFILE2
+fi
+/var/ec2/greeneggs.py
+export AWS_CREDENTIAL_FILE=/var/ec2/samiam
+export PYTHONPATH=/opt/boto-2.2.1:/opt/ipaddr-2.1.10
+sleep 3
+/bin/bash -c '/var/ec2/s3.py' >> /var/ec2/s3.out 2>&1
+service openvpn start

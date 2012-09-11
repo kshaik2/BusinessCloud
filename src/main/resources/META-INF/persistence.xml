@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+  xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+    <persistence-unit name="CloudSuiteDB" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <!-- Disable second level cache for production until a we define a production one. -->
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <validation-mode>NONE</validation-mode>
+        <properties>
+            <!--<property name="hibernate.transaction.manager_lookup_class" value="com.atomikos.icatch.jta.hibernate3.TransactionManagerLookup"/>-->
+            <property name="javax.persistence.validation.mode" value="none"/>
+            <!--<property name="hibernate.use_query_cache" value="false"/>-->
+            <!--<property name="hibernate.cache.provider_class" value="com.googlecode.hibernate.memcached.MemcachedCacheProvider"/>-->
+            <!--<property name="hibernate.memcached.servers" value="192.168.126.130:11211"/>-->
+            <!--<property name="hibernate.generate_statistics" value="true"/>-->
+        	<!--<property name="hibernate.cache.use_structure_entries" value="true"/>-->
+            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+        </properties>
+    </persistence-unit>
+</persistence>

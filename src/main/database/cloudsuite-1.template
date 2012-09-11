@@ -1,0 +1,125 @@
+{
+    "AWSTemplateFormatVersion":"2010-09-09",
+    "Description":"CloudSuite Deployment Template",
+    "Parameters":{
+        "accessKey":{
+            "Description":"Access Key",
+            "Type":"String"
+        },
+        "secretKey":{
+            "Description":"Secret Key",
+            "Type":"String"
+        },
+        "cname":{
+            "Description":"CNAME prefix for the instance",
+            "Type":"String"
+        }
+    },
+    "Resources":{
+        "CloudSuite":{
+            "Type":"AWS::ElasticBeanstalk::Application",
+            "Properties":{
+                "Description":"CloudSuite Web application",
+                "ApplicationVersions":[
+                    {
+                        "VersionLabel":"Initial Version",
+                        "Description":"Version 1.0",
+                        "SourceBundle":{
+                            "S3Bucket":"cloudsuiteServer",
+                            "S3Key":"CloudSuite-1.0.war"
+                        }
+                    }
+                ],
+                "ConfigurationTemplates":[
+                    {
+                        "TemplateName":"DefaultConfiguration",
+                        "Description":"Default Configuration Version 1.0 - with SSH access",
+                        "OptionSettings":[
+                            {
+                                "Namespace":"aws:elasticbeanstalk:container:tomcat:jvmoptions",
+                                "OptionName":"JVM Options",
+                                "Value":{
+                                    "Fn::Join":[ "", [ "-Djdbc.url=jdbc:mysql://",
+                                        {
+                                            "Fn::GetAtt":[ "cloudsuiteDB", "Endpoint.Address" ]
+                                        },
+                                        ":",
+                                        {
+                                            "Fn::GetAtt":[ "cloudsuiteDB", "Endpoint.Port" ]
+                                        },
+                                        "/cloudsuite" ]]
+                                }
+                            },
+                            {
+                                "Namespace":"aws:elasticbeanstalk:application:environment",
+                                "OptionName":"AWS_ACCESS_KEY_ID",
+                                "Value" : { "Ref" : "accessKey" }
+                            },
+                            {
+                                "Namespace":"aws:elasticbeanstalk:application:environment",
+                                "OptionName":"AWS_SECRET_KEY",
+                                "Value" : { "Ref" : "secretKey" }
+
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "CloudSuiteWS":{
+            "Type":"AWS::ElasticBeanstalk::Environment",
+            "Properties":{
+                "ApplicationName":{
+                    "Ref":"CloudSuite"
+                },
+                "CNAMEPrefix": { "Ref": "cname" },
+                "Description":"CloudSuite WebServer",
+                "TemplateName":"DefaultConfiguration",
+                "VersionLabel":"Initial Version"
+            }
+        },
+        "cloudsuiteDB":{
+            "Type":"AWS::RDS::DBInstance",
+            "Properties":{
+                "AllocatedStorage":"10",
+                "BackupRetentionPeriod":"1",
+                "DBInstanceClass":"db.m1.small",
+                "DBName":"cloudsuite",
+                "DBParameterGroupName":"default.mysql5.5",
+                "Engine":"mysql",
+                "EngineVersion":"5.5.12",
+                "MasterUsername":"cloudsuite",
+                "MasterUserPassword":"cloud",
+                "Port":"3306",
+                "PreferredBackupWindow":"05:00-05:30",
+                "PreferredMaintenanceWindow":"wed:04:30-wed:05:00",
+                "DBSecurityGroups":[
+                    {
+                        "Ref":"dbsgdefault"
+                    }
+                ]
+            }
+        },
+        "dbsgdefault":{
+            "Type":"AWS::RDS::DBSecurityGroup",
+            "Properties":{
+                "GroupDescription":"default",
+                "DBSecurityGroupIngress":[
+                    {
+                        "EC2SecurityGroupName":"elasticbeanstalk-default"
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs":{
+        "URL":{
+            "Description":"URL of the AWS Elastic Beanstalk Environment",
+            "Value":{
+                "Fn::Join":[ "", [ "http://", {
+                    "Fn::GetAtt":[ "CloudSuiteWS", "EndpointURL" ]
+                }]]
+            }
+        }
+    }
+}

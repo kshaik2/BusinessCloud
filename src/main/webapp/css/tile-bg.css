@@ -1,0 +1,133 @@
+.tile-bg-01{
+	background: #9f9f9f url(img/infor-bg/server-room.jpg) -50px -110px;
+}
+	.small-app-box.tile-bg-01{ 
+		background: #9f9f9f url(img/infor-bg/server-room.jpg) -40px -120px;
+	}
+.tile-bg-02{
+	background: #9f9f9f url(img/infor-bg/credit-card.jpg) -50px -120px;
+}
+	.small-app-box.tile-bg-02{ 
+		background: #9f9f9f url(img/infor-bg/credit-card.jpg) -80px -170px;
+	}
+.tile-bg-03{
+	background: #9f9f9f url(img/infor-bg/factory-robot.jpg) -50px -110px;
+}
+	.small-app-box.tile-bg-03{ 
+		background: #9f9f9f url(img/infor-bg/factory-robot.jpg) -180px -110px;
+	}
+.tile-bg-04{
+	background: #9f9f9f url(img/infor-bg/newyork.jpg) -50px -120px;
+}
+	.small-app-box.tile-bg-04{ 
+		background: #9f9f9f url(img/infor-bg/newyork.jpg) -50px -130px;
+	}
+.tile-bg-05{
+ 	background: #9f9f9f url(img/infor-bg/chart-performance.jpg) 0 -50px;
+}
+	.small-app-box.tile-bg-05{ 
+		background: #9f9f9f url(img/infor-bg/chart-performance.jpg) 0 -100px;
+	}
+.tile-bg-06{
+ 	background: #9f9f9f url(img/infor-bg/classroom.jpg) -50px -60px;
+}
+	.small-app-box.tile-bg-06{ 
+		background: #9f9f9f url(img/infor-bg/classroom.jpg) -170px -40px;
+	}
+.tile-bg-07{
+ 	background: #9f9f9f url(img/infor-bg/hotel-lobby.jpg) 0 -100px;
+}
+	.large-app-box.tile-bg-07{
+		background: #9f9f9f url(img/infor-bg/hotel-lobby.jpg) 0 0;
+	}
+.tile-bg-08{
+ 	background: #9f9f9f url(img/infor-bg/chart-with-pen.jpg) 0 -100px;
+}
+	.small-app-box.tile-bg-08{
+		background: #9f9f9f url(img/infor-bg/chart-with-pen.jpg) 0 -100px;
+	}
+.tile-bg-09{
+ 	background: #2989D8 url(img/infor-bg/document-pen.jpg) -35px -40px;
+}
+	.small-app-box.tile-bg-09{
+		background: #2989D8 url(img/infor-bg/document-pen.jpg) -140px -130px;
+	}
+.tile-bg-10{
+ 	background: #2989D8 url(img/infor-bg/networking.jpg) -40px -45px;
+}
+	.small-app-box.tile-bg-10{
+		background: #2989D8 url(img/infor-bg/networking.jpg) -40px -10px;
+	}
+.tile-bg-11{
+ 	background: #2989D8 url(img/infor-bg/forklift.jpg) -35px -120px;
+}
+	.small-app-box.tile-bg-11{
+		background: #2989D8 url(img/infor-bg/forklift.jpg) -20px -125px;
+	}
+.tile-bg-12{
+ 	background: #2989D8 url(img/infor-bg/ship.jpg) -80px -50px;
+}
+	.small-app-box.tile-bg-12{
+		background: #2989D8 url(img/infor-bg/ship.jpg) -110px -140px;
+	}
+.tile-bg-13{
+ 	background: #2989D8 url(img/infor-bg/workflow.jpg) -80px -20px;
+}
+	.small-app-box.tile-bg-13{
+		background: #2989D8 url(img/infor-bg/workflow.jpg) -110px -20px;
+	}
+.tile-bg-14{
+ 	background: #2989D8 url(img/infor-bg/warehouse.jpg) -80px -50px;
+}
+	.small-app-box.tile-bg-14{
+		background: #2989D8 url(img/infor-bg/warehouse.jpg) -110px -140px;
+	}
+.tile-bg-15{
+ 	background: #2989D8 url(img/infor-bg/computer-chip.jpg) -50px -120px;
+}
+	.small-app-box.tile-bg-15{
+		background: #2989D8 url(img/infor-bg/computer-chip.jpg) -80px -125px;
+	}
+.tile-bg-16{
+ 	background: #2989D8 url(img/infor-bg/puzzle.jpg) -40px -120px;
+}
+	.small-app-box.tile-bg-16{
+		background: #2989D8 url(img/infor-bg/puzzle.jpg) -70px -140px;
+	}
+.tile-bg-17{
+ 	background: #2989D8 url(img/infor-bg/loading-dock-truck.jpg) -0px -120px;
+}
+	.small-app-box.tile-bg-17{
+		background: #2989D8 url(img/infor-bg/loading-dock-truck.jpg) -0px -125px;
+	}
+.tile-bg-18{
+ 	background: #2989D8 url(img/infor-bg/laptop.jpg) -40px -120px;
+}
+	.small-app-box.tile-bg-18{
+		background: #2989D8 url(img/infor-bg/laptop.jpg) -75px -155px;
+	}
+.tile-bg-19{
+ 	background: #2989D8 url(img/infor-bg/currency.jpg) -40px -120px;
+}
+	.small-app-box.tile-bg-19{
+		background: #2989D8 url(img/infor-bg/currency.jpg) -40px -155px;
+	}
+.tile-bg-20{
+ 	background: #2989D8 url(img/infor-bg/hotel-room.jpg) -100px -100px;
+}
+	.small-app-box.tile-bg-20{
+		background: #2989D8 url(img/infor-bg/hotel-room.jpg) -190px -125px;
+	}	
+.tile-bg-21{
+ 	background: #2989D8 url(img/infor-bg/forklift.jpg) -35px -120px;
+}
+	.small-app-box.tile-bg-21{
+		background: #2989D8 url(img/infor-bg/forklift.jpg) -20px -125px;
+	}
+
+.tile-bg-22{
+ 	background: #9f9f9f url(img/infor-bg/chart-performance.jpg) 0 -50px;
+}
+	.small-app-box.tile-bg-22{ 
+		background: #9f9f9f url(img/infor-bg/chart-performance.jpg) 0 -100px;
+	}

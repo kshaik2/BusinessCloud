@@ -1,0 +1,287 @@
+body{
+	background: #EAEAEA url(img/bc-white-bg.png) repeat;
+	padding:0;
+	margin:0;
+}
+#header-top{
+	height: 70px;
+	padding: 3px 0;
+	background: #EAEAEA url(img/bc-top-bg.png) repeat-x;
+	background: #000 url(img/global-sprite-background.png) center 0 no-repeat;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+#header-top-content{
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	height:50px;
+	position:relative;
+}
+#infor-bc-logo{
+	height: 60px;
+	width:300px;
+	position:relative;
+	float:left;
+	margin-top:4px;
+	margin-left:10px;
+	/*background: transparent url(img/bc-logo-with-infor-white.png) no-repeat;*/
+	background: transparent url(img/new-infor-bc-logo-for-dark-.png) 0 0 no-repeat;
+}
+#login-button-top{
+	margin-top:13px;
+	margin-right:10px;
+	width:111px;
+	height:44px;
+	background: transparent url(img/login-default.png) no-repeat;
+	float:right;
+	cursor:pointer;
+
+}
+#login-button-top:hover{
+	background: transparent url(img/login-hover.png) no-repeat;
+}
+#get-started-button-top{
+	margin-top:13px;
+	width:162px;
+	height:44px;
+	background: transparent url(img/get-started-default.png) no-repeat;
+	float:right;
+	cursor:pointer;
+}
+#get-started-button-top:hover{
+	background: transparent url(img/get-started-hover.png) no-repeat;
+}
+#content-main{
+	top: 0;
+	left: 0;
+	right: 0;
+	margin:0;
+	padding:76px 0 0 0;	
+}
+#content-one,#content-two,#content-three,#content-four,#content-five,#content-six{
+	width: 100%;
+	height:500px;
+	position:relative;
+}
+
+
+
+.sub-content{
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	height:auto;
+	position:relative;
+	overflow:hidden;
+}
+#content-one{
+	height:auto;
+}
+#content-one .sub-content{
+	height:495px;
+}
+#monitor-site{
+	margin:50px 0 0 17px;
+	width:387px;
+	height:446px;
+	float:left;
+	background: transparent url(img/monitor-site-pic.png) no-repeat;
+}
+#huge-headline-text{
+	margin:50px 15px 0 0;
+	width:536px;
+	height:311px;
+	float:left;
+	background: transparent url(img/huge-headline-text.png) no-repeat;
+}
+#content-two{
+	height:600px;
+}
+#section-two-icon-list{
+	width:887px;
+	height:210px;
+	float:left;
+	margin:40px 0 20px 36px;
+	background: transparent url(img/section-two-icon-list.png) no-repeat;
+}
+#content-three{
+	height:450px;
+}
+#deploy-in-minutes{
+	width:930px;
+	height:400px;
+	float:left;
+	margin:30px 0 0 12px;
+	background: transparent url(img/deploy-in-minutes.png) no-repeat;
+}
+#content-four{
+	height:auto;
+	padding:30px 0;
+}
+#customize-by-industry{
+	width:702px;
+	height:69px;
+	float:left;
+	margin:30px 25px 0 30px;
+	background: transparent url(img/customized-by-industry.png) no-repeat;
+}
+#day-in-the-life{
+	width:702px;
+	height:69px;
+	float:left;
+	margin:30px 25px 0 30px;
+	background: transparent url(img/day-in-the-life.png) no-repeat;
+}
+.day-in-the-life-vid-container{
+	width:960px;
+	float:left;
+	height:240px;
+	margin-top:0px;
+	background: transparent url(img/vid-thumbs.png) 30px 40px no-repeat;
+}
+#customer-test{
+	width:887px;
+	height:210px;
+	float:left;
+	margin:40px 0 20px 24px;
+	background: transparent url(img/section-two-icon-list.png) no-repeat;
+}
+.life-vid{
+	width:250px;
+	height:180px;
+	margin:29px;
+	float:left;
+}
+#content-five{
+	height:460px;
+}
+#industry-list{
+	width:899px;
+	height:171px;
+	float:left;
+	margin:30px 0 0 30px;
+	background: transparent url(img/industry-list.png) no-repeat;
+}
+#horizontal-by-need{
+	width:856px;
+	height:167px;
+	float:left;
+	margin:50px 0 0 30px;
+	background: transparent url(img/horizontal-by-need.png) no-repeat;
+}
+#content-six{
+	height:100px;
+}
+.twitter-follow-button{
+	width:181px;
+	height:28px;
+	float:right;
+	margin:15px 10px 10px 10px;
+	border:0px !important;
+	color:#000;
+	text-decoration:none;
+	background: transparent url(img/twitter-bc.png) no-repeat;
+}
+.twitter-to-button{
+	width:193px;
+	height:28px;
+	float:right;
+	margin:15px 10px 10px 10px;
+	border:0px !important;
+	color:#000;
+	text-decoration:none;
+	background: transparent url(img/twitter-bc-to.png) no-repeat;
+}
+
+
+.sub-desc{
+	width:300px;
+	height:250px;
+	padding:10px;
+}
+.sd-icon{
+	float:left;
+	height:250px;
+	width:60px;
+	margin-right:5px;
+	background: transparent url(img/icons/black/137-presentation@2x.png) no-repeat;
+}
+.sd-text{
+	float:left;
+	height:250px;
+	width:230px;
+	margin-left:5px;
+	color:#fff;
+	overflow:hidden;
+	font-size:14px;
+	font-weight:bold;
+	line-height:18px;
+}
+
+a.ibc-blog-title{
+	float:left;
+	width:760px;
+	margin-left:100px;
+	height:50px;
+	padding:10px 0px;
+	color:#333;
+	font-size:33px;
+	line-height:33px;
+	font-weight:bold;
+	font-family:Arial;
+	text-decoration:none;
+}
+a.ibc-blog-view-more{
+	float:left;
+	width:760px;
+	margin-left:100px;
+	height:20px;
+	padding:10px 0px;
+	color:#333;
+	font-size:14px;
+	line-height:14px;
+	font-weight:bold;
+	font-family:Arial;
+	text-decoration:none;
+	text-align:center;
+}
+
+#blog .post{
+	float:left;
+	width:760px;
+	margin-left:100px;
+}
+#blog a.post-link{
+font-size:20px;
+float:left;
+text-decoration:none;
+color:#333;
+font-weight:bold;
+width:760px;
+height:33px;
+line-height:33px;
+margin-left:0px;
+}
+#blog .post-body{
+	float:left;
+	width:700px;
+	margin-left:60px;
+	color:#555;
+}
+
+
+
+
+.bg-black{
+	background: #EAEAEA url(img/bc-black-bg.png) repeat;
+}
+.bg-white{
+	background: #EAEAEA url(img/bc-white-bg.png) repeat;
+}
+.bg-grey{
+	background: #EAEAEA url(img/bc-grey-bg.png) repeat;
+}

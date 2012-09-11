@@ -1,0 +1,19 @@
+
+POST Deployment of new WAR:
+1. Re-import products
+    a. Log into the app as an administrative user (admin@infor.com)
+    b. Open REST plugin in browser
+    c. Perform the following as a POST operation.  
+    Set "Content-Type" to "application/json"
+    Hit the following URL (change hostname/path to match):
+    http://hostname:<port>/PATH/services/superadmin/reseedKey?importKey=PRODUCTS
+  
+    This will load the ProductVersion data from seed, and appropriately hook it to Product
+
+2. Run BUSCLOUD-98-*.sql file to update the DeploymentStack and TrialInstance tables.  
+  
+3. Run BUSCLOUD-Release3-Sprint5-HMS-adds-*.sql to add HMS products.
+
+4. Confirm that data has migrated, before doing step 5.
+
+5. Run BUSCLOUD-Sprint5-Cleanup-*.sql

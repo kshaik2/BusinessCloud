@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="settings" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:settings.properties"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+    </bean>
+
+    <bean id="settingsProvider" class="com.infor.cloudsuite.platform.components.SettingsProvider">
+        <property name="productionMode" value="${settings.productionMode}"/>
+        <property name="trialRecycleInforDomain" value="${settings.trialRecycleInforDomain}"/>
+        <property name="trialRecycleAllDomains" value="${settings.trialRecycleAllDomains}"/>
+        <property name="excludeInforEmailsFromLeads" value="${settings.excludeInforEmailsFromLeads}"/>
+        <property name="daysUntilValidationCleaned" value="${settings.daysUntilValidationCleaned}"/>
+        <property name="daysAfterTrialRequestStaleNotification" value="${settings.daysAfterTrialRequestStaleNotification}"/>
+        <property name="forceUpdateWithSeedData" value="${settings.forceUpdateWithSeedData}"/>
+        <property name="seedFileName" value="${settings.seedFileName}"/>
+        <property name="versionOneProductionUsername" value="${settings.versionOneProductionUsername}"/>
+        <property name="versionOneProductionPassword" value="${settings.versionOneProductionPassword}"/>
+        <property name="versionOneProductionConnectionString" value="${settings.versionOneProductionConnectionString}"/>
+        <property name="scheduleAdvancedEmailWarningTime" value="${settings.scheduleAdvancedEmailWarningTime}" />
+        <property name="notificationTrialExpirationWarning" value="${settings.notificationTrialExpirationWarning}" />
+    </bean>
+</beans>

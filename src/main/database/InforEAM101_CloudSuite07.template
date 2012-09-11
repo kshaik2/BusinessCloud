@@ -1,0 +1,963 @@
+{
+   "AWSTemplateFormatVersion":"2010-09-09",
+   "Description":"Rev 1.07 - A complete Infor EAM 10.1 Stack. AMIs are chosen based on the region in which the stack is deployed.  Necessary EIPs are created and associated with instances. WaitCondition is employed, or you manually signal the WaitCondition object using the URL created by the WaitConditionHandle. To find the URL, use cfn-describe-stack-resources or the AWS Management Console to display the PhysicalResourceId of the WaitConditionHandle. | Author: Mike Savage, Infor Global Solutions | Date: Dec. 16, 2011",
+   
+   "Parameters":{
+      "KeyName":{
+	 "Description":"Name of an existing EC2 KeyPair",
+	 "Type":"String"
+      },
+      "DbInstanceType":{
+	 "Type":"String",
+	 "Default":"m1.large",
+	 "Description":"DB Server EC2 instance type, e.g. m1.small, m1.large, etc."
+      },
+      "AppInstanceType":{
+	 "Type":"String",
+	 "Default":"m1.large",
+	 "Description":"App Server EC2 instance type, e.g. m1.small, m1.large, etc."
+      },
+      "RepInstanceType":{
+	 "Type":"String",
+	 "Default":"m1.large",
+	 "Description":"Report Server EC2 instance type, e.g. m1.small, m1.large, etc."
+      },
+      "AppDatasourceName":{
+	 "Type":"String",
+	 "Default":"EAM101_AWS",
+	 "Description":"Application datasource name for JDBC connection"
+      },
+      "AppDatabasePort":{
+	 "Type":"String",
+	 "Default":"5001",
+	 "Description":"Application database port for JDBC connection"
+      },
+      "AppDatabaseName":{
+	 "Type":"String",
+	 "Default":"eam101",
+	 "Description":"Application database name"
+      },
+      "AppDatabaseUserName":{
+	 "Type":"String",
+	 "Default":"eam101",
+	 "Description":"Application database username"
+      },
+      "RepDatabasePort":{
+	 "Type":"String",
+	 "Default":"5001",
+	 "Description":"Reports database port for JDBC connection"
+      },
+      "RepDatabaseName":{
+	 "Type":"String",
+	 "Default":"cogcs",
+	 "Description":"Reports database name"
+      },
+      "RepDatabaseUserName":{
+	 "Type":"String",
+	 "Default":"cogcs",
+	 "Description":"Reports database username"
+      }
+   },
+   "Mappings":{
+      "DbRegionMap":{
+	 "us-east-1":{
+	    "AMI":"ami-2f549f46"
+	 },
+	 "us-west-1":{
+	    "AMI":"ami-655a0a20"
+	 },
+	 "eu-west-1":{
+	    "AMI":"ami-7fd4e10b"
+	 },
+	 "ap-southeast-1":{
+	    "AMI":"ami-72621c20"
+	 },
+	 "ap-northeast-1":{
+	    "AMI":"ami-8e08a38f"
+	 }
+      },
+      "AppRegionMap":{
+	 "us-east-1":{
+	    "AMI":"ami-3172b958"
+	 },
+	 "us-west-1":{
+	    "AMI":"ami-655a0a20"
+	 },
+	 "eu-west-1":{
+	    "AMI":"ami-7fd4e10b"
+	 },
+	 "ap-southeast-1":{
+	    "AMI":"ami-72621c20"
+	 },
+	 "ap-northeast-1":{
+	    "AMI":"ami-8e08a38f"
+	 }
+      },
+      "RepRegionMap":{
+	 "us-east-1":{
+	    "AMI":"ami-bb3df7d2"
+	 },
+	 "us-west-1":{
+	    "AMI":"ami-655a0a20"
+	 },
+	 "eu-west-1":{
+	    "AMI":"ami-7fd4e10b"
+	 },
+	 "ap-southeast-1":{
+	    "AMI":"ami-72621c20"
+	 },
+	 "ap-northeast-1":{
+	    "AMI":"ami-8e08a38f"
+	 }
+      },
+      "AWSInstanceType2Arch":{
+	 "t1.micro":{
+	    "Arch":64
+	 },
+	 "m1.small":{
+	    "Arch":32
+	 },
+	 "m1.large":{
+	    "Arch":64
+	 },
+	 "m1.xlarge":{
+	    "Arch":64
+	 },
+	 "m2.xlarge":{
+	    "Arch":64
+	 },
+	 "m2.2xlarge":{
+	    "Arch":64
+	 },
+	 "m2.4xlarge":{
+	    "Arch":64
+	 },
+	 "c1.medium":{
+	    "Arch":32
+	 },
+	 "c1.xlarge":{
+	    "Arch":64
+	 },
+	 "cc1.4xlarge":{
+	    "Arch":64
+	 }
+      }
+   },
+   "Resources":{
+     "GlobalEAM101SecurityGroup" : {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "Enables circular SG dependencies...",
+          "SecurityGroupIngress" : [
+            {
+              "IpProtocol" : "icmp",
+              "FromPort" : "-1",
+              "ToPort" : "-1"
+            }
+          ]
+      }
+    },
+    "GlobalEAM101SecurityGroupIngress" : {
+      "Type" : "AWS::EC2::SecurityGroupIngress",
+      "Properties" : {
+        "GroupName" : { "Ref" : "GlobalEAM101SecurityGroup" },
+        "IpProtocol" : "icmp",
+        "FromPort" : "-1",
+        "ToPort" : "-1",
+        "SourceSecurityGroupName" : { "Ref" : "GlobalEAM101SecurityGroup" }
+      }
+    },
+      "EAM101DbEc2Instance":{
+	 "Type":"AWS::EC2::Instance",
+	 "Properties":{
+	    "KeyName":{
+	       "Ref":"KeyName"
+	    },
+	    "InstanceType":{
+	       "Ref":"DbInstanceType"
+	    },
+	    "ImageId":{
+	       "Fn::FindInMap":[
+		  "DbRegionMap",
+		  {
+		     "Ref":"AWS::Region"
+		  },
+		  "AMI"
+	       ]
+	    },
+	    "UserData":{ "Fn::Base64" : 
+        { "Fn::Join" :
+            [ "\n", [ 
+                { "Fn::Join" : [ "", [ "[EAM101]", "" ] ] },
+                { "Fn::Join" : [ "=", [ "SignalURL", {"Ref" : "EAM101DbWaitHandle"} ] ] },
+                { "Fn::Join" : [ "=", [ "CLOUDWININITPARAMSFILE", "C:/Windows/cwi/wininit.params" ] ] },
+                { "Fn::Join" : [ "", [ "import ConfigParser", "" ] ] },
+                { "Fn::Join" : [ "", [ "import os, sys, string, time", "" ] ] },
+                { "Fn::Join" : [ "", [ "from os.path import isfile", "" ] ] },
+                { "Fn::Join" : [ "", [ "import httplib, urllib", "" ] ] },
+                { "Fn::Join" : [ "", [ "from urlparse import urlparse", "" ] ] },
+                { "Fn::Join" : [ "", [ "import logging", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "debug = True # Set to True to turn on logging", "" ] ] },
+                { "Fn::Join" : [ "", [ "log_file = 'C:/Windows/cwi/wininitscript.log'", "" ] ] },
+                { "Fn::Join" : [ "", [ "log = logging.getLogger()", "" ] ] },
+                { "Fn::Join" : [ "", [ "ch  = logging.StreamHandler()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def dropcogdb():", "" ] ] },
+                { "Fn::Join" : [ "", [ "    execsql = \"sqlcmd\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    defdb = \"master\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    connstr = execsql + \" -W -h-1 -E -d \" + defdb + \" /w 8192 \"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    singlecogdb = \"ALTER DATABASE cogcs SET SINGLE_USER WITH ROLLBACK IMMEDIATE\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dropcoglogin = \"sp_droplogin cogcs\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dropcogdb = \"drop database cogcs\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    singlecogdbnow = os.popen(connstr + ' -Q' + '\"' + singlecogdb + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(20)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dropcogloginnow = os.popen(connstr + ' -Q' + '\"' + dropcoglogin + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(5)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dropcogdbnow = os.popen(connstr + ' -Q' + '\"' + dropcogdb + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(15)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def createcogdb():", "" ] ] },
+                { "Fn::Join" : [ "", [ "    execsql = \"sqlcmd\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    defdb = \"master\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    connstr = execsql + \" -W -h-1 -E -d \" + defdb + \" /w 8192 \"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    createcogdb = \"create database cogcs ON PRIMARY (NAME= cogcs_data01, FILENAME= 'C:\\Program Files\\Microsoft SQL Server\\MSSQL10_50.MSSQLSERVER\\MSSQL\\DATA\\cogcs_data01.mdf', SIZE = 200, MAXSIZE = 2000, FILEGROWTH = 50MB), FILEGROUP cogcs_idx01 ( NAME = cogcs_idx01, FILENAME = 'C:\\Program Files\\Microsoft SQL Server\\MSSQL10_50.MSSQLSERVER\\MSSQL\\DATA\\cogcs_idx01.ndf', SIZE = 100, MAXSIZE = 800, FILEGROWTH = 10MB ) LOG ON (NAME = cogcs_log01, FILENAME='C:\\Program Files\\Microsoft SQL Server\\MSSQL10_50.MSSQLSERVER\\MSSQL\\DATA\\cogcs_log01.ldf', SIZE = 100, MAXSIZE = 800, FILEGROWTH = 20MB) COLLATE Latin1_General_CI_AS\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    snapisolaton = \"ALTER DATABASE cogcs SET ALLOW_SNAPSHOT_ISOLATION ON\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    readcomsnapon = \"ALTER DATABASE cogcs SET READ_COMMITTED_SNAPSHOT ON\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    createcogdbnow = os.popen(connstr + ' -Q' + '\"' + createcogdb + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(20)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    snapisolatonnow = os.popen(connstr + ' -Q' + '\"' + snapisolaton + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(5)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    readcomsnaponnow = os.popen(connstr + ' -Q' + '\"' + readcomsnapon + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(5)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def createcoglogin():", "" ] ] },
+                { "Fn::Join" : [ "", [ "    execsql = \"sqlcmd\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    defdb = \"master\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    connstr = execsql + \" -W -h-1 -E -d \" + defdb + \" /w 8192 \"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    newcoglogin = \"CREATE login cogcs WITH PASSWORD = 'cogcspwd01' , DEFAULT_DATABASE=cogcs, CHECK_POLICY=OFF\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    newcogloginnow = os.popen(connstr + ' -Q' + '\"' + newcoglogin + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(5)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def createcoguser():", "" ] ] },
+                { "Fn::Join" : [ "", [ "    execsql = \"sqlcmd\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    defdb = \"cogcs\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    connstr = execsql + \" -W -h-1 -E -d \" + defdb + \" /w 8192 \"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    newcoguser = \"CREATE user cogcs for login cogcs\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbo = \"sp_addrolemember db_owner, cogcs\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    newcogusernow = os.popen(connstr + ' -Q' + '\"' + newcoguser + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(5)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbonow = os.popen(connstr + ' -Q' + '\"' + cogdbo + '\"')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(5)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "if os.path.exists(os.path.dirname(log_file)):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    fh = logging.FileHandler(log_file)", "" ] ] },
+                { "Fn::Join" : [ "", [ "else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    raise \"log directory does not exist (\" + os.path.dirname(log_file) + \")\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sys.exit(1)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.addHandler(ch)", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.addHandler(fh)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "if debug:", "" ] ] },
+                { "Fn::Join" : [ "", [ "  log.setLevel(logging.DEBUG)", "" ] ] },
+                { "Fn::Join" : [ "", [ "else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "  log.setLevel(logging.INFO)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "file_to_watch = \"C:/Program Files/Microsoft SQL Server/MSSQL10_50.MSSQLSERVER/MSSQL/Log/ERRORLOG\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "search_phrase = \"SQL Server is now ready for client connections\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "config = ConfigParser.ConfigParser(allow_no_value=True)", "" ] ] },
+                { "Fn::Join" : [ "", [ "config.read('C:/Windows/cwi/wininit.params')", "" ] ] },
+                { "Fn::Join" : [ "", [ "sigurl=config.get('EAM101','SignalURL')", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.debug('SignalURL passed as: %s', sigurl)", "" ] ] },
+                { "Fn::Join" : [ "", [ "o = urlparse(sigurl)", "" ] ] },
+                { "Fn::Join" : [ "", [ "pathnquery = o.path + \"?\" + o.query", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.debug('URL path + query set to: %s', pathnquery)", "" ] ] },
+                { "Fn::Join" : [ "", [ "body_content_success = '{\"Status\" : \"SUCCESS\",\"Reason\" : \"Configuration Complete\",\"UniqueId\" : \"EAM101DB20111101\",\"Data\" : \"Infor EAM 10.1 Database Server is available.\"}'", "" ] ] },
+                { "Fn::Join" : [ "", [ "body_content_failure = '{\"Status\" : \"FAILURE\",\"Reason\" : \"SQL Server timeout\",\"UniqueId\" : \"EAM101DB20111101\",\"Data\" : \"Infor EAM 10.1 Database Server failed to start in under 10 minutes.\"}'", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "count=0", "" ] ] },
+                { "Fn::Join" : [ "", [ "while not os.path.exists(file_to_watch):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    count += 1", "" ] ] },
+                { "Fn::Join" : [ "", [ "    time.sleep(15)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('Waiting for SQL Server to start...')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if count == 40:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        log.debug('Waited ten minutes, cutting the chord...')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn = httplib.HTTPSConnection(o.netloc)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn.request(\"PUT\", pathnquery, body_content_failure)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        response = conn.getresponse()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        log.debug('%s %s', response.status, response.reason)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        data = response.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        log.debug('%s', data)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        sys.exit()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "a = open(file_to_watch, \"rb\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "# First check", "" ] ] },
+                { "Fn::Join" : [ "", [ "binText = a.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "statinfo1 = os.stat(file_to_watch)", "" ] ] },
+                { "Fn::Join" : [ "", [ "newText = binText.decode('utf-16')", "" ] ] },
+                { "Fn::Join" : [ "", [ "newText = newText.encode('ascii', 'ignore')", "" ] ] },
+                { "Fn::Join" : [ "", [ "searchText = newText.find(search_phrase)", "" ] ] },
+                { "Fn::Join" : [ "", [ "if searchText == -1:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('Search phrase not found.')", "" ] ] },
+                { "Fn::Join" : [ "", [ "else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('Search phrase found!!!')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    a.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    conn = httplib.HTTPSConnection(o.netloc)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    conn.request(\"PUT\", pathnquery, body_content_success)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    response = conn.getresponse()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('%s %s', response.status, response.reason)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    data = response.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('%s', data)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    conn.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dropcogdb()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    createcogdb()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    createcoglogin()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    createcoguser()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sys.exit()", "" ] ] },
+                { "Fn::Join" : [ "", [ "while 1:", "" ] ] },
+                { "Fn::Join" : [ "", [ "  time.sleep (3)", "" ] ] },
+                { "Fn::Join" : [ "", [ "  statinfo2 = os.stat(file_to_watch)", "" ] ] },
+                { "Fn::Join" : [ "", [ "  if statinfo1 != statinfo2:", "" ] ] },
+                { "Fn::Join" : [ "", [ "      binText = a.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "      statinfo1 = os.stat(file_to_watch)", "" ] ] },
+                { "Fn::Join" : [ "", [ "      newText = binText.decode('utf-16')", "" ] ] },
+                { "Fn::Join" : [ "", [ "      newText = newText.encode('ascii', 'ignore')", "" ] ] },
+                { "Fn::Join" : [ "", [ "      searchText = newText.find(search_phrase)", "" ] ] },
+                { "Fn::Join" : [ "", [ "      statinfo1 = os.stat(file_to_watch)", "" ] ] },
+                { "Fn::Join" : [ "", [ "      if searchText == -1:", "" ] ] },
+                { "Fn::Join" : [ "", [ "          log.debug('Search phrase not found.')", "" ] ] },
+                { "Fn::Join" : [ "", [ "      else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "          log.debug('Search phrase found!!!')", "" ] ] },
+                { "Fn::Join" : [ "", [ "          a.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          conn = httplib.HTTPSConnection(o.netloc)", "" ] ] },
+                { "Fn::Join" : [ "", [ "          conn.request(\"PUT\", pathnquery, body_content_success)", "" ] ] },
+                { "Fn::Join" : [ "", [ "          response = conn.getresponse()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          log.debug('%s %s', response.status, response.reason)", "" ] ] },
+                { "Fn::Join" : [ "", [ "          data = response.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          log.debug('%s', data)", "" ] ] },
+                { "Fn::Join" : [ "", [ "          conn.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          dropcogdb()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          createcogdb()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          createcoglogin()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          createcoguser()", "" ] ] },
+                { "Fn::Join" : [ "", [ "          break", "" ] ] },
+                { "Fn::Join" : [ "", [ "      log.debug('ERRORLOG size = %s', statinfo2.st_size)", "" ] ] } 
+            ] ] 
+        }
+      },
+	    "SecurityGroups" : [ { "Ref" : "EAM101DbSG" } ]
+	 }
+      },
+      "EAM101DbSG" : {
+                "Type" : "AWS::EC2::SecurityGroup",
+                "Properties" : {
+                     "GroupDescription" : "Infor EAM 10.1 MSSQL Server Security Group",
+                     "SecurityGroupIngress" : [
+                        {
+                           "IpProtocol" : "tcp",
+                           "FromPort" : "5001",
+                           "ToPort" : "5001",
+                           "SourceSecurityGroupName" : { "Ref" : "GlobalEAM101SecurityGroup" }
+                  }
+              ]
+          }
+      },
+      "EAM101DbSGIngress" : {
+                "Type" : "AWS::EC2::SecurityGroupIngress",
+                "Properties" : {
+                      "GroupName" : { "Ref" : "EAM101DbSG" },
+                      "IpProtocol" : "tcp",
+                      "FromPort" : "5001",
+                      "ToPort" : "5001",
+                      "SourceSecurityGroupName" : { "Ref" : "EAM101DbSG" }
+                 }
+    },
+      "EAM101DbEIPAddress" : {
+	    "Type" : "AWS::EC2::EIP",
+	    "Properties" : {
+	    }
+	},
+	"DbEIPAssoc" : {
+	    "Type" : "AWS::EC2::EIPAssociation",
+	    "Properties" : {
+		"InstanceId" : { "Ref" : "EAM101DbEc2Instance" },
+		"EIP" : { "Ref" : "EAM101DbEIPAddress" }
+	    }
+	},
+        "EAM101DbWaitHandle" : {
+            "Type" : "AWS::CloudFormation::WaitConditionHandle",
+            "Properties" : {
+            }
+        },
+        "EAM101DbWaitCondition" : {
+            "Type" : "AWS::CloudFormation::WaitCondition",
+            "Properties" : {
+                "Handle" : { "Ref" : "EAM101DbWaitHandle" },
+                "Timeout" : "7200"
+            }
+        },
+      "EAM101RepEc2Instance":{
+	 "Type":"AWS::EC2::Instance",
+	 "Properties":{
+	    "KeyName":{
+	       "Ref":"KeyName"
+	    },
+	    "InstanceType":{
+	       "Ref":"RepInstanceType"
+	    },
+	    "ImageId":{
+	       "Fn::FindInMap":[
+		  "RepRegionMap",
+		  {
+		     "Ref":"AWS::Region"
+		  },
+		  "AMI"
+	       ]
+	    },
+	    "UserData":{ "Fn::Base64" : 
+        { "Fn::Join" : 
+            [ "\n", [ 
+                { "Fn::Join" : [ "", [ "[EAM101]", "" ] ] },
+                { "Fn::Join" : [ "=", [ "DSNAME", {"Ref" : "AppDatasourceName"} ] ] },
+                { "Fn::Join" : [ "=", [ "DBPORT", { "Ref" : "AppDatabasePort" } ] ] }, 
+                { "Fn::Join" : [ "=", [ "DBNAME", { "Ref" : "AppDatabaseName" } ] ] }, 
+                { "Fn::Join" : [ "=", [ "DBUSERNAME", { "Ref" : "AppDatabaseUserName" } ] ] }, 
+                { "Fn::Join" : [ "=", [ "DBPWD", "{ENCR}8Ofnqt5YEMVNBCoPxWCG3Q==" ] ] },
+                { "Fn::Join" : [ "=", [ "DBEIPADDR", { "Ref" : "EAM101DbEIPAddress" } ] ] },
+                { "Fn::Join" : [ "", [ "[COG101]", "" ] ] },
+                { "Fn::Join" : [ "=", [ "COGDBPORT", { "Ref" : "RepDatabasePort" } ] ] },
+                { "Fn::Join" : [ "=", [ "COGDBNAME", { "Ref" : "RepDatabaseName" } ] ] },
+                { "Fn::Join" : [ "=", [ "COGDBUSERNAME", { "Ref" : "RepDatabaseUserName" } ] ] },
+                { "Fn::Join" : [ "=", [ "COGDBUSERPASSWD", "{ENCR}4lgcOfr1r0K2V4gMiQj5Sw==" ] ] },
+                { "Fn::Join" : [ "=", [ "COGDBEIPADDR", { "Ref" : "EAM101DbEIPAddress" } ] ] },
+                { "Fn::Join" : [ "=", [ "COGHSTEIPADDR", { "Ref" : "EAM101RepEIPAddress" } ] ] },
+                { "Fn::Join" : [ "=", [ "SignalURL", { "Ref" : "EAM101RepWaitHandle" } ] ] },
+                { "Fn::Join" : [ "=", [ "CLOUDWININITPARAMSFILE", "C:/Windows/cwi/wininit.params" ] ] },
+                { "Fn::Join" : [ "", [ "import ConfigParser", "" ] ] },
+                { "Fn::Join" : [ "", [ "import os, sys, time", "" ] ] },
+                { "Fn::Join" : [ "", [ "import subprocess", "" ] ] },
+                { "Fn::Join" : [ "", [ "from socket import gethostbyaddr", "" ] ] },
+                { "Fn::Join" : [ "", [ "from os.path import isfile", "" ] ] },
+                { "Fn::Join" : [ "", [ "import httplib, urllib", "" ] ] },
+                { "Fn::Join" : [ "", [ "from urlparse import urlparse", "" ] ] },
+                { "Fn::Join" : [ "", [ "import logging", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "debug=1 # Set to 1 to turn on logging", "" ] ] },
+                { "Fn::Join" : [ "", [ "force=0   # Set to 1 to force run at every startup", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def replace_all(text, dic):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    for i, j in dic.iteritems():", "" ] ] },
+                { "Fn::Join" : [ "", [ "        text = text.replace(i, j)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    return text", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def nslooky(ip):", "" ] ] },
+                { "Fn::Join" : [ "", [ "      try:", "" ] ] },
+                { "Fn::Join" : [ "", [ "           output = gethostbyaddr(ip)", "" ] ] },
+                { "Fn::Join" : [ "", [ "           return output[0]", "" ] ] },
+                { "Fn::Join" : [ "", [ "      except:", "" ] ] },
+                { "Fn::Join" : [ "", [ "           output = \"not found\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "           return output", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "body_content_success = '{\"Status\" : \"SUCCESS\",\"Reason\" : \"Configuration Complete\",\"UniqueId\" : \"COG10120111101\",\"Data\" : \"Infor EAM 10.1 Advanced Reporting Server is available..\"}'", "" ] ] },
+                { "Fn::Join" : [ "", [ "body_content_failure = '{\"Status\" : \"FAILURE\",\"Reason\" : \"Error during deployment\",\"UniqueId\" : \"COG10120111101\",\"Data\" : \"Infor EAM 10.1 Advanced Reporting Server deployment failed.\"}'", "" ] ] },
+                { "Fn::Join" : [ "", [ "search_phrase = \"BUILD FAILED\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "log_file = 'C:/Windows/cwi/wininitscript.log'", "" ] ] },
+                { "Fn::Join" : [ "", [ "log = logging.getLogger()", "" ] ] },
+                { "Fn::Join" : [ "", [ "ch  = logging.StreamHandler()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "if os.path.exists(os.path.dirname(log_file)):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    fh = logging.FileHandler(log_file)", "" ] ] },
+                { "Fn::Join" : [ "", [ "else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    raise \"log directory does not exist (\" + os.path.dirname(log_file) + \")\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sys.exit(1)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.addHandler(ch)", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.addHandler(fh)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "if debug:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.setLevel(logging.DEBUG)", "" ] ] },
+                { "Fn::Join" : [ "", [ "else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.setLevel(logging.INFO)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "Reboots = 'C:/Windows/cwi/Rcount'", "" ] ] },
+                { "Fn::Join" : [ "", [ "if not isfile(Reboots):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('%s is not present, touch file...', Reboots)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile = open(Reboots,\"w\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile.write(\"1\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('Remove necessary files...')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    os.remove('C:/InforEAMAdvRep/depconfig/ewsconfig.xml')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    os.remove('C:/InforEAMAdvRep/depconfig/advrep_properties.xml')", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "EWScfgtmplt = 'C:/InforEAMAdvRep/depconfig/init/ewsconfig.xml.template'", "" ] ] },
+                { "Fn::Join" : [ "", [ "EWSconfiguration = 'C:/InforEAMAdvRep/depconfig/ewsconfig.xml'", "" ] ] },
+                { "Fn::Join" : [ "", [ "if isfile(EWSconfiguration) and not force:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('%s exists, exiting system init...', EWSconfiguration)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "elif not isfile(EWSconfiguration) or force:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('%s is not present, proceed with system init...', EWSconfiguration)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    config = ConfigParser.ConfigParser(allow_no_value=True)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    config.read('C:/Windows/cwi/wininit.params')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dsn=config.get('EAM101','DSNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbp=config.get('EAM101','DBPORT')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbn=config.get('EAM101','DBNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbu=config.get('EAM101','DBUSERNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbw=config.get('EAM101','DBPWD')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbe=config.get('EAM101','DBEIPADDR')", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('DSNAME passed as: %s', dsn)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('DBPORT passed as: %s', dbp)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('DBNAME passed as: %s', dbn)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('DBUSERNAME passed as: %s', dbu)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('DBPWD passed as: %s', dbw)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('DBEIPADDR passed as: %s', dbe)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    EIPHOSTNAME = nslooky(dbe)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbh = EIPHOSTNAME", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sublocs = ['DSNAME', 'DBHOSTNAME', 'DBPORT', 'DBNAME', 'DBUSERNAME', 'DBPWD']", "" ] ] },
+                { "Fn::Join" : [ "", [ "    provided = [dsn, dbh, dbp, dbn, dbu, dbw]", "" ] ] },
+                { "Fn::Join" : [ "", [ "    subdict = dict(zip(sublocs, provided))", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile = open(EWScfgtmplt,\"r\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile = open(EWSconfiguration,\"w\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    while infile:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        line = infile.readline()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        n = len(line)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if n == 0:", "" ] ] },
+                { "Fn::Join" : [ "", [ "            break", "" ] ] },
+                { "Fn::Join" : [ "", [ "        newline = replace_all(line, subdict)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        outfile.write(newline)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "COGcfgtmplt = 'C:/InforEAMAdvRep/depconfig/init/advrep_properties.xml.template'", "" ] ] },
+                { "Fn::Join" : [ "", [ "COGconfiguration = 'C:/InforEAMAdvRep/depconfig/advrep_properties.xml'", "" ] ] },
+                { "Fn::Join" : [ "", [ "if isfile(COGconfiguration) and not force:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('%s exists, exiting system init...', COGconfiguration)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "elif not isfile(COGconfiguration) or force:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('%s is not present, proceed with system init...', COGconfiguration)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    config = ConfigParser.ConfigParser(allow_no_value=True)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    config.read('C:/Windows/cwi/wininit.params')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbp=config.get('COG101','COGDBPORT')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbn=config.get('COG101','COGDBNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbu=config.get('COG101','COGDBUSERNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbpwd=config.get('COG101','COGDBUSERPASSWD')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbe=config.get('COG101','COGDBEIPADDR')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    coghost=config.get('COG101','COGHSTEIPADDR')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sigurl=config.get('COG101','SignalURL')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('COGDBPORT passed as: %s', cogdbp)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('COGDBNAME passed as: %s', cogdbn)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('COGDBUSERNAME passed as: %s', cogdbu)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('COGDBUSERPASSWD passed as: %s', cogdbpwd)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('COGDBEIPADDR passed as: %s', cogdbe)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.debug('SignalURL passed as: %s', sigurl)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    DBEIPHOSTNAME = nslooky(cogdbe)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    cogdbh = DBEIPHOSTNAME", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    CHEIPHSTNAME = nslooky(coghost)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    coghost = CHEIPHSTNAME", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sublocs = ['COGHOST', 'COGDBHOSTNAME', 'COGDBPORT', 'COGDBNAME', 'COGDBUSERNAME', '{ENCR}4lgcOfr1r0KJQvskt/8xKg==']", "" ] ] },
+                { "Fn::Join" : [ "", [ "    provided = [coghost, cogdbh, cogdbp, cogdbn, cogdbu, cogdbpwd]", "" ] ] },
+                { "Fn::Join" : [ "", [ "    subdict = dict(zip(sublocs, provided))", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile = open(COGcfgtmplt,\"r\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile = open(COGconfiguration,\"w\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    while infile:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        line = infile.readline()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        n = len(line)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if n == 0:", "" ] ] },
+                { "Fn::Join" : [ "", [ "            break", "" ] ] },
+                { "Fn::Join" : [ "", [ "        newline = replace_all(line, subdict)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        outfile.write(newline)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    count=0", "" ] ] },
+                { "Fn::Join" : [ "", [ "    while 1:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        os.chdir(\"C:/InforEAMAdvRep/depconfig\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/deploy_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/deploy_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        p = subprocess.Popen(['deploy.bat'], cwd=\"C:/InforEAMAdvRep/depconfig\", bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        # Let's wait for the deploy to finish...", "" ] ] },
+                { "Fn::Join" : [ "", [ "        pout, perr = p.communicate()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        log.debug('stderr for the deploy process: %s',perr)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stefchk='C:/Windows/Temp/deploy_stderr'", "" ] ] },
+                { "Fn::Join" : [ "", [ "        a = open(stefchk, 'r')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        Text = a.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        searchText = Text.find(search_phrase)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        a.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if searchText == -1:", "" ] ] },
+                { "Fn::Join" : [ "", [ "            log.debug('Build successful.')", "" ] ] },
+                { "Fn::Join" : [ "", [ "            break", "" ] ] },
+                { "Fn::Join" : [ "", [ "        else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "            log.debug('Build failed!!!')", "" ] ] },
+                { "Fn::Join" : [ "", [ "            count += 1", "" ] ] },
+                { "Fn::Join" : [ "", [ "            if count == 3:", "" ] ] },
+                { "Fn::Join" : [ "", [ "                log.debug('Deployment has failed 3 consecutive times, signal stack rollback...')", "" ] ] },
+                { "Fn::Join" : [ "", [ "                conn = httplib.HTTPSConnection(o.netloc)", "" ] ] },
+                { "Fn::Join" : [ "", [ "                conn.request(\"PUT\", pathnquery, body_content_failure)", "" ] ] },
+                { "Fn::Join" : [ "", [ "                response = conn.getresponse()", "" ] ] },
+                { "Fn::Join" : [ "", [ "                log.debug('%s %s', response.status, response.reason)", "" ] ] },
+                { "Fn::Join" : [ "", [ "                data = response.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "                log.debug('%s', data)", "" ] ] },
+                { "Fn::Join" : [ "", [ "                conn.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "                sys.exit()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if str(perr) == 'None':", "" ] ] },
+                { "Fn::Join" : [ "", [ "        # Add a line here to check for the string \"BUILD FAILED\" in deploy_stderr file", "" ] ] },
+                { "Fn::Join" : [ "", [ "        log.debug('No errors...lets roll.')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/sc_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/sc_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        c = subprocess.Popen(['sc','config','Infor EAM Advanced Reporting','start=','auto'], bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/sc1_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/sc2_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        c1 = subprocess.Popen(['sc','config','InforEAMAdvancedReportingHTTP','start=','auto'], bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/service_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/service_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        s = subprocess.Popen(['net','start','Infor EAM Advanced Reporting'], bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        # Let's wait for the service to start...", "" ] ] },
+                { "Fn::Join" : [ "", [ "        sout, serr = s.communicate()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/service1_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/service2_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        s1 = subprocess.Popen(['net','start','InforEAMAdvancedReportingHTTP'], bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        # Let's wait for the service to start...", "" ] ] },
+                { "Fn::Join" : [ "", [ "        sout, serr = s1.communicate()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        #TODO: Add a section to scan the EXTSvc log/stdout/stderr for errors.", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/fw_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/fw_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        fw1 = subprocess.Popen(['netsh','advfirewall','firewall','add','rule','name=CognosDispatcher','dir=in','localport=9300','protocol=TCP','action=allow'], bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        # Make sure it executes...", "" ] ] },
+                { "Fn::Join" : [ "", [ "        sout, serr = fw1.communicate()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        o = urlparse(sigurl)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        pathnquery = o.path + \"?\" + o.query", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn = httplib.HTTPSConnection(o.netloc)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn.request(\"PUT\", pathnquery, body_content_success)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        response = conn.getresponse()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        log.debug('%s, %s', response.status, response.reason)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        data = response.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        log.debug('%s',data)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn.close()", "" ] ] }
+            ] ] 
+        }
+      },
+	    "SecurityGroups": [{ "Ref" : "EAM101RepSG" }, { "Ref" : "EAM101DbSG" }]
+	 }
+      },
+      "EAM101RepSG" : {
+                 "Type" : "AWS::EC2::SecurityGroup",
+                       "Properties" : {
+                            "GroupDescription" : "Cognos Reports Server Security Group",
+                            "SecurityGroupIngress" : [ 
+                               {
+                                "IpProtocol" : "tcp",
+                                "FromPort" : "9300",
+                                "ToPort" : "9300",
+                           "SourceSecurityGroupName" : { "Ref" : "GlobalEAM101SecurityGroup" }
+                                }
+                         ]
+                 }
+      },
+      "EAM101RepSGIngress1" : {
+                "Type" : "AWS::EC2::SecurityGroupIngress",
+                "Properties" : {
+                      "GroupName" : { "Ref" : "EAM101RepSG" },
+                                 "IpProtocol" : "tcp",
+                                 "FromPort" : "80",
+                                 "ToPort" : "80",
+                                 "CidrIp" : "0.0.0.0/0"
+                                }
+      },
+      "EAM101RepSGIngress2" : {
+                "Type" : "AWS::EC2::SecurityGroupIngress",
+                "Properties" : {
+                      "GroupName" : { "Ref" : "EAM101RepSG" },
+                                 "IpProtocol" : "tcp",
+                                 "FromPort" : "9300",
+                                 "ToPort" : "9300",
+                                 "SourceSecurityGroupName" : {"Ref" : "EAM101AppSG" }
+                                }
+      },
+      "EAM101RepEIPAddress" : {
+	    "Type" : "AWS::EC2::EIP",
+	    "Properties" : {
+	    }
+	},
+	"RepEIPAssoc" : {
+	    "Type" : "AWS::EC2::EIPAssociation",
+	    "Properties" : {
+		"InstanceId" : { "Ref" : "EAM101RepEc2Instance" },
+		"EIP" : { "Ref" : "EAM101RepEIPAddress" }
+	    }
+	},
+        "EAM101RepWaitHandle" : {
+            "Type" : "AWS::CloudFormation::WaitConditionHandle",
+            "Properties" : {
+            }
+        },
+        "EAM101RepWaitCondition" : {
+            "Type" : "AWS::CloudFormation::WaitCondition",
+            "DependsOn" : "EAM101DbEc2Instance",
+            "Properties" : {
+                "Handle" : { "Ref" : "EAM101RepWaitHandle" },
+                "Timeout" : "7200"
+            }
+        },
+       "EAM101AppEc2Instance":{
+	 "Type":"AWS::EC2::Instance",
+	 "Properties":{
+	    "KeyName":{
+	       "Ref":"KeyName"
+	    },
+	    "InstanceType":{
+	       "Ref":"AppInstanceType"
+	    },
+	    "ImageId":{
+	       "Fn::FindInMap":[
+		  "AppRegionMap",
+		  {
+		     "Ref":"AWS::Region"
+		  },
+		  "AMI"
+	       ]
+	    },
+	    "UserData":{ "Fn::Base64" : 
+        { "Fn::Join" : 
+            [ "\n", [ 
+                { "Fn::Join" : [ "", [ "[EAM101]", "" ] ] },
+                { "Fn::Join" : [ "=", [ "DSNAME", {"Ref" : "AppDatasourceName"} ] ] },
+                { "Fn::Join" : [ "=", [ "DBPORT", { "Ref" : "AppDatabasePort" } ] ] }, 
+                { "Fn::Join" : [ "=", [ "DBNAME", { "Ref" : "AppDatabaseName" } ] ] }, 
+                { "Fn::Join" : [ "=", [ "DBUSERNAME", { "Ref" : "AppDatabaseUserName" } ] ] }, 
+                { "Fn::Join" : [ "=", [ "DBUSERPASSWD", "{ENCR}8Ofnqt5YEMVNBCoPxWCG3Q==" ] ] },
+                { "Fn::Join" : [ "=", [ "DBSQLSVCNAME", "" ] ] },
+                { "Fn::Join" : [ "=", [ "DBEIPADDR", { "Ref" : "EAM101DbEIPAddress" } ] ] }, 
+                { "Fn::Join" : [ "=", [ "REPEIPADDR", { "Ref" : "EAM101RepEIPAddress" } ] ] },
+                { "Fn::Join" : [ "=", [ "REPPORT", "80" ] ] },
+                { "Fn::Join" : [ "=", [ "REPPROTOCOL", "http" ] ] },
+                { "Fn::Join" : [ "=", [ "SignalURL", { "Ref" : "EAM101AppWaitHandle" } ] ] },
+                { "Fn::Join" : [ "=", [ "CLOUDWININITPARAMSFILE", "C:/Windows/cwi/wininit.params" ] ] },
+                { "Fn::Join" : [ "", [ "import ConfigParser", "" ] ] },
+                { "Fn::Join" : [ "", [ "import os, time", "" ] ] },
+                { "Fn::Join" : [ "", [ "import subprocess", "" ] ] },
+                { "Fn::Join" : [ "", [ "from socket import gethostbyaddr", "" ] ] },
+                { "Fn::Join" : [ "", [ "from os.path import isfile", "" ] ] },
+                { "Fn::Join" : [ "", [ "import httplib, urllib", "" ] ] },
+                { "Fn::Join" : [ "", [ "from urlparse import urlparse", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def replace_all(text, dic):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    for i, j in dic.iteritems():", "" ] ] },
+                { "Fn::Join" : [ "", [ "        text = text.replace(i, j)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    return text", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def nslooky(ip):", "" ] ] },
+                { "Fn::Join" : [ "", [ "      try:", "" ] ] },
+                { "Fn::Join" : [ "", [ "           output = gethostbyaddr(ip)", "" ] ] },
+                { "Fn::Join" : [ "", [ "           return output[0]", "" ] ] },
+                { "Fn::Join" : [ "", [ "      except:", "" ] ] },
+                { "Fn::Join" : [ "", [ "           output = \"not found\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "           return output", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "EWSconfiguration = 'C:/inforEAM/depconfig/ewsconfig.xml'", "" ] ] },
+                { "Fn::Join" : [ "", [ "EWSproperties = 'C:/inforEAM/depconfig/extended_properties.xml'", "" ] ] },
+                { "Fn::Join" : [ "", [ "verbose=0 # Set to 1 for debug output", "" ] ] },
+                { "Fn::Join" : [ "", [ "force=0   # Set to 1 to force run at every startup", "" ] ] },
+                { "Fn::Join" : [ "", [ "if isfile(EWSconfiguration) and not force:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if verbose: print EWSconfiguration, 'exists, exiting system init...'", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "elif not isfile(EWSconfiguration) or force:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if verbose: print EWSconfiguration, ' is not present, proceed with system init...'", "" ] ] },
+                { "Fn::Join" : [ "", [ "    config = ConfigParser.ConfigParser(allow_no_value=True)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    config.read('C:/Windows/cwi/wininit.params')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dsn=config.get('EAM101','DSNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbp=config.get('EAM101','DBPORT')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbn=config.get('EAM101','DBNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbu=config.get('EAM101','DBUSERNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbw=config.get('EAM101','DBUSERPASSWD')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbs=config.get('EAM101','DBSQLSVCNAME')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbe=config.get('EAM101','DBEIPADDR')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    repe=config.get('EAM101','REPEIPADDR')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    repp=config.get('EAM101','REPPORT')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    repl=config.get('EAM101','REPPROTOCOL')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sigurl=config.get('EAM101','SignalURL')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if verbose:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'DSNAME passed as:', dsn", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'DBPORT passed as:', dbp", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'DBNAME passed as:', dbn", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'DBUSERNAME passed as:', dbu", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'DBUSERPASSWD passed as:', dbw", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'DBSQLSVCNAME passed as:', dbs", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'DBEIPADDR passed as:', dbe", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'REPEIPADDR passed as:', repe", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'REPPORT passed as:', repp", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'REPPROTOCOL passed as:', repl", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print 'SignalURL passed as:', sigurl", "" ] ] },
+                { "Fn::Join" : [ "", [ "    o = urlparse(sigurl)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    pathnquery = o.path + \"?\" + o.query", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if verbose: print 'URL path + query set to:', pathnquery", "" ] ] },
+                { "Fn::Join" : [ "", [ "    body_content = '{\"Status\" : \"SUCCESS\",\"Reason\" : \"Configuration Complete\",\"UniqueId\" : \"EAM101APP20111101\",\"Data\" : \"Infor EAM 10.1 Application Server is available.\"}'", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    DBEIPHOSTNAME = nslooky(dbe)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    dbh = DBEIPHOSTNAME", "" ] ] },
+                { "Fn::Join" : [ "", [ "    reph = nslooky(repe)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sublocs = ['DSNAME', 'DBHOSTNAME', 'DBPORT', 'DBNAME', 'DBUSERNAME', 'DBUSERPASSWD', 'COGNOSHOSTNAME', 'COGNOSHTTPPORT', 'COGNOSHTTPPROTOCOL']", "" ] ] },
+                { "Fn::Join" : [ "", [ "    provided = [dsn, dbh, dbp, dbn, dbu, dbw, reph, repp, repl]", "" ] ] },
+                { "Fn::Join" : [ "", [ "    subdict = dict(zip(sublocs, provided))", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    filename1 = \"C:/inforEAM/depconfig/ewsconfig.xml.template\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile1 = open(filename1,\"r\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile1 = open(EWSconfiguration,\"w\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    while infile1:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        line = infile1.readline()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        n = len(line)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if n == 0:", "" ] ] },
+                { "Fn::Join" : [ "", [ "            break", "" ] ] },
+                { "Fn::Join" : [ "", [ "        newline = replace_all(line, subdict)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if verbose: print newline", "" ] ] },
+                { "Fn::Join" : [ "", [ "        outfile1.write(newline)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile1.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile1.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    filename2 = \"C:/inforEAM/depconfig/extended_properties.xml.template\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile2 = open(filename2,\"r\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile2 = open(EWSproperties,\"w\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    while infile2:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        line = infile2.readline()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        n = len(line)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if n == 0:", "" ] ] },
+                { "Fn::Join" : [ "", [ "            break", "" ] ] },
+                { "Fn::Join" : [ "", [ "        newline = replace_all(line, subdict)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        #print newline", "" ] ] },
+                { "Fn::Join" : [ "", [ "        outfile2.write(newline)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    outfile2.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    infile2.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "    os.chdir(\"C:/inforEAM/depconfig\")", "" ] ] },
+                { "Fn::Join" : [ "", [ "    stof=file('C:/Windows/Temp/deploy_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    stef=file('C:/Windows/Temp/deploy_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "    p = subprocess.Popen(['deploy.bat'], cwd=\"C:/inforEAM/depconfig\", bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    # Let's wait for the deploy to finish...", "" ] ] },
+                { "Fn::Join" : [ "", [ "    pout, perr = p.communicate()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if verbose: print(perr)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    #TODO: Add a section to scan the deploy log/stdout/stderr for errors.", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if str(perr) == 'None':", "" ] ] },
+                { "Fn::Join" : [ "", [ "        # Add a line here to check for the string \" FAILED\" in deploy_stderr file", "" ] ] },
+                { "Fn::Join" : [ "", [ "        print \"No errors...lets's roll.\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/sc_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/sc_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        c = subprocess.Popen(['sc','config','EXTSvc','start=','auto'], bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof=file('C:/Windows/Temp/service_stdout','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef=file('C:/Windows/Temp/service_stderr','w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "        s = subprocess.Popen(['net','start','EXTSvc'], bufsize=4096, stdout=stof, stderr=stef)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        # Let's wait for the service to start...", "" ] ] },
+                { "Fn::Join" : [ "", [ "        sout, serr = s.communicate()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stof.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        stef.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        #TODO: Add a section to scan the EXTSvc log/stdout/stderr for errors.", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn = httplib.HTTPSConnection(o.netloc)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn.request(\"PUT\", pathnquery, body_content)", "" ] ] },
+                { "Fn::Join" : [ "", [ "        response = conn.getresponse()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if verbose: print response.status, response.reason", "" ] ] },
+                { "Fn::Join" : [ "", [ "        data = response.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "        if verbose: print data", "" ] ] },
+                { "Fn::Join" : [ "", [ "        conn.close()", "" ] ] }
+            ] ] 
+        }
+      },
+	    "SecurityGroups": [{ "Ref" : "EAM101AppSG" }, { "Ref" : "EAM101DbSG" }]
+	 }
+      },
+      "EAM101AppSG" : {
+                 "Type" : "AWS::EC2::SecurityGroup",
+                       "Properties" : {
+                            "GroupDescription" : "Infor EAM 10.1 Application Server Security Group",
+                            "SecurityGroupIngress" : [ {
+                                 "IpProtocol" : "tcp",
+                                 "FromPort" : "80",
+                                 "ToPort" : "80",
+                                 "CidrIp" : "0.0.0.0/0"
+                                } ]
+                 }
+      },
+      "EAM101AppEIPAddress" : {
+	    "Type" : "AWS::EC2::EIP",
+	    "Properties" : {
+	    }
+	},
+	"AppEIPAssoc" : {
+	    "Type" : "AWS::EC2::EIPAssociation",
+	    "Properties" : {
+		"InstanceId" : { "Ref" : "EAM101AppEc2Instance" },
+		"EIP" : { "Ref" : "EAM101AppEIPAddress" }
+	    }
+	},
+        "EAM101AppWaitHandle" : {
+            "Type" : "AWS::CloudFormation::WaitConditionHandle",
+            "Properties" : {
+            }
+        },
+        "EAM101AppWaitCondition" : {
+            "Type" : "AWS::CloudFormation::WaitCondition",
+            "DependsOn" : "EAM101DbEc2Instance",
+            "Properties" : {
+                "Handle" : { "Ref" : "EAM101AppWaitHandle" },
+                "Timeout" : "7200"
+            }
+           }
+         },
+   "Outputs":{
+      "EAM101DbInstanceIPAddress" : {
+	    "Value" : { "Ref" : "EAM101DbEIPAddress" }
+      },
+      "EAM101RepInstanceIPAddress" : {
+	    "Value" : { "Ref" : "EAM101RepEIPAddress" }
+      },
+      "EAM101AppInstanceIPAddress" : {
+	    "Value" : { "Ref" : "EAM101AppEIPAddress" }
+      },
+      "EAM101DbApplicationData" : {
+            "Value" : { "Fn::GetAtt" : [ "EAM101DbWaitCondition", "Data" ]},
+            "Description" : "Infor EAM 10.1 Db WaitCondition signal"
+        },
+      "EAM101RepApplicationData" : {
+            "Value" : { "Fn::GetAtt" : [ "EAM101RepWaitCondition", "Data" ]},
+            "Description" : "Infor EAM 10.1 Rep WaitCondition signal"
+        },
+      "EAM101AppApplicationData" : {
+            "Value" : { "Fn::GetAtt" : [ "EAM101AppWaitCondition", "Data" ]},
+            "Description" : "Infor EAM 10.1 App WaitCondition signal"
+        },
+      "EAM101URL" : {
+            "Description" : "The URL of the Infor EAM 10.1 website",
+            "Value" :  { "Fn::Join" : 
+                                [ "", [     
+                                 {"Fn::Join" : [ "", [ "http://", { "Fn::GetAtt" : [ "EAM101AppEc2Instance", "PublicDnsName" ] } ] ] },
+                                 {"Fn::Join" : [ "=", [ "/web/base/logindisp?tenant", {"Ref" : "AppDatasourceName"} ] ] }
+                          ]]
+                       }
+                }
+        }
+}

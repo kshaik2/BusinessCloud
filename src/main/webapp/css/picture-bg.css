@@ -1,0 +1,37 @@
+.bg-pic-01, .tile-bg-01{
+	background: #000 url(img/pic-bg/1.png) -100px -60px no-repeat;
+}
+.bg-pic-02, .tile-bg-07{
+	background: #000 url(img/pic-bg/2.png) no-repeat;
+}
+.bg-pic-03, .tile-bg-06{
+	background: #000 url(img/pic-bg/3.png) no-repeat;
+}
+.bg-pic-04, .tile-bg-11{
+	background: #000 url(img/pic-bg/4.png) no-repeat;
+}
+.bg-pic-05{
+	background: #000 url(img/pic-bg/5.png) no-repeat;
+}
+.bg-pic-06{
+	background: #000 url(img/pic-bg/6.png) no-repeat;
+}
+.bg-pic-07, .tile-bg-12{
+	background: #000 url(img/pic-bg/7.png) no-repeat;
+}
+.bg-pic-08, .tile-bg-16{
+	background: #000 url(img/pic-bg/8.png) no-repeat;
+}
+.bg-pic-09, .tile-bg-19{
+	background: #000 url(img/pic-bg/9.png) no-repeat;
+}
+.bg-pic-10, .tile-bg-04{
+	background: #000 url(img/pic-bg/10.png) no-repeat;
+}
+.bg-pic-11, .tile-bg-08{
+	background: #000 url(img/pic-bg/11.png) no-repeat;
+}
+.bg-pic-12, .tile-bg-14{
+	background: #000 url(img/pic-bg/12.png) no-repeat;
+}
+

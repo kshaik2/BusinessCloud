@@ -1,0 +1,35 @@
+{
+    "version":"VERSION_TWO_SEED",
+    "exportedRegions":[],
+    "exportedProducts":[],
+    "exportedProductDescriptions":[],
+    "exportedCompanies":[],
+    "exportedUsers":[    
+        {
+        "createdAt":1334253384000,
+        "createdAtString":"2012-04-12 13:56:24 EDT",
+        "password":"ffe32606b6ef502c05ed83ab5079c353b129c3fe",
+        "address1":"null",
+        "address2":"null",
+        "phone":"null",
+        "active":true,
+        "roles":["ROLE_EXTERNAL"],
+        "companyName":"Test Company",
+        "username":"bob.vila@this-old-house.com",
+        "country":null,
+        "firstName":"Bob",
+        "lastName":"Vila",
+        "language":null,
+        "userProductDtos":[],
+        "inforCustomer":false,
+        "updatedAt":1334676761000,
+        "updatedAtString":"2012-04-17 11:32:41 EDT"        
+        }],
+        
+    "exportedAmazonCredentials":[], 
+    "exportedTrialEnvironments":[],
+    "exportedTrialProductChildren":[],
+    "exportedServiceUsers":[],    
+    "exportedIndustries":[],
+    "exportedAmiDescriptors":[]
+    }

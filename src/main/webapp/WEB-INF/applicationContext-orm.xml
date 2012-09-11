@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+                           http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd">
+
+    <tx:annotation-driven/>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor">
+        <property name="persistenceContexts">
+            <map>
+                <entry key="cloudSuiteDB-PC" value="cloudSuiteDB_emf"/>
+            </map>
+        </property>
+        <property name="defaultPersistenceUnitName" value="cloudSuiteDB-PC"/>
+    </bean>
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="cloudSuiteDB_emf"/>
+    </bean>
+
+    <jpa:repositories base-package="com.infor.cloudsuite.dao"
+                      factory-class="com.infor.cloudsuite.platform.ExtJpaRepositoryFactoryBean"/>
+
+</beans>

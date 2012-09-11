@@ -1,0 +1,1636 @@
+[
+		{
+			"id" : null,
+			"name" : "Infor10 EAM Enterprise",
+			"shortName" : "EAM",
+			"trialsAvailable" : true,
+			"deploymentsAvailable" : true,
+			"ieOnly" : true,
+			"tileSize" : "small",
+			"tileOrder" : 1,
+			"contactMap" : {
+				"1" : {
+					"productShortName" : "EAM",
+					"regionShortName" : "NA",
+					"contactEmail" : "cs-demo-eam-na@infor.com"
+				},
+				"2" : {
+					"productShortName" : "EAM",
+					"regionShortName" : "SA",
+					"contactEmail" : "cs-demo-eam-sa@infor.com"
+				}
+			},
+			"templateName" : "InforEAM101_CloudSuite07.template",
+			"amis" : [ "ami-2f549f46", "ami-3172b958", "ami-bb3df7d2" ],
+			"accessKey" : "AKIAIA7HTUW2JJUSU3GQ",
+			"secretKey" : "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",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Successful companies know that improving their asset performance reduces costs and  enhances their capacity to grow. At Infor, we've been helping customers understand the connection between asset performance and top-line growth for years. We deliver the enterprise asset management (EAM) system capabilities you need to transform this understanding into action, so your EAM system can become a source of greater business efficiency. Learn how to streamline your asset and maintenance processes to save time and money with EAM Enterprise.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>EAM Enterprise, a comprehensive enterprise asset management solution, lets you keep a constant watch on your asset condition and performance, evaluate data to find key trends and anomalies, forecast performance concerns, and make decisions that drive action.</p>\r\n\r\n<p>With over 20 years of asset management experience built in, EAM Enterprise has been helping companies around the world-including more than 60% of the Fortune 500.</p>\r\n\r\n<p>EAM Enterprise addresses your most challenging asset issues, from preventative maintenance for discrete manufacturing, to predictive maintenance for food and beverage companies, emissions and energy demand management in pulp and paper, risk-based maintenance in life science organizations, fleet management for transportation companies, linear asset management for oil and gas, asset tracking and condition-based maintenance for public sector organizations, and more.</p>\r\n\r\n<p>With EAM Enterprise, you can:<br />\r\n\r\n<ul>\r\n<li>Cut your purchasing costs, inventory levels, and inventory carrying costs, while making your workers more productive.</li>\r\n<li>Comply with regulations and requirements without breaking a sweat.</li>\r\n<li>Keep your assets up and running, and know when to replace them.</li>\r\n<li>Reduce expenses by collecting on warranty claims</li>\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>EAM Enterprise provides the tools to monitor and manage the deployment, performance, and maintenance of company assets, including alerts that help you eliminate operational downtimes and reveal hidden profits.</p>\r\n\r\n<p>EAM Enterprise puts built-in predictive maintenance (PdM) and condition-based maintenance (CBM) to work for you, along with our intelligent operations and asset sustainability capabilities-without incurring the costs, complexity, and uncertainty of third-party software. It delivers equipment alarms, as well as the data and real-time intelligence you need to take quick and precise action, and escalate problems, when necessary, to the appropriate resources.</p>\r\n\r\n<p>With EAM Enterprise you get:<br>\r\n\r\n<ul>\r\n<li>Asset hierarchy management. Keep track of where your assets are located and what they cost with the help of a \"family tree\" that connects equipment, systems, and locations.</li>\r\n<li>Budget management. Automate everything relating to your budget, from setting it up to calculating what it takes to maintain it.</li>\r\n<li>Inspection management. Get automatic notification of an asset problem when an inspection exceeds a preset limit, and find out how to fix it.</li>\r\n<li>Purchasing management. Order the right parts and stay on top of delivery times, vendor payments, and receipt of goods.</li>\r\n<li>Work management. Track and manage all asset work requests, labor, planning, and scheduling.</li>\r\n<li>Materials management. Monitor and control storeroom inventories with tools that include economic order quantity with class calculations and assignments, support parts receipts, issues, returns, and cycle counts.</li>\r\n\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Unlike other EAM systems, EAM Enterprise uniquely provides you with the ability to:<br/>\r\n\r\n<ul>\r\n<li>Maximize maintenance effectiveness-Streamline the maintenance process, so you can extend the longevity of your assets and improve productivity.</li>\r\n<li>Reduce inventory costs-Avoid carrying unneeded inventory or experiencing downtime because of inadequate inventory.</li>\r\n<li>Increase warranty recovery-Improve your tracking of repairs that are eligible for warranty claims.</li>\r\n<li>Improve reliability and risk management-Anticipate and mitigate asset reliability and regulatory risks.</li>\r\n<li>Get flexible deployment-Implement on-premises, in the cloud, or both. It's your choice. You'll get the same full-featured system either way-not a scaled-down version like some systems.</li>\r\n\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The EAM Enterprise Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Manage your equipment, facilities, and vehicle assets from the point of purchase to the point of disposal-while cutting costs and increasing profits. "
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Successful companies know that improving their asset performance reduces costs and  enhances their capacity to grow. At Infor, we've been helping customers understand the connection between asset performance and top-line growth for years. We deliver the enterprise asset management (EAM) system capabilities you need to transform this understanding into action, so your EAM system can become a source of greater business efficiency. Learn how to streamline your asset and maintenance processes to save time and money with EAM Enterprise.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 Expense Management",
+			"shortName" : "XM",
+			"trialsAvailable" : true,
+			"deploymentsAvailable" : true,
+			"ieOnly" : true,
+			"tileSize" : "small",
+			"tileOrder" : 2,
+			"contactMap" : {
+				"1" : {
+					"productShortName" : "XM",
+					"regionShortName" : "NA",
+					"contactEmail" : "cs-demo-xm-na@infor.com"
+				},
+				"2" : {
+					"productShortName" : "XM",
+					"regionShortName" : "SA",
+					"contactEmail" : "cs-demo-xm-sa@infor.com"
+				}
+			},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Employee-initiated expenses can account for a surprisingly large percentage of total corporate spending. It's more important than ever to track, analyze, and control these expenditures. Get more information sooner, close your books faster, and enforce your policies promptly and consistently enough to make a difference with Infor10 Expense Management.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>Used by forward-looking companies all over the world, Expense Management software reduces the cost and increases the effectiveness of employee-initiated expenditure and revenue processes, including those for travel expenses and entertainment expense claims, travel planning and pre-trip approval, rechargeable time capture, and supplier payment initiation.</p>\r\n\r\n<p>Modular by design, Expense Management lets companies select only the capabilities that address their specific business requirements, and the flexibility to grow.</p>\r\n\r\n<p>The solution's four core modules-Travel Plans, Expense Reports, Payment Requests, and Timesheets-share a single, intuitive interface, so they are simple to learn, use, and maintain. These integrated applications make it easy to plan and expense business travel, request and approve payments, charge time to projects and cost centers, and calculate paid time off and overtime.  The overall result is comprehensive control over employee-initiated corporate spending.</p>\r\n\r\n<p>Designed by experts in finance and travel, with decades of experience built in, Expense Management is the most configurable travel and entertainment expense management application available.\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>Expense Management automates all employee-based financial processes in a single, consolidated solution, and offers world-class reporting and auditing.</p>\r\n\r\n\r\n<p>Expense Management allows even complex, multinational organizations to automate expense-related business processes and enforce policy compliance, reducing associated administrative costs and decreasing the opportunity for accidental error and intentional fraud. With it, companies can implement instantaneous global updates to policies and processes to support continuous improvement, while simultaneously managing local policies and statutory requirements.</p>\r\n\r\n\r\n<p>The solution provides you with:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Expense Reports-Infor's web-based, automated system dramatically reduces the hassle, time, and cost of creating, approving, and processing expense reports, and offers the visibility and control necessary to comply with today's accounting standards. Travelers can create and manage expense reports whenever and wherever it's convenient-the office, the airport, even a taxicab-with Infor's offline client and mobility platform. Plus, reviewers can open expense reports and attached supporting documents when they receive email alerts-without logging into the application.</li>\r\n<li>Travel Plans-Travel Plans enforces corporate travel policy before spending occurs, because the system verifies compliance with corporate policy as employees make their travel plans-which they must then submit for approval. Plus, Travel Plans allows attachment of travel plans to expense reports to compare planned and actual expenses. Not only does this help managers make better approval decisions, it adds rich analytic capabilities to improve future budget planning.</li>\r\n<li>Payment Requests-Employees sometimes must purchase goods and services immediately, bypassing the company's purchase requisition and order process. As a result, these requests often go untracked, resulting in an incomplete view of employee spending. Payment Requests closes this gap by eliminating duplicate data entry and automating validation, ensuring that requests are accurate, complete, and charged to the correct cost centers or project codes. While Payment Requests is designed for use by non-finance employees, accounts payable (AP) and purchasing personnel can also use the system to enter information on behalf of other employees.</li>\r\n<li>Timesheets-Accurate recording of salaried and hourly employee time is vital for timely customer billing and payroll calculation. Yet, this simple function is typically manual, time-consuming, and error-prone. Timesheets simplifies the process by letting employees accurately report project hours as well as general work and absence hours, in a fraction of the time required by traditional paper-based methods. Quicker processing times and fewer errors lead to more efficient customer billing cycles and a reduction in days sales outstanding, contributing directly to the bottom line.</li>\r\n<li>Mobile device support-Employees can create expense reports on smart phones and other mobile devices anywhere, any time. Plus, managers can view and approve expense reports from their mobile devices, leading to time savings, maximum performance, and rapid response.</li>\r\n<li>Digital receipt management-Employees can easily attach, email, or fax receipts for a paperless solution.</li>\r\n<li>Flexible, affordable delivery options-Choose from an unparalleled range of software deployment options. Take advantage of a hosted version and let us deal with application management, or license the application outright.</li>\r\n</ul>\r\n</p>\r\n<p>All Expense Management modules:</p>\r\n<p>\r\n<ul>\r\n<li>Alert employees to violations as they enter data, allowing them to provide explanations or make corrections before submitting plans or expenses.</li>\r\n<li>Alert reviewers, obtain necessary approvals, and then trigger events such as issuing plane tickets and reimbursing expenses.</li>\r\n<li>Analyze the solution's database, searching for opportunities to transform spending into savings.</li>\r\n</ul>\r\n</p>\r\n<p>In addition, Expense Management:</p>\r\n<p>\r\n<ul>\r\n<li>Captures information for analysis and benchmarking, identifying spending patterns that can be used to negotiate savings with vendors.</li>\r\n<li>Supports multiple languages and currencies.</li>\r\n<li>Provides seamless integration for corporate card data.</li>\r\n<li>Works with all international date and currency formats.</li>\r\n<li>Facilitates application of rules and policies specific to independent divisions or geographic locations.</li>\r\n<li>Accommodates country-specific per diem rates, local taxation requirements, variable VAT rates, and mileage rates.</li>\r\n<li>Significantly reduces discretionary spending through compliance, visibility, third-party spending, and error reduction.</li>\r\n<li>Seamlessly integrates with other Infor systems.</li>\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Unlike other expense management systems, Expense Management  uniquely offers:<br/>\r\n\r\n<ul>\r\n<li>The ability to tailor your solution to meet specific business requirements and to \"plug in\" to your existing back- office infrastructure. With a powerful configuration module, you have control as your business and requirements change.</li>\r\n<li>Comprehensive control over employee spending through consistent policy enforcement during expense entry, repeatable documented processes, automated workflow, digital receipt filing, and automated approvals.</li>\r\n<li>Choices, whether they have to do with deployment (on-premises, hosted, or subscription), reporting (Data Warehouse, Business Objects, Cognos, or BIRT), or platform (MS SQL Server, Oracle, or DB2).</li>\r\n<li>Lower cost of ownership through pre-loaded common data, business rule templates, a best-practices approach to implementation, and multi-language, multi-currency capabilities.</li>\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The Expense Management Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Expense Management helps companies like yours squeeze costs out of your travel budget and get more mileage from every travel dollar."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Employee-initiated expenses can account for a surprisingly large percentage of total corporate spending. It's more important than ever to track, analyze, and control these expenditures. Get more information sooner, close your books faster, and enforce your policies promptly and consistently enough to make a difference with Infor10 Expense Management.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor 10 ERP Business",
+			"shortName" : "Syteline",
+			"trialsAvailable" : true,
+			"deploymentsAvailable" : false,
+			"ieOnly" : true,
+			"tileSize" : "small",
+			"tileOrder" : 3,
+			"contactMap" : {
+				"1" : {
+					"productShortName" : "Syteline",
+					"regionShortName" : "NA",
+					"contactEmail" : "cs-demo-erp-na@infor.com"
+				},
+				"2" : {
+					"productShortName" : "Syteline",
+					"regionShortName" : "SA",
+					"contactEmail" : "cs-demo-erp-sa@infor.com"
+				}
+			},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Competition continues to increase in discrete manufacturing.  To stay ahead, you need to get to market quicker and do a better job of matching up supply with demand. Personalize your enterprise resource planning system, focus on your work, and be confident you've got the right software and support team for the job...all with ERP Business.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>ERP Business provides the foundation to improve business efficiency, customer service, and overall manufacturing productivity for a broad range of industries, including metal fabrication, industrial equipment and machinery, and high-tech and electronics.  It delivers the complete package, with tight integration to tools for managing:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Sales and customer relationships</li>\r\n<li>Production</li>\r\n<li>Supply chain</li>\r\n<li>Inventory</li>\r\n<li>Financials</li>\r\n<li>Service Management</li>\r\n<li>Quality</li>\r\n</ul>\r\n</p>\r\n\r\n<p>Developed by experts in discrete manufacturing, ERP Business has more than 25 years of experience built in. That means you can be confident you've got the tools you need to get the job done-and that you're getting it all from an experienced support team.</p>\r\n\r\n<p>From selling and sourcing to production and fulfillment, ERP Business provides clear visibility across your organization, helping you automate and manage key business processes.</p>\r\n"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>ERP Business is built with extensibility from the ground up. The ERP Business framework gives you the ability to adapt the system to your business, rather than requiring you to force your business to fit the software. The model in the ERP Business framework makes it possible to adapt the ERP Business application to new business requirements without incurring the high cost and delays involved in modifying or writing new code. This, in turn, allows you to rapidly adapt the system to your business, while continuing to receive new features and fixes.</p>\r\n\r\n<p>With ERP Business, you get:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Mixed mode manufacturing. ERP Business accommodates true mixed mode manufacturing. From repetitive to engineer-to-order, you get the processes you need to accelerate production and meet customer demand more quickly.</li>\r\n<li>Complex product configuration. Integrated management tools ensure configured orders are accurate for the customer and feasible for the production department.</li>\r\n<li>Advanced planning & scheduling (APS). A fully integrated, lean advanced planning engine synchronizes material and capacity to customer orders. Continually monitor demand as it occurs, and update production schedules quickly, so you provide accurate and real-time capable-to promise estimates to your customers.</li>\r\n<li>Materials and inventory management. Automate the process of calculating and monitoring your inventory drivers-forecasts, safety stocks, and order size-to keep inventory low while avoiding shortages. You'll be able to shorten order entry time, eliminate duplicate orders, reduce costly data entry errors, and ensure your data is consistent.</li>\r\n<li>Customer management. An efficient method for managing the entire sales process, from customer lead origination and sales opportunity tracking through converting prospects to customers and placing the order. Tight integration between the front and back office streamlines sales and customer service processes, decreases the cost of sales and cost to serve, and ultimately increases revenue.</li>\r\n<li>Role-based information. All the information you need to do your job in a single screen. We have identified the specific daily tasks of specific career positions in our customers' organizations and defined the exact collection of information and actions that help them accomplish that job effectively. This collection is presented on a home page, the set of actions and data most closely associated with a specific, defined job in an organization, such as customer service, controller, or production planner. This helps you make faster, more efficient and informed decisions. </li>\r\n<li>Better user experiences. Easily customize the user interface to fit a particular industry, team, or an individual user. Add, remove, and edit fields, labels, and complete screens without having to call on IT for help. Get the information you need, when you need it, with easy-to-use grid forms. Plus, reduce or eliminate costly modifications to personalized features with upgrades to the system.</li>\r\n<li>Microsoft-based system. Familiar tools and common navigation translate to big time savings on implementation, customization, and training. Plus, ERP Business interfaces with Microsoft Project; the ERP Business calendar and task list tightly integrate with Outlook; and SharePoint pages can include charts and lists that display current ERP Business data.</li>\r\n<li>Flexible deployment options. Subscribe to ERP Business through the Infor cloud computing platform to multiply the performance-enhancing and cost-cutting benefits. Go back and forth between the on-premises and cloud-based versions any time-or combine the two. Wherever you deploy, you benefit from a single sign-on, consistent user interface, and seamless data exchange.</li>\r\n<li>Infor10 Barcode. Fully automate key business processes, cut costs while improving profits, and enhance your ERP functions with modules such as Pallet Management. From receiving to shipping and everything in between, you can integrate Infor Barcode seamlessly with ERP Business version 8.0 and above. Quickly implement the application, plus configure and re-configure it as your business processes change. </li>\r\n\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Unlike other ERP systems, ERP Business uniquely offers:<br/>\r\n\r\n<ul>\r\n<li>Conventional ERP planning and Advanced Planning & Scheduling (APS) all within your ERP planning system.  APS provides capable to promise and available to promise capabilities so you can improve customer service.</li>\r\n<li>The ability to personalize your user experience-showing you the information you want to see, the way you want to see it, where you want to see it.  Like your web browser, your personalizations upgrade automatically.</li>\r\n<li>Flexible deployment-on-premises or in the cloud, or both. It's your choice.  You'll get the same full featured system either way-not a scaled down version like some systems.</li>\r\n<li>Built on .net open development platform, which lets you enrich and extend your system to match your way of working using the same development environment Infor engineers use. This means your configurations and customizations upgrade automatically with the next Infor release.</li>\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The ERP Business Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "ERP Business helps manufacturers like you improve the bottom line by adapting business processes to market requirements. You deliver more with less, and win the race against time."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Competition continues to increase in discrete manufacturing.  To stay ahead, you need to get to market quicker and do a better job of matching up supply with demand. Personalize your enterprise resource planning system, focus on your work, and be confident you've got the right software and support team for the job...all with ERP Business.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 Workspaces",
+			"shortName" : "WS",
+			"trialsAvailable" : true,
+			"deploymentsAvailable" : false,
+			"ieOnly" : true,
+			"tileSize" : "large",
+			"tileOrder" : 7,
+			"contactMap" : {
+				"1" : {
+					"productShortName" : "WS",
+					"regionShortName" : "NA",
+					"contactEmail" : "cs-demo-ws-na@infor.com"
+				},
+				"2" : {
+					"productShortName" : "WS",
+					"regionShortName" : "SA",
+					"contactEmail" : "cs-demo-ws-sa@infor.com"
+				}
+			},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>\r\nThousands of customers trust Infor for industry-specific business \r\nsoftware that helps them stay competitive. We've focused our \r\ndecades of business experience on delivering the user experience \r\nyou need to succeed in today's volatile, high-speed business \r\nenvironment. That's why we built Infor10 Workspace to serve as the \r\nuser interface and unifying fabric of our most popular products-it \r\nbrings a great look and feel and exceptional usability to some of the \r\nmost powerful business software available, so that you get solutions \r\nthat give you information quickly and add value permanently.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>Infor10 Workspace delivers a unified user experience that supports single sign-on, common navigation, and a common look and feel across various Infor products. The user interface combines deep industry processes, analytics, and collaboration to create a more satisfying, easier to use software experience that helps you make better and faster decisions.</p>\r\n"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>Infor10 Workspace embeds 'in-context business intelligence' into the user experience. This means that users automatically see the relevant information they need to make better decisions and complete tasks at the moment they need it. So, instead of swivelling from one application to another, users see the information from the different applications they need to get their jobs done on a single screen-in real-time. This means they're getting the most up-to-date, accurate information possible, so they can make sound decisions based on fact, not intuition.</p>\r\n\r\n<p>With Infor10 Workspace you get:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Consumer-grade user experience.  One sign-on, common navigation, and common look-and-feel across Infor applications means you can get to work quickly.</li>\r\n<li>Personalized tools. Add the web parts and information you need to get your job done.</li>\r\n<li>A single source of information.  Workspace aggregates business information from multiple sources, including Infor solutions, your Intranet, and Internet resources, and presents it to you in a logical fashion-when you need it.</li>\r\n<li>Context-aware data.  Get the right information, at the right time, so you can make informed decisions more quickly.</li>\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Infor10 Workspace uniquely delivers the ability to:<br/>\r\n\r\n<ul>\r\n<li>Make better decisions, faster with in-context business intelligence.</li>\r\n<li>See all the information you need in one place.</li>\r\n<li>Navigate quickly across applications, thanks to a common user interface.</li>\r\n<li>Make your Workspace your own. Add the web parts you need to bring your information together.</li>\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The Workspace Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "With Infor10 Workspace you'll have the power to work more efficiently and make better decisions, faster."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>\r\nThousands of customers trust Infor for industry-specific business \r\nsoftware that helps them stay competitive. We've focused our \r\ndecades of business experience on delivering the user experience \r\nyou need to succeed in today's volatile, high-speed business \r\nenvironment. That's why we built Infor10 Workspace to serve as the \r\nuser interface and unifying fabric of our most popular products-it \r\nbrings a great look and feel and exceptional usability to some of the \r\nmost powerful business software available, so that you get solutions \r\nthat give you information quickly and add value permanently.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 CRM Enterprise Service (Epiphany)",
+			"shortName" : "CRM Enterprise",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 4,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>You don't need us to tell you how hard it is to provide great customer service with a limited budget. But the right customer relationship management system can help you improve service while you reduce costs.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>Using CRM Enterprise Service, you can:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Get a complete look at customer data-including interaction history-no matter where it's stored within your company.</li>\r\n<li>Manage inbound customer emails without breaking a sweat.</li>\r\n<li>Reduce costs.</li>\r\n<li>Stay on budget.</li>\r\n<li>Improve productivity.</li>\r\n</ul>\r\n</p>\r\n\r\n<p>All that, with one application. And you'll find that it's so easy to use, even your most inexperienced agents can zip through a customer interaction without a problem.</p>\r\n\r\n<p>With CRM Enterprise Service, you can provide:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Personalized interaction-Define each step in a customer interaction for your agents-including what to say, ask, or suggest.</li>\r\n<li>24x7 customer self-service-Your customers can find answers on the web, and you can reply to their emails in a way that shows you understand their needs.</li>\r\n<li>Better customer service-Extend personalized offers to customers at the time of your interaction, shorten call times, resolve issues the first time, and make sure you treat customers in a consistent way.</li>\r\n<li>Quick access to accurate information-You and your customers can look up articles, solutions, and frequently asked questions, helping you answer your customers' questions and helping your customers make up their minds.</li>\r\n</ul>\r\n<p>\r\n\r\n<p>In short, you can satisfy your customers while cutting your costs.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "See how contact centers improve customer support effectiveness and accelerate response times while controlling costs."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>You don't need us to tell you how hard it is to provide great customer service with a limited budget. But the right customer relationship management system can help you improve service while you reduce costs.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 Business Intelligence (BI)",
+			"shortName" : "Business Intelligence (BI)",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 5,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Business Intelligence (BI) is a set of proven corporate performance management solutions with online analytical processing (OLAP) capabilities that allow you to make better decisions and improve your business process by delivering better information to decision makers within your company.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>Business Intelligence (BI) makes it easy for your company's decision makers to get the meaningful reporting and analysis they need to effectively monitor and control performance, leading to more informed decisions. It's made up of three core applications: Office Plus for advanced reporting and sophisticated business analysis, OLAP Server for modeling any business process and predicting results, and Application Studio, which lets you supplement reports with essential background information in a familiar spreadsheet environment. Infor Business Intelligence offers powerful tools to improve information gathering and knowledge sharing throughout your organization.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>Business Intelligence solutions build on the universally familiar spreadsheet interface to streamline and accelerate the process of gathering, analyzing, and reporting critical decision making information. By enhancing and improving the tools managers already use every day, Business Intelligence simplifies complex choices and improves your company's ability to make effective plans and communicate those plans to everyone who needs to be included. Each solution includes powerful, specific features for getting better results, including:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Application Studio-Allows you to supplement reports with essential background information in a familiar spreadsheet environment for better information gathering and knowledge sharing throughout your organization.</li>\r\n<li>Office Plus-Delivers advanced reporting and sophisticated business analysis to improve collaboration and optimize key processes. With wizards that make it easy to create sophisticated reports, such as trend analysis, BI Office Plus lets you produce custom templates or adapt standard ones to incorporate design elements, key performance indicators, and more. Because you can create new models or modify existing ones within the spreadsheet environment, you'll keep the software in sync with changes, without requiring help from IT.</li>\r\n<li>OLAP Server-A platform for modeling any business process and predicting the results of any change to that process, BI OLAP Server introduces multidimensional data into your modeling process to enhance \"what if\" scenarios, improving not only your business decisions, but also your confidence in those decisions. It also makes it possible to test multiple planning scenarios quickly by automatically allocating your budget down to any level of detail. Likewise, you can set up business rules to reflect interdependencies. The solution also provides one common administrator interface with the ability to control online backups, administer databases on remote servers, and update roles from this single location. What's more, BI OLAP Server is memory-resident, which means that all \"write\" actions and data modifications are stored in auditable relational tables, so that you can easily undo multiple actions to create optimal models quickly and efficiently. </li>\r\n\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Business Intelligence gives decision makers a unique degree of power and flexibility to:<br/>\r\n\r\n<ul>\r\n<li>Create optimal business models quickly and easily.</li>\r\n<li>Enhance reporting and analysis without IT support.</li>\r\n<li>Gather information from multiple sources.</li>\r\n<li>Share important data with everyone who needs it.</li>\r\n<li>Perform \"what if\" analysis to get better result.</li>\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The Business Intelligence Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "With Business Intelligence, decision makers improve their ability to access critical business information and more."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Business Intelligence (BI) is a set of proven corporate performance management solutions with online analytical processing (OLAP) capabilities that allow you to make better decisions and improve your business process by delivering better information to decision makers within your company.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 Public Sector Enterprise Asset Management (Hansen)",
+			"shortName" : "Hansen",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 6,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Public Sector Enterprise Asset Management is the solution that more than 250 leading government agencies worldwide trust to improve asset efficiency, conduct condition analysis, and perform advanced asset analysis.  It can be deployed separately, or as part of a government enterprise solution for citizen response management, community development and regulation, and utility billing.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "\r\n<p>Public agencies have no choice but to stretch resources as far as possible. With revenues shrinking and infrastructure aging, agencies need to get maximum value from existing assets. And even while budgets are getting tighter, demands for high quality service and accountability increase every day. Agencies need to ensure assets are available, safe, reliable, and performing to design standards. By understanding your assets, you will be able to manage your assets more effectively and economically with the help of the world's foremost government-specific asset management solution, Public Sector Enterprise Asset Management .<br></p>\r\n<p>Public Sector Enterprise Asset Management is the solution that more than 250 leading government agencies worldwide trust to improve asset efficiency, conduct condition analysis, and perform advanced asset analysis.&nbsp; It can be deployed separately, or as part of a government enterprise solution for citizen response management, community development and regulation, and utility billing.</p>\r\n<p>To improve performance and reduce costs, our customers use Public Sector Enterprise Asset Management&nbsp;to:</p>\r\n<ul>\r\n<li>Track and report costs accurately against assets and activities. </li>\r\n<li>Plan, schedule, and execute effective maintenance programs. </li>\r\n<li>Create detailed asset inventories and agency-specific asset inspections</li>\r\n<li>Record and track requests for service.</li>\r\n<li>Leverage Geographic Information System (GIS) technology to create a more accurate inventory of infrastructure assets. </li>\r\n<li>Use innovative technologies to improve work processes. </li>\r\n<li>Provide compliance support for current and future asset related regulations. </li></ul>\r\n<p>Government-specific tasks require software that was purpose built for the unique demands of managing government assets. Public Sector Enterprise Asset Management is that solution.</p>\r\n<p>Public Sector Enterprise Asset Management provides an extensive range of asset-specific data fields to make it easy to manage every asset type. Agencies from the smallest local department to the largest state and federal agencies use Public Sector Enterprise Asset Management to better manage the broadest possible range of assets, including:</p>\r\n<ul>\r\n<li>Water-Mains, valves, meters, hydrants, service lines, water nodes, wells.</li>\r\n<li>Sewer-Mains, manholes, service lines, nodes, lift stations.</li>\r\n<li>Storm-Channels, inlets, mains, manholes, culverts, storage basins.</li>\r\n<li>Streets and Roadways-Segments, signals, signs, lights, trees, landscape, intersections, bridges.</li>\r\n<li>Parks-Buildings, equipment, trees, landscaping, playground equipment, sports complexes.</li>\r\n<li>Plant-Facilities, equipment, vehicles.</li>\r\n<li>Railway-Equipment, tracks, signals, signs, yards.</li>\r\n<li>Customer Service-Service request management.</li></ul>\r\n<p>Public Sector Enterprise Asset Management also includes a comprehensive array of tools for managing your agency's physical assets, including:</p>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Work management</li>\r\n<li>Work planning tools</li>\r\n<li>Preventive maintenance</li>\r\n<li>Warehouse and parts inventory management</li>\r\n<li>Map drawer and Geoadministrator</li>\r\n<li class=\"last\">Executive reporting and dashboards</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Inspection and analysis tools</li>\r\n<li>Risk management</li>\r\n<li>Condition analysis</li>\r\n<li>Budget analysis</li>\r\n<li>Asset valuation</li>\r\n<li class=\"last\">Water distribution</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Wastewater</li>\r\n<li>Fleet</li>\r\n<li>Storm water</li>\r\n<li>Industrial waste</li>\r\n<li>Plant, buildings, complexes, and equipment</li></ul>\r\n<p>Government agencies around the world trust Public Sector Enterprise Asset Management to help them deliver high-quality services while effectively managing their budget.</p>\r\n<p>With Public Sector Enterprise Asset Management , you'll not only have a solution that was designed with government agencies in mind, you'll lower your risk because of the stability and strength of Infor, a robust global software provider with decades of experience in delivering government specific solutions. You'll also: </p>\r\n<ul>\r\n<li>Remove the silos between departments to improve coordination and boost performance, while delivering high-quality service to your citizens.</li>\r\n<li>Get the complete picture of the condition and cost of your assets.</li>\r\n<li>Be ready to comply with regulatory requirements and reduce your risk of fines and unexpected compliance costs.</li></ul>\r\n<p>Give your agency the tools to improve efficiency by effectively managing infrastructure, streamlining business processes, and saving money. You'll get all that from Public Sector Enterprise Asset Management, a single, integrated system that supports your exact business needs across all departments and helps you deliver the great service your citizens demand.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Government-specific tasks require software that was purpose built for the unique demands of managing government assets."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Public Sector Enterprise Asset Management is the solution that more than 250 leading government agencies worldwide trust to improve asset efficiency, conduct condition analysis, and perform advanced asset analysis.  It can be deployed separately, or as part of a government enterprise solution for citizen response management, community development and regulation, and utility billing.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 Sales & Operations Planning (S&OP)",
+			"shortName" : "Sales & Operations Planning",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 8,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>The efficiency of your supply chain-and the profitability of your business-rely on your sales and operations plan. Your plan determines your success in meeting customer demands and putting all your resources to work in synchronizing supply to meet demand. Sales and Operations Planning ties together your operational plan with your strategic business plan, providing a holistic view of demand, supply, and finance so that you can literally plan to profit..</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "\r\n<p>With Sales &amp; Operations Planning, decision-makers achieve consensus on a single operating plan that profitably matches supply and demand, while aligning with executive business goals. Sales &amp; Operations Planning provides a holistic framework for balancing demand with supply and incorporates key financial measures to ensure your operational plan is aligned with your strategic plan to produce the best possible business results. </p>\r\n<p>With multiple \"what if\" scenarios on both demand and supply, you can identify the best plan to meet your customer service and financial goals, respond more quickly to the changing landscape of demand, and ensure your S&amp;OP process remains strong throughout the business.</p>\r\n<p>Designed for manufacturers and distributors, Sales &amp; Operations Planning works with conventional ERP and supply chain planning systems to deliver information and process support to create a consensus plan among:</p>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Senior executives</li>\r\n<li class=\"last\">Demand planning managers</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Production managers</li>\r\n<li class=\"last\">Inventory managers</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li class=\"last\">Financial managers</li></ul>\r\n<p>More than 25 years of supply chain management experience is built into Infor Sales &amp; Operations Planning. That's why you can be confident you have a proven solution from industry experts that delivers on its promise.</p>\r\n<p>Across your supply chain, Sales &amp; Operations Planning brings you visibility and insight into all aspects of your demand and supply picture-from forecasts through to actual demand, inventory, production, and supplier plans.&nbsp;&nbsp; </p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>Sales &amp; Operations Planning closes the gap between operations and strategy. The S&amp;OP system contains pre-configured processes and key performance indicators to create a framework for balancing demand and supply.</p>\r\n<p>With Sales &amp; Operations Planning, you get:</p>\r\n<ul><li><strong>Demand-supply balancing.</strong> Plan your enterprise for any grouping of product, customer, geography, or channel to market to ensure you can meet your demand plan. Plan in units, sales values, or costs-and see the impact on your business.</li>\r\n<li><strong>\"What if\" simulations.</strong> Run scenarios for various demand and supply profiles and compare \"what if\" alternatives showing probable financial impact of different strategic, operational, and tactical events. That way, you can align operations with business objectives.</li>\r\n<li><strong>S&amp;OP process support.</strong> Sales &amp; Operations Planning governs your S&amp;OP business process. Embedded task management enforces your process, ensuring tasks are done on time by the right people. You'll also document activities and decisions made, and the system tracks all changes to demand or supply for compliance reporting.&nbsp;&nbsp; </li>\r\n<li><strong>Common information repository.</strong> Use imported data from multiple sources including demand, inventory, and planned production as a common information system and foundation for deep analysis of your business-from forecast and sales history through to supply.&nbsp;&nbsp; </li>\r\n<li><strong>Unit and currency synchronization.</strong> Provide a common view of your business with a system that synchronizes the monetary forecast and the unit forecast for better decision-making. Avoid the common and unfortunate scenario where the finance staff view only financial terms of the business and operations staff view only volume of products made and shipped. </li>\r\n<li><strong>Collaboration network.</strong> Use a single platform to synchronize and rationalize your sales and operational forecast across all functional areas: design, supply, operations, marketing, finance, and other stakeholders. Collaborate using one set of data in one place that the system automatically compiles and stores to allow interactive analytics that drive a consensus plan.</li>\r\n<li><strong>Event alerts.</strong> Provide a proactive system enabling the appropriate decision-maker to automatically receive alerts to plan deviations and other events and efficiently make adjustments. Analyze exceptions to determine cause and communicate it to the right people to improve your plan and processes. The workflow drives everyone to review and approve on time.</li>\r\n<li><strong>Key performance indicator measurement.</strong> Continuously review and improve your performance by measuring your progress toward your financial objectives. Track your assumptions made in the course of agreeing to a unified forecast and make continuous improvements.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Unlike other supply chain management systems, S&amp;OP uniquely offers: </p>\r\n<ul><li><strong>S&amp;OP process modeling</strong>-Model your own S&amp;OP business process in the system and enforce it using embedded task management and alerting.</li>\r\n<li><strong>\"What if\" scenario planning</strong>-Create different demand plan scenarios and compare with different supply plan scenarios-each with its own financial analysis of sales revenues and costs-and choose the plan that best serves your customer demands and your business.</li>\r\n<li><strong>Integration with any ERP</strong>-Get pre-packaged integration with Infor10 ERP, or, using its open platform, easily integrate with any non-Infor ERP or specialist demand and supply chain planning system.</li>\r\n<li><strong>Embedded analytics</strong>-Obtain deep insight into your operational plan at any grouping level-company, product, customer, geography. Analyze forecasts, actuals, inventory, and supply plans, and view in any units, sales value, or costs.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The Sales & Operations Planning Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Infor10 Sales & Operations Planning ties together your operational plan with your strategic business plan so you can literally plan to profit."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>The efficiency of your supply chain-and the profitability of your business-rely on your sales and operations plan. Your plan determines your success in meeting customer demands and putting all your resources to work in synchronizing supply to meet demand. Sales and Operations Planning ties together your operational plan with your strategic business plan, providing a holistic view of demand, supply, and finance so that you can literally plan to profit.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Lawson HR Service Delivery (Enwisen)",
+			"shortName" : "HR Service Delivery",
+			"trialsAvailable" : true,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 9,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Lawson HR Service Delivery can help you deliver better HR services without breaking the bank. It allows your workforce to create and update their own HR records, keep up to date on company policies, and fully understand their total compensation.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p align=\"justify\">Lawson HR Service Delivery helps you transform HR into a strategic partner and fully engage your employees, all while lowering annual HR service delivery costs. Your HR service delivery platform moves your organization toward true HR shared services, and HR shared services helps:</p>\r\n<ul><li>Support a multi-tier approach to HR service delivery.</li>\r\n<li>Employees answer their own HR questions, often in two clicks or less.</li>\r\n<li>HR service representatives provide accurate answers, often on the first call.</li>\r\n<li>Your service center handle tier 2 calls with fewer HR resources.</li></ul>\r\n<p align=\"justify\">Lawson HR Service Delivery is a confidential, secure environment for employees, managers and HR professionals to obtain information on sensitive personal and corporate information and policies. With HR Service Delivery, employees can feel more at ease when dealing with sensitive issues (such as divorce) or conditions associated with employee assistance programs. </p>\r\n<p align=\"justify\">The applications include:</p>\r\n<ul><li><strong>Onboarding/Offboarding</strong>: Orchestrate all steps in the employee new-hire and separation processes for employees, hiring managers, and line managers as well as &nbsp;provisioning hiring departments, finance, and HR. </li>\r\n<li><strong>KnowledgeBase</strong>: A personalized, searchable online source for all workforce communications and decision support. It is the foundation for a multi-tier approach to HR service delivery, helping organizations achieves results well above industry averages. </li>\r\n<li><strong>Case Management</strong>: Helps your HR service representatives manage employee inquiries when employees cannot find the answers to their questions on their own. Complex employee and manager HR inquiries are also initiated through the online AskHR feature, or HR Shared Services Center, and then they are escalated to HR subject matter experts when necessary.</li>\r\n<li><strong>Total Rewards</strong>: An on-demand tool that helps employees understand the contents and true value of their total compensation (total rewards) package.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Lawson HR Service Delivery helps you transform HR into a strategic partner and fully engage your employee while lowering costs."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Lawson HR Service Delivery can help you deliver better HR services without breaking the bank. It allows your workforce to create and update their own HR records, keep up to date on company policies, and fully understand their total compensation.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 ERP Express (VISUAL)",
+			"shortName" : "ERP Express",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 10,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Order-driven manufacturing is getting more complex because of globalization, regulation, extended supply chains, and customer pressures. To grow, manufacturers need to focus on boosting operational efficiency as well as introducing new products and services. Bring order to your orders, create a more predictable process, and get better results with ERP Express, a powerful enterprise resource planning (ERP) solution designed with manufacturing in mind.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>ERP Express is an easy-to-implement business system that provides manufacturers and distributors with multiple scheduling options so they can start improving performance right away.</p>\r\n<p>Affordable and easy to use, ERP Express incorporates:</p>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Advanced planning and scheduling (APS) </li>\r\n<li>Manufacturing execution system (MES) </li>\r\n<li>Customer relationship management (CRM)</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li class=\"last\">Quality management</li>\r\n<li>Lean scheduling</li>\r\n<li>Project management</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Financials</li>\r\n<li class=\"last\">Dashboard</li></ul>\r\n<p>ERP Express provides an entirely different approach to shop-floor scheduling that's been refined through years of experience and thousands of successful customer implementations. ERP Express is based on a patented finite scheduling algorithm that accounts for actual capacity, and includes on-hand and expected material availability. </p>\r\n<p>Created specifically for order-driven manufacturing, ERP Express solves issues for various industries, including:</p>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Discrete general manufacturing</li>\r\n<li>Aerospace/defense</li>\r\n<li class=\"last\">Automotive-Tier 2, Tier 3</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Industrial equipment and machine manufacturers</li>\r\n<li class=\"last\">Heavy fabrication</li></ul>\r\n<ul class=\"bullets bullets3Col\">\r\n<li>Specialty vehicles</li>\r\n<li class=\"last\">Medical devices</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>ERP Express quickly converts customer requirements into manufacturing requirements and then executes them efficiently. Lean concepts eliminate redundant or wasteful steps that users may be forced to go through with other manufacturing software.</p>\r\n<p>True to its name, ERP Express provides a compelling visual presentation that shows how each part of the manufacturing process relates to the other parts-helping to resolve bottlenecks, schedule effectively, and price jobs accurately.</p>\r\n<p>For manufacturers, ERP Express supports mixed-mode production strategies, including engineer-to-order, make-to-order, assemble-to-order, and make-to-stock. ERP Express also displays all key statistics on a single screen, helping ensure that schedules are met, materials arrive on time, and costs are in line with estimates.</p>\r\n<p>Core modules include: </p>\r\n<ul class=\"bullets longContentList\"><li><strong>Manufacturing Window</strong>-Creates an engineering plan or bill of material (BOM) quickly and easily with a full-color, graphical interface, and then uses the design to automatically create a quote and/or work order. Provides a comprehensive view of the materials and operations involved in the engineering process, including both macro and micro views of your business. </li>\r\n<li><strong>Cost Accounting</strong>-Captures costs as changes occur, ensuring up-to-date and accurate costs. Lets you choose between actual costs and standard costs. Links purchases directly to existing work orders through the Purchasing or Manufacturing modules, earmarking costs that are specific to jobs. </li>\r\n<li><strong>Quoting and Estimating</strong>-Creates professional and comprehensive quotations, determines realistic delivery dates based on material and resource availability, and turns quotes into sales orders. Users can create quotes quickly and easily by copying them from another quote, an existing work order, or a BOM, and then modifying the new quote to match customer specifications. Plus, users can estimate costs for material, labor, burden, and outside services, and, once a contract is awarded, automatically create sales and work orders from quotes.</li>\r\n<li><strong>Order Management</strong>-Manages a large volume of customer orders and meets varied fulfillment objectives. Helps users manage customer order allocation and new product deployment planning throughout the supply chain. Also optimizes fulfillment, reduces order processing cycle times, provides cost-effective sourcing of inventory to customer orders, and increases revenue through substitution, cross-selling, and value-added services.</li>\r\n<li><strong>Contact Center</strong>-Retains existing customers and acquires new accounts by tracking everything there is to know about prospects and customers. Schedules activities, assists in sending letters and emails, and keeps detailed notes about conversations with contacts. Provides histories, tasks, and other sales data for every contact, at every account. Accesses important back-office data such as accounts receivable, current part inventory, return material authorization (RMA) status, estimates, sales orders, credit status, and shipments for each customer. </li>\r\n<li><strong>Purchasing</strong>-Coordinates material purchases by providing online decision support that simplifies record keeping. Helps control inventory, enhance cash flow, and shorten delivery times. Handles all types of purchases, including inventoried items, supply items, outside service operations pertaining to a manufacturing order, and subcontracted items that require delivery of components to a vendor. Accommodates drop shipments at locations other than the primary ship-to address, such as warehouses or customer locations. Provides standard form reports such as purchase orders, acknowledgments, and order lists for purchasing personnel, as well as analytical accounts' payable-related reports-including purchase order lists and accrual reports. \r\n</li><li><strong>Concurrent Scheduling</strong>-Ensures the most efficient use of materials and resources, and provides the necessary information to deliver product on time, with two powerful tools-Global Scheduler and Scheduling Window. ERP Express was the first software system to feature concurrent scheduling, which considers both material and capacity constraints when generating shop schedules.</li>\r\n<li><strong>Material Requirements Planning (MRP)</strong>-Manages the balance between supply and demand, providing a comprehensive analysis of your material situation, including the suggested action to restore balance. Suggests when to release supply orders (for either purchased or fabricated parts) based on the most up-to-date supply and demand information available. Also helps reduce inventory, increase manufacturing productivity, and facilitate cash flow. </li>\r\n<li><strong>Master Production Scheduling (MPS)</strong>-Working with MRP, MPS translates business plans, including forecasted demand, into production plans using firm planned orders in a true multi-level, optional component scheduling environment. Drives the manufacturing process, and prevents shortages, costly expediting, last-minute rescheduling, and inefficient allocation of resources.</li>\r\n<li><strong>Shop Floor Control</strong>-Seamlessly integrates all ERP Express's features, including inventory control, material and labor tracking and reporting, purchasing, and scheduling. Provides complete control over production operations, eliminating redundant data entry and ensuring consistency and accuracy throughout the shop floor.</li>\r\n<li><strong>Executive Information System</strong>-Allows decision makers to view and analyze key factors and performance trends in the areas of sales, purchasing, production, and finance, and to see both summary and detail-level data. Displays summarized data that reflects the overall status of the enterprise. Spotlights areas that need attention before situations become critical and costly by highlighting key performance indicators. Lets decision makers trace problem areas directly to the source.</li>\r\n<li><strong>Inventory Control</strong>-Provides greater accuracy and immediate access to inventory information throughout the company. Automates part-tracking by adjusting inventory whenever a part transaction occurs. Designates inventory items as purchased, manufactured, stocked, or non-stocked so you can immediately place a purchase order or issue a job order when you need a particular item. Tracks materials and costs on a per-project basis, providing an online, in-depth, time-phased, netting evaluation of the complete supply and demand situation for parts. Provides complete profiles of any part in the system.</li>\r\n<li><strong>Dimensional Inventory Tracking</strong>-Breaks down the total quantity of inventoried parts into various dimensional sizes, providing more control. Calculates the correct total order quantity by making necessary conversions when a specified number of pieces are issued by dimension. Immediately adjusts all values related to a part transaction, so you can purchase, receive, and enter a material requirement simply by entering the number of pieces of material, the required dimensions, and the warehouse location. Also performs a physical inventory of specified numbers of pieces and dimensions.</li>\r\n<li><strong>Engineering Change Notice</strong>-Establishes controls and manages the process of making changes to documents and drawings, parts, BOMs and routings, work orders, and projects. \r\n</li><li><strong>Throughput</strong>-Measures productivity considering the contribution of a job or product toward company profit, calculated as price of goods sold minus cost to produce. Increases profit by working a schedule that will increase throughput, using measurements not commonly found in ERP and MES systems. Accesses a variety of reports and inquiries: actual or expected throughput reports; and utilization, contention, and material constraint inquiries. Displays \"what if\" scenarios to help determine whether a request is feasible. </li>\r\n<li><strong>Workflow</strong>-Passes information from one person or department to another through an automated process cycle, integrating policies and procedures with information flow according to predefined conditions or rules. Provides master, predefined, and user-defined workflow templates, ensuring a logical, repeatable flow of data. Releases defined workflows into the ERP Express system, where they operate behind the scenes. Notifies users of tasks and activities that require action. Routes information, such as customer orders, purchase orders, or engineering changes, to internal and external participants in the business process, incorporating approval functions along the way. Allows users to conveniently track and monitor the status of documents. \r\n</li><li><strong>Data Import Utility</strong>-Provides a BOM and part-import interface for 3PL applications, which must generate a properly formatted flat file. Validates all fields, recalculates required quantities, and produces a log of all transactions during the import process.</li>\r\n<li><strong>Messages</strong>-Transmits important information to appropriate persons, either within or outside the company, using familiar email features. Delivers alerts to user workstations, pagers, cellular phones, printers, and fax machines. Defines important events within the manufacturing process, creating and transmitting messages to key personnel. Allows employees to focus on other business without needing to constantly check in, while ensuring they'll be informed of-and can act on-critical information.</li>\r\n<li><strong>Management Reporting</strong>-Analyzes and manages enterprise and accounting data providing the methodology to build customized queries and forms, define business graphics, and create complex cross-tabular reports. Also helps pinpoint resource contention-otherwise known as bottlenecks-to improve shop floor schedules, increase on-time delivery, and improve profits. </li>\r\n<li><strong>Return Material Authorization</strong>-Manages documents that control the return of parts previously sold and shipped to a customer. Contains an ID status and other identification regarding who is returning the material, and for what purpose. </li>\r\n<li><strong>Lot and Serial Traceability</strong>-Creates trace records for each lot number, serial number, or other grouping of a part, and automatically tracks each part as it flows through your plant. Assigns additional information, including a description, expiration date, and other user-definable fields. Tracks parts from material receipt through product delivery, as well as all intermediate levels. Prompts operators for additional information when receiving and issuing material and reporting labor. Reviews flow of material lots and serialized parts as they move through the manufacturing process. </li>\r\n<li><strong>Quality control</strong>-Makes quality assurance an intrinsic part of your workflow. Establishes, tracks, and manages every engineering activity and supply chain expectation, while supporting business growth and profitability goals. Creates critical manufacturing specifications for products, processes, equipment, and measuring devices, and improves enterprise team collaboration with vendors, customers, and employees. Get tools to automate associated design, pre-production, production, and post-production activities; expertly manage business performance; and easily collect, control, and analyze quality system data.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "\r\n<p>Unlike other enterprise resource planning systems, ERP Express uniquely offers: \r\n</p><ul><li>A patented, finite scheduling algorithm that accounts for actual capacity-including on-hand and expected material availability.</li>\r\n<li>A compelling visual presentation that shows how each part of the manufacturing process relates to the other parts-helping to resolve bottlenecks, schedule effectively, and price jobs accurately.</li>\r\n<li>Flexible deployment options, including on-premises, hosted, and cloud-all from a single code base, and all with a consistent user experience, security, and administration.</li>\r\n<li>Tools created specifically for order-driven manufacturing.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The ERP Express Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "ERP Express provides you with the structure to create a more predictable process and get a firm grasp on how every change affects your business."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Order-driven manufacturing is getting more complex because of globalization, regulation, extended supply chains, and customer pressures. To grow, manufacturers need to focus on boosting operational efficiency as well as introducing new products and services. Bring order to your orders, create a more predictable process, and get better results with ERP Express, a powerful enterprise resource planning (ERP) solution designed with manufacturing in mind.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 ERP Process Business (Adage)",
+			"shortName" : "ERP Process Business",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 11,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>You want to plan well and manufacture well. But your customers want new products faster every day, which leaves less and less time for planning.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>You need tools that help you:</p>\r\n<ul>\r\n<li>Respond to your customers' needs.</li>\r\n<li>Reduce waste.</li>\r\n<li>Price products profitably.</li>\r\n<li>Plan rather than react.</li></ul>\r\n<p>ERP Process Business puts process manufacturers like you in the drivers' seat by giving you total control over how you enter, view, use, and analyze your business information. It also puts all the puzzle pieces together so that you can see your business choices more clearly and make better decisions.</p>\r\n<p>ERP Process Business helps you:</p>\r\n<ul>\r\n<li>Plan to produce more efficiently.</li>\r\n<li>Discover where your true profitability lies</li>\r\n<li>See the direct impact of quality on your bottom line.</li>\r\n<li>Improve collaboration for better results.</li></ul>\r\n<p>In addition, Infor's Enterprise Performance Accelerator Kit (EPAK) gives you all the tools you need to build your employee skill sets and make them more productive-before, during and after implementation. It's a proven solution for your organization's specific deployment requirements across the entire lifecycle of your software systems. </p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "You want to plan well and manufacture well. But your customers want new products faster every day, which leaves less and less time for planning."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>You want to plan well and manufacture well. But your customers want new products faster every day, which leaves less and less time for planning.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 ERP Enterprise (LN)",
+			"shortName" : "ERP Enterprise",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 12,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Complexity is an inescapable part of today's global supply chains. Multiple operations, collaborative partner networks, rapid innovation, and a competitive market increase manufacturing complexity. The system you trust to tame complexity should allow you to see and manage all of your resources as a unified whole. With ERP Enterprise, you'll have the tools to improve operational excellence in your manufacturing plants and across your supply chain.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>ERP Enterprise is the most powerful and comprehensive system available for managing the demands of complex manufacturing, distribution, and service industries. Its deep functionality gives you unparalleled control over the complexities of your global operations, with over 30 modules covering:</p>\r\n<ul class=\"bullets bullets3Col\"><li>Global Financial Management</li>\r\n<li>Customer Relationship Management</li>\r\n<li>Sales and Configuration Order Management</li>\r\n<li class=\"last\">Enterprise and Supply Chain Planning</li></ul>\r\n<ul class=\"bullets bullets3Col\"><li>Manufacturing Control</li>\r\n<li>Sourcing and Procurement</li>\r\n<li>Project Management</li>\r\n<li class=\"last\">Quality Management</li></ul>\r\n<ul class=\"bullets bullets3Col\"><li>Service Management</li>\r\n<li>Engineering Data Management</li>\r\n<li class=\"last\">Dynamic Enterprise Modeling</li></ul>\r\n<p>ERP Enterprise is proven across a wide range of engineering-based industries, including automotive, industrial equipment and machinery, high tech&nbsp; and electronics and aerospace and defense. It has more than 25 years of manufacturing know how built in and is helping run more than 5,000 companies worldwide.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>ERP Enterprise gives you control over every aspect of your manufacturing supply chain, from design through to delivery, and beyond to your after-market service business. The result of years of development investment and focus on core industries, ERP Enterprise delivers the deepest industry functionality available, including capabilities you simply won't find in other systems-all of which add up to more control, fewer modifications, and sharper information to make better decisions. </p>\r\n<p>The latest release introduces new technologies that transform your user experience for greater productivity and connectivity. You get software that's easier to use on the frontend, with faster, smarter connections on the back end, including:</p>\r\n<ul><li>Infor10 Workspace for a personalized, high productivity user experience.</li>\r\n<li>Infor10 ION Suite to connect ERP Enterprise to all other systems in your infrastructure.</li>\r\n<li>Visibility and control over your global operations.</li>\r\n<li>Financial budgeting, consolidation, and strategic planning.</li>\r\n<li>Enterprise planning to improve manufacturing supply chain performance.</li>\r\n<li>Customer relationship management to maximize your market opportunity.</li>\r\n<li>Assembly Line Control to synchronize manufacturing in a work-station production environment</li>\r\n<li class=\"last\">Flexible architecture so that you can define (and re-define) your processes.</li></ul>\r\n<p>ERP Enterprise is the only full-featured manufacturing solution that completely and simultaneously supports all of the technologies that are indispensable for manufacturing success today, with features that include:</p>\r\n<ul><li><strong>Planning</strong>-This sophisticated planning engine consolidates multiple planning methods into one application and provides a holistic view and management of capacity and demand. Planning is complemented with capacity scheduling applications.</li>\r\n<li><strong>Manufacturing</strong>-The core of ERP Enterprise, its manufacturing capabilities are supremely flexible and highly functional, supporting all manufacturing typologies and offering the ability to manage the most complex, highly engineered, or project-based configurations.</li>\r\n<li><strong>Finance</strong>-Multi-company, multi-site, multi-currency, multi-language-ERP Enterprise's financial management capability supports the full range of financial operations. It delivers financial control with comprehensive analytics that give you the insight you need in every area of your business.</li>\r\n<li><strong>Warehousing</strong>-Using barcoding and the latest radio frequency identification (RFID) technology, Warehousing improves inventory accuracy, optimizes your warehousing resources, and helps you boost customer fulfillment.</li>\r\n<li><strong>Freight Management</strong>-Manage your own transportation needs and use your warehouse capacity more efficiently with better transportation planning and execution.</li>\r\n<li><strong>Procurement</strong>-With robust direct and indirect materials purchasing features, the Procurement module provides centralized and decentralized order and contract management capabilities, and supports the full range of procurement activities.</li>\r\n<li><strong>Sales</strong>-This fully integrated sales solution streamlines the order management process, allowing you to customize order entry procedures for different items and customers, and provides support for the handling and releasing of schedules, including push and pull. Graphical product configuration enables you to more easily configure product to customer order.</li>\r\n<li><strong>Enterprise Service Management</strong>-Turn your aftermarket into a profit center. Enterprise Service Management gives you seamless, end-to-end integration of your entire service supply chain and the up-to-the minute management information you need to make clear, confident, strategic decisions.</li>\r\n<li><strong>Project</strong>-Project and manufacturing resource management come together in one environment, with real-time control for all aspects of project manufacturing. </li>\r\n<li><strong>Quality Management</strong>-Gain complete control over all aspects of Quality through sales, purchasing, and production orders, as well as with inventory, location, lot control, and serial number traceability.</li>\r\n<li class=\"last\"><strong>Product Lifecycle Management</strong>-Close the gap between engineering and other departments by making detailed product information easily accessible, so employees from purchasing to production can improve decision-making. Automated transactions have reduced internal approval time at some companies by as much as 50%.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Unlike other ERP systems, ERP Enterprise uniquely offers: </p>\r\n<ul><li>Assembly Line Control (ALC), which synchronizes material and production operations in manufacturing environments that build unique configurations of product on main and feeder assembly lines. These environments are often found in automotive, high tech electronics, and aerospace industries. ALC can operate across sites for true assembly line synchronization, delivering what MRP and traditional supply chain planning systems cannot.</li>\r\n<li>A combined project and production planning system for improved bid and project profitability. Many manufacturers describe themselves as project-based, with engineer-to-order products that start with a new bid. ERP Enterprise enables you to bid confidently, tracked earned value throughout the project, and synchronize project activities with your production operations.</li>\r\n<li>Visibility, management, and support for your global operations. Consolidate your financials across your business, prepare budgets and track performance, support strategic planning and forecasting, and get access to deep analysis and insight into all areas of your business.</li>\r\n<li>Dynamic Enterprise Modeling (DEM) that lets you configure the system to match the way you run your business and the way your users use it. Don't accept complex menu structures that confuse and inhibit your use of the system-use DEM to define the navigation that you need to support your business processes and deliver the information you need faster.</li>\r\n<li>The ability to run on any standard operating system, hardware platform, or database, and to run on several platforms at once in a single instance. The matchless adaptability of ERP Enterprise means that you can choose the IT environment that suits you best, or migrate to another without disruption.</li>\r\n<li>Optional cloud-hybrid deployment, which combines the best qualities of cloud deployment and on-premises implementation. You'll get the universal availability and low hardware requirements of cloud computing along with rich connections to local hardware resources. </li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The ERP Enterprise Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "ERP Enterprise helps your company improve operational excellence and respond to change."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Complexity is an inescapable part of today's global supply chains. Multiple operations, collaborative partner networks, rapid innovation, and a competitive market increase manufacturing complexity. The system you trust to tame complexity should allow you to see and manage all of your resources as a unified whole. With ERP Enterprise, you'll have the tools to improve operational excellence in your manufacturing plants and across your supply chain.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor EAM (MP2)",
+			"shortName" : "Infor EAM (MP2)",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 13,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>Whether your small- to medium-sized business (SMB) manufactures products such as food, or provides services such as healthcare, you rely on your property, plant, and equipment to  ensure quality and profit. But because your IT staff is limited, and your maintenance teams spend much of their time in the field servicing equipment, you need a client/server-based enterprise asset management (EAM) system that's quick to implement, easy to learn, and mobile. That's what you get with Infor EAM (MP2).</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "\r\n<p>Infor EAM&nbsp;(MP2)&nbsp;is a proven, easy-to-use application that helps SMBs make the most of their assets. By leveraging Infor's experience, you can efficiently manage maintenance processes, collaborative workflow, reporting and analysis, inventory, financial and budget information, logistics, and e-commerce.</p>\r\n<p>You'll be able to view up-to-date location and usage information so you can share assets across sites and between divisions, making your assets more productive. Plus you can quickly access historical costs, performance characteristics, and warranty information associated with assets, and decide whether repair or replacement is the best solution.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "\r\n<p>Available on Microsoft SQL Server 2005 and Microsoft SQL Express, Infor EAM&nbsp;(MP2) provides you with an organized, accountable system for effective asset management. You can easily access maintenance and inventory histories as well as get in-depth analysis of equipment reliability, inventory use, and planned maintenance.</p>\r\n<p>Infor EAM&nbsp;(MP2) helps you with:</p>\r\n<ul><li><strong>Equipment management</strong>-Track important asset details. Plus, create service contract records for equipment under warranty.</li>\r\n<li><strong>Scheduling</strong>-Avoid resource shortages and overutilization, eliminating unnecessary labor costs and increasing profits.</li>\r\n<li><strong>Inventory</strong>-Check out, return, adjust, and move inventory items so that less money is tied up in unused assets, and necessary parts are always available.</li>\r\n<li><strong>Labor</strong>-Ensure compliance with ISO 9000, OSHA, Joint Commission, HAZMAT, employee training, and workforce development requirements.</li>\r\n<li><strong>Purchasing</strong>-Automatically generate requisitions, easily calculate purchase order costs, and efficiently order parts and supplies.</li>\r\n<li><strong>Procurement</strong>-Determine the parts you need, review catalogs online, and purchase items at volume discounts-all with a simple click-with Infor EAM iProcure, an integrated procurement network.</li>\r\n<li><strong>Reporting and analysis</strong>-Track the life of your assets, and select from more than 150 pre-built reports. </li>\r\n<li><strong>Security</strong>-Minimize the chance of altered or contaminated data by establishing user accounts and passwords, assigning users to security groups, and limiting access at the menu, form, and field level. </li>\r\n<li><strong>Statistical predictive maintenance</strong>-Predict and prevent equipment failure, flagging equipment to be checked based on statistical exceptions, and tracking conditions for each maintenance task.</li>\r\n<li><strong>Tasks</strong>-Schedule preventive maintenance tasks to avoid equipment failures and increase productivity, delivering integral information straight to the personnel who need it. </li>\r\n<li><strong>Work orders</strong>-Track labor costs and manage work order assignments easily, helping reduce unscheduled downtime. </li>\r\n<li><strong>Work requests</strong>-Create on-site and call-in requests. Monitor the status of work requests, and open, close, and update them as necessary.</li>\r\n<li><strong>Advanced asset management</strong>-Make asset management even easier with advanced options including Infor EAM&nbsp;(MP2) WebLink and Messenger, and Infor EAM&nbsp;(MP2) Pocket Plus. </li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Unlike other EAM systems, Infor EAM&nbsp;(MP2):</p>\r\n<ul><li>Was developed specifically for small- to medium-sized, asset-intensive organizations.</li>\r\n<li>Is designed for swift implementation in days, with minimal upfront training and consultation required. \r\n</li><li>Is simple for non-IT staff to use and administer.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The Infor EAM (MP2) Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "By implementing flexible, business-specific Infor EAM (MP2), you can strategically address your asset management challenges to positively affect business results."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>Whether your small- to medium-sized business (SMB) manufactures products such as food, or provides services such as healthcare, you rely on your property, plant, and equipment to  ensure quality and profit. But because your IT staff is limited, and your maintenance teams spend much of their time in the field servicing equipment, you need a client/server-based enterprise asset management (EAM) system that's quick to implement, easy to learn, and mobile. That's what you get with Infor EAM (MP2).</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 EAM Business",
+			"shortName" : "Infor10 EAM Business",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 14,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>You know that the health of your enterprise assets affects the health of your company. But your small- to medium-sized business (SMB) can't afford the cost and complexity typically associated with a best-in-class EAM system. EAM Business can help.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "\r\n<p>EAM Business helps SMBs control critical functions, such as work orders, purchasing, inventory, and preventive maintenance, without the investment and extended implementation time required for a larger-scale installation. Whether you have single or multiple sites, EAM Business allows you to manage several essential business functions from within a single web-based solution-increasing productivity while reducing downtime</p>\r\n<p>Because the security model is uncomplicated, installation time is reduced. System users access the features and functions of web-based Infor10 EAM software through a browser, working with an easy-to-use graphical user interface.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>EAM Business improves asset performance, which reduces operational costs and increases top-line growth. Designed for companies that have small IT departments or no IT department at all, EAM Business provides unparalleled insight into operations and can fully integrate with other enterprise applications, advantages typically reserved for large, multinational corporations.</p>\r\n<p>EAM Business helps you with:</p>\r\n<ul><li><strong>Asset management</strong>-Identify, track, locate, and analyze your company's physical assets to maximize productivity and extend asset life.</li>\r\n<li><strong>Work management</strong>-Track and manage work requests, labor, planning, and scheduling to make the most of your resources while improving productivity.</li>\r\n<li><strong>Preventive maintenance</strong>-Schedule workers to maintain equipment based on a fixed date, flexible time period, or metered usage.</li>\r\n<li><strong>Materials management</strong>-Monitor and control your storerooms to make sure you're carrying the right amount of inventory-no more, no less.&nbsp; </li>\r\n<li><strong>Purchasing</strong>-Order the right parts, and also stay on top of delivery times, vendor payments, and receipt of goods. </li></ul>\r\n<p>In addition, EAM Business features an optional Mobile module with which you can download work assignments from the Infor10 EAM database, using docking cradles or dial-up and wireless connections. The Mobile module automates virtually every aspect of maintenance and data collection, allowing you to create field-based work orders, use drill-down menus to retrieve detailed information about a piece of equipment, and capture actual \"wrench time\" as work occurs.</p>\r\n<p>With a wide range of deployment and buying options, EAM Business can provide your company with the model that best meets your business needs. </p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>Unlike other EAM systems, EAM Business uniquely offers:</p>\r\n<ul><li>The tools to reduce combined operating and maintenance expenses by 10% or more while significantly increasing business performance. </li>\r\n<li>A standards-based approach to integration at a fraction of the cost of other vendors, plus software as a service (SaaS) pricing and delivery that dramatically reduces your investment. </li>\r\n<li>Savings of up to 50% in purchasing process costs and up to 30% in inventory levels, helping you achieve a return on investment in 12 months or less.</li>\r\n<li>The functionality of a best-in-class system without the price tag.</li>\r\n<li>Choices in how you purchase, deploy, and manage your EAM solution, including standard on-premises deployment, dedicated hosting options, and two different cloud-based options-SaaS subscription and cloud (hosted) license. </li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The EAM Business Difference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "EAM Business helps companies like yours cut costs and boost profits, all within your budget and timeframe. Plus you'll have the flexibility to upgrade as your business grows."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>You know that the health of your enterprise assets affects the health of your company. But your small- to medium-sized business (SMB) can't afford the cost and complexity typically associated with a best-in-class EAM system. EAM Business can help.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor System i",
+			"shortName" : "Infor System i",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 15,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>You're one of the nearly 15,000 Infor manufacturing customers whose enterprise resource planning (ERP) solution leverages the IBM System i platform. You know it's a powerful combination. You'll be pleased to know that it's becoming more powerful every day. </p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>You're one of the nearly 15,000 Infor manufacturing customers whose enterprise resource planning (ERP) solution leverages the IBM System i platform. You know it's a powerful combination. You'll be pleased to know that it's becoming more powerful every day.&nbsp; </p>\r\n<p>Like IBM, Infor is making a significant investment in its System i capabilities so you can: </p>\r\n<ul><li>Protect and leverage your current IT investment</li>\r\n<li>Easily add new capabilities to your ERP solution to meet changing business requirements</li>\r\n<li>Continue to enjoy the reliability, security and low total cost of ownership delivered by the System i and Infor&nbsp; ERP solutions</li></ul>\r\n<p>The Infor strategy for the System i platform is based on the following: </p>\r\n<ul><li>Leverage a dedicated team of Infor System i ERP experts in development, implementation, support, service, solutions management, and strategic planning. </li>\r\n<li>Develop new Infor tooling technology to stay in lock step with IBM's ongoing System i technology development</li>\r\n<li>Develop new System i-specific ERP functional capabilities and applications for Infor System i&nbsp; solutions</li>\r\n<li>Deliver more value for our customers' investment in maintenance</li></ul>\r\n<p>The result: You have the advanced, integrated hardware and software platform you need to be competitive today and in the future.&nbsp; <br></p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Easily add new capabilities to your ERP solution to meet changing business requirements."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>You're one of the nearly 15,000 Infor manufacturing customers whose enterprise resource planning (ERP) solution leverages the IBM System i platform. You know it's a powerful combination. You'll be pleased to know that it's becoming more powerful every day. </p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 PLM Discrete (PLM8)",
+			"shortName" : "Infor10 PLM Discrete (PLM8)",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 16,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>To succeed, discrete manufacturers need efficient product lifecycle management (PLM) processes that integrate easily with other business processes so they develop new products faster, produce them for less, and manage the entire product lifecycle more efficiently.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "\r\n<p>A CAD-neutral, best-of-breed product lifecycle management solution integrated with the Infor ERP, Infor10 PLM Discrete (PLM8) streamlines product development and management processes for discrete manufacturers with complex organizations, processes, and supply chains. The solution increases the effectiveness of product development, management, and production processes. </p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p align=\"justify\"><strong>Seamless integration with Infor ERP</strong>. Infor10 PLM Discrete features \"out-of-the box\" integration with Infor enterprise resource planning solutions so comprehensive and accurate product information is readily available to everyone in the enterprise who needs it to do their job.<br> <br><strong>Seamless integration with all major CAD solutions</strong>. Discrete manufacturers depend on the capabilities of computer-aided design solutions to streamline their new product design processes. But once the design is created in CAD, they also need an efficient way to use that information in the engineering and production of the product. By being CAD-neutral, Infor10 PLM Discrete eliminates obstacles that can interfere with the efficient use of design information in other business processes. <br><br><strong>Best-of-breed discrete PLM capabilities</strong>. Infor10 PLM Discrete gives manufactures the specific capabilities they need to streamline product design, increase the success of new product introductions, and improve overall product performance. The solution features product data management, enterprise content management, and product lifecycle analysis capabilities designed specifically for discrete manufacturing production environments. <br><br>When you use Infor10 PLM Discrete, your company will be more agile and responsive to customers and your product performance will increase. <br></p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Infor10 PLM Discrete features \"out-of-the box\" integration with Infor enterprise resource planning solutions."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>To succeed, discrete manufacturers need efficient product lifecycle management (PLM) processes that integrate easily with other business processes so they develop new products faster, produce them for less, and manage the entire product lifecycle more efficiently.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 PLM Process (Optiva)",
+			"shortName" : "Infor10 PLM Process (Optiva)",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 17,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>To be competitive, process manufacturers have to develop new products quickly, produce them using the best possible formula, and maintain full compliance with all regulatory requirements. It's a unique set of requirements that demands a tailored approach to product lifecycle management (PLM).</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "\r\n<p class=\"contentLeftSection\" align=\"justify\">A best-of-breed product lifecycle management solution created specifically for process manufacturers, Infor10 PLM Process (Optiva) helps companies accelerate their product development, minimize their cost of production, and ensure 100% regulatory compliance. </p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>Infor10 PLM Process streamlines processes for product development, material selection, formulation, and new product introductions. The solution is helping process manufacturers worldwide: </p>\r\n<p><strong>Deliver Fast Innovation.</strong> Companies using Infor10 PLM Process can reduce the time to develop new products 50% or more by simplifying development processes, improving supply chain collaboration, and integrating product lifecycle management with enterprise resource planning (ERP) and other core processes. <br><br><strong>Optimize Formulas.</strong> Infor10 PLM Process delivers industry-leading capability for analyzing material cost, inventory, and manufacturing capacity to help process companies select the best formula for a given product. By optimizing product formulas, process companies can significantly reduce material costs and manufacture more efficiently. <br><br><strong>Ensure 100% Labeling Compliance.</strong> For process companies, complying with label content requirements is critical to overall success. Infor10 PLM Process provides the capabilities food and beverage, home and personal care, pharmaceutical, and nutraceutical companies need to design and produce labels that consistently meet government regulations. <br><br>When you use Infor10 PLM Process, your company will become more agile and responsive to customers and your product performance will increase. <br></p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "A best-of-breed product lifecycle management solution created specifically for process manufacturers."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>To be competitive, process manufacturers have to develop new products quickly, produce them using the best possible formula, and maintain full compliance with all regulatory requirements. It's a unique set of requirements that demands a tailored approach to product lifecycle management (PLM).</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 CPM Planning, Budgeting and Forecasting (PM10)",
+			"shortName" : "Infor10 CPM Planning (PM10)",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 18,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>With CPM Planning, Budgeting and Forecasting, companies can leverage technology to plan and forecast objectively, quickly, and accurately, and strengthen their overall performance. It also helps them assess the potential impact of key events across the organization; simplify the creation and maintenance of relevant, dynamic plans and budgets that support organizational goals; and improve overall results.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "\r\n<p>CPM Planning, Budgeting and Forecasting helps you quickly set high level plan targets, develop detailed driver-based operational and financial plans, and collect and manage the budget and forecast information required to achieve your planned objectives.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_2",
+						"text" : "<p>ERP Business is built with extensibility from the ground up. The ERP Business framework gives you the ability to adapt the system to your business, rather than requiring you to force your business to fit the software. The model in the ERP Business framework makes it possible to adapt the ERP Business application to new business requirements without incurring the high cost and delays involved in modifying or writing new code. This, in turn, allows you to rapidly adapt the system to your business, while continuing to receive new features and fixes.</p>\r\n\r\n<p>With ERP Business, you get:</p>\r\n\r\n<p>\r\n<ul>\r\n<li>Mixed mode manufacturing. ERP Business accommodates true mixed mode manufacturing. From repetitive to engineer-to-order, you get the processes you need to accelerate production and meet customer demand more quickly.</li>\r\n<li>Complex product configuration. Integrated management tools ensure configured orders are accurate for the customer and feasible for the production department.</li>\r\n<li>Advanced planning & scheduling (APS). A fully integrated, lean advanced planning engine synchronizes material and capacity to customer orders. Continually monitor demand as it occurs, and update production schedules quickly, so you provide accurate and real-time capable-to promise estimates to your customers.</li>\r\n<li>Materials and inventory management. Automate the process of calculating and monitoring your inventory drivers-forecasts, safety stocks, and order size-to keep inventory low while avoiding shortages. You'll be able to shorten order entry time, eliminate duplicate orders, reduce costly data entry errors, and ensure your data is consistent.</li>\r\n<li>Customer management. An efficient method for managing the entire sales process, from customer lead origination and sales opportunity tracking through converting prospects to customers and placing the order. Tight integration between the front and back office streamlines sales and customer service processes, decreases the cost of sales and cost to serve, and ultimately increases revenue.</li>\r\n<li>Role-based information. All the information you need to do your job in a single screen. We have identified the specific daily tasks of specific career positions in our customers' organizations and defined the exact collection of information and actions that help them accomplish that job effectively. This collection is presented on a home page, the set of actions and data most closely associated with a specific, defined job in an organization, such as customer service, controller, or production planner. This helps you make faster, more efficient and informed decisions. </li>\r\n<li>Better user experiences. Easily customize the user interface to fit a particular industry, team, or an individual user. Add, remove, and edit fields, labels, and complete screens without having to call on IT for help. Get the information you need, when you need it, with easy-to-use grid forms. Plus, reduce or eliminate costly modifications to personalized features with upgrades to the system.</li>\r\n<li>Microsoft-based system. Familiar tools and common navigation translate to big time savings on implementation, customization, and training. Plus, ERP Business interfaces with Microsoft Project; the ERP Business calendar and task list tightly integrate with Outlook; and SharePoint pages can include charts and lists that display current ERP Business data.</li>\r\n<li>Flexible deployment options. Subscribe to ERP Business through the Infor cloud computing platform to multiply the performance-enhancing and cost-cutting benefits. Go back and forth between the on-premises and cloud-based versions any time-or combine the two. Wherever you deploy, you benefit from a single sign-on, consistent user interface, and seamless data exchange.</li>\r\n<li>Infor10 Barcode. Fully automate key business processes, cut costs while improving profits, and enhance your ERP functions with modules such as Pallet Management. From receiving to shipping and everything in between, you can integrate Infor Barcode seamlessly with ERP Business version 8.0 and above. Quickly implement the application, plus configure and re-configure it as your business processes change. </li>\r\n\r\n</ul>\r\n</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_3",
+						"text" : "<p>CPM Planning, Budgeting and Forecasting makes it easier for companies like yours to improve performance by streamlining planning, budgeting, and forecasting business processes and reducing the extra hours it takes to create and execute those plans. CPM Planning, Budgeting and Forecasting draws on the information you have across your organization and around the world at the level of detail you require. </p>\r\n<p>It helps companies improve every aspect of the planning, budgeting, and forecasting process, including:</p>\r\n<ul><li><strong>Budgeting more effectively</strong>-Document the budgeting process, educate system users across the organization, monitor company-wide budget submissions and approvals from anywhere at any time, and enforce budget rules and timelines. The central communication portal, guided workflow capabilities, electronic budget submission and approval process, and automated exception alerts are just some of the tools that will help you gain control over this process.</li>\r\n<li><strong>Planning more effectively</strong>-Model your business quickly and test multiple scenarios easily, so you can prepare realistic financial and operational plans that help your organization achieve its goals. Driver-based modeling helps your company define its business success factors, key contributors to those factors, and then plan them in detail providing a roadmap to improved performance. </li>\r\n<li><strong>Testing \"what if\" scenarios</strong>-Comprehensively model your business and perform real-time \"what if\" scenario planning. You can change a business assumption, and watch as the software automatically recalculates the entire model for you, freeing you to concentrate on the actual plan instead of the math. With this solution, you can build in calculations, allocations, phasing, market factors, seasonality, and more.</li>\r\n<li><strong>Ensuring realistic results with forecasting</strong>-Let the calculation engine select the optimum method for data analysis, and create benchmarks to test the likely accuracy of employee-submitted forecasts, ultimately reducing forecast game-playing. You can also use this objective forecast to jump-start your planning and budgeting process. Forecasting lets you predict not only at a summary level, but also at a detailed level, such as product line, region, or sales channel.</li>\r\n<li><strong>Adjusting actions to achieve goals</strong>-Shift planning away from less accurate historical budgeting and forecasting, and move toward continuous predictive modeling and rolling forecast models-automatically adjusting the revenue targets to meet your goals as each period closes and a new period rolls forward.<br></li></ul>\r\n<p>CPM Planning, Budgeting and Forecasting delivers unique value to customers by:</p>\r\n<ul><li>Leveraging familiar spreadsheet tools to improve forecasting.</li>\r\n<li>Delivering sophisticated analytical tools that don't require statistical expertise.</li>\r\n<li>Improving your ability to create complex models and generate accurate forecasts.</li>\r\n<li>Accelerating the process of planning and budgeting.</li></ul>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_2",
+						"text" : "What it Does"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_3",
+						"text" : "The Planning, Budgeting, and Forecasting\r\nDifference"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "Ensure realistic results and improved performance when plans, budgets, and forecasts all work seamlessly with each other."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>With CPM Planning, Budgeting and Forecasting, companies can leverage technology to plan and forecast objectively, quickly, and accurately, and strengthen their overall performance. It also helps them assess the potential impact of key events across the organization; simplify the creation and maintenance of relevant, dynamic plans and budgets that support organizational goals; and improve overall results.</p>"
+					} ]
+		},
+		{
+			"id" : null,
+			"name" : "Infor10 CPM Reporting and Analysis (PM10)",
+			"shortName" : "Infor10 CPM Reporting and Analysis (PM10)",
+			"trialsAvailable" : false,
+			"deploymentsAvailable" : false,
+			"ieOnly" : false,
+			"tileSize" : "small",
+			"tileOrder" : 19,
+			"contactMap" : {},
+			"templateName" : "null",
+			"amis" : [],
+			"accessKey" : "null",
+			"secretKey" : "null",
+			"productDescriptionDtos" : [
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "header_large_desc_text",
+						"text" : "<p>You have to deliver accurate financial information to decision makers across your business on demand. But in order to do that, you need powerful performance management (PM) tools. Infor PM can help.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_1",
+						"text" : "<p>You have to deliver accurate financial information to decision makers across your business on demand. But in order to do that, you need powerful performance management (PM) tools. Infor PM can help.</p>\r\n<p>Using CPM Reporting and Analysis, you'll be able to:</p>\r\n<ul>\r\n<li>Report financial results more quickly and accurately. </li>\r\n<li>Gather information and share it throughout your organization-fast.</li>\r\n<li>Provide important information to decision makers whenever they need it.</li>\r\n<li>See performance improvement sooner rather than later. </li></ul>\r\n<p>Even better, you'll be able to do all those things easily, because Infor PM tools have the look and feel of familiar spreadsheets-without the drawbacks.</p>\r\n<p>CPM Reporting and Analysis lets you:</p>\r\n<ul>\r\n<li>Access general ledger information easily.</li>\r\n<li>Provide comprehensive financial reports and dashboards.</li>\r\n<li>Analyze financial results across multiple dimensions, hierarchies, and currencies.</li>\r\n<li>See a full audit trail into all financial data.</li>\r\n<li>Manage secure access to key financial data.</li></ul>\r\n<p>As a result, you'll get better insight into company performance, be able to spend more time on analysis, and make better decisions, faster.</p>"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "overview_header_1",
+						"text" : "What it Is"
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_desc_text",
+						"text" : "You have to deliver accurate financial information to decision makers across your business on demand."
+					},
+					{
+						"id" : null,
+						"productId" : null,
+						"localeLanguage" : "en",
+						"localeCountry" : "US",
+						"localeVariant" : "",
+						"productDescKey" : "tile_large_desc_text",
+						"text" : "<p>You have to deliver accurate financial information to decision makers across your business on demand. But in order to do that, you need powerful performance management (PM) tools. Infor PM can help.</p>"
+					} ]
+		} ]

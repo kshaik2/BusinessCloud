@@ -1,0 +1,508 @@
+{
+   "AWSTemplateFormatVersion":"2010-09-09",
+   "Description":"Rev 1.03 - OpenVPN instance creation template. | Author: Mike Savage, Infor Global Solutions | Date: Mar. 6, 2012",
+   
+   "Parameters":{
+      "KeyName":{
+	 "Description":"Name of an existing EC2 KeyPair",
+	 "Type":"String"
+      },
+      "AppInstanceType":{
+	 "Type":"String",
+	 "Default":"m1.small",
+	 "Description":"App Server EC2 instance type, e.g. m1.small, m1.large, etc."
+      },
+      "VpcId":{
+	 "Type":"String",
+	 "Description":"VPC ID"
+      },
+      "VpcNetIP":{
+	 "Type":"String",
+	 "Description":"VPC network IP"
+      },
+      "VpcIPnetmask":{
+	 "Type":"String",
+	 "Description":"VPC network subnet mask"
+      },
+      "TargetSubnetId":{
+	 "Type":"String",
+	 "Description":"Subnet ID where the instance should be launched"
+      },
+      "IPaddy":{
+	 "Type":"String",
+	 "Description":"IP address for the instance"
+      },
+      "AWSAccessKeyIdCipher":{
+	 "Type":"String",
+	 "Description":"AWS Access Key ID cipher"
+      },
+      "AWSSecretKeyCipher":{
+	 "Type":"String",
+	 "Description":"AWS Secret Key cipher"
+      }
+   },
+   "Mappings":{
+      "AppRegionMap":{
+	 "us-east-1":{
+	    "AMI":"ami-6bb56602"
+	 },
+	 "us-west-1":{
+	    "AMI":"ami-655a0a20"
+	 },
+	 "us-west-2":{
+	    "AMI":"ami-655a0a20"
+	 },
+	 "eu-west-1":{
+	    "AMI":"ami-7fd4e10b"
+	 },
+	 "ap-southeast-1":{
+	    "AMI":"ami-72621c20"
+	 },
+	 "ap-northeast-1":{
+	    "AMI":"ami-8e08a38f"
+	 },
+	 "sa-east-1":{
+	    "AMI":"ami-8e08a38f"
+	 }
+      },
+      "AWSInstanceType2Arch":{
+	 "t1.micro":{
+	    "Arch":32
+	 },
+	 "m1.small":{
+	    "Arch":32
+	 },
+	 "m1.large":{
+	    "Arch":64
+	 },
+	 "m1.xlarge":{
+	    "Arch":64
+	 },
+	 "m2.xlarge":{
+	    "Arch":64
+	 },
+	 "m2.2xlarge":{
+	    "Arch":64
+	 },
+	 "m2.4xlarge":{
+	    "Arch":64
+	 },
+	 "c1.medium":{
+	    "Arch":32
+	 },
+	 "c1.xlarge":{
+	    "Arch":64
+	 },
+	 "cc1.4xlarge":{
+	    "Arch":64
+	 }
+      }
+   },
+   "Resources":{
+       "OpenVPNAppEc2Instance":{
+	 "Type":"AWS::EC2::Instance",
+	 "Properties":{
+	    "KeyName":{
+	       "Ref":"KeyName"
+	    },
+	    "InstanceType":{
+	       "Ref":"AppInstanceType"
+	    },
+	    "SubnetId":{
+	       "Ref":"TargetSubnetId"
+	    },
+	    "PrivateIpAddress":{
+	       "Ref":"IPaddy"
+	    },
+	    "ImageId":{
+	       "Fn::FindInMap":[
+		  "AppRegionMap",
+		  {
+		     "Ref":"AWS::Region"
+		  },
+		  "AMI"
+	       ]
+	    },
+	    "UserData":{ "Fn::Base64" : 
+        { "Fn::Join" : 
+            [ "\n", [ 
+                { "Fn::Join" : [ "", [ "#!/bin/bash", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLESSYSCONFIG=/etc/sysconfig/iptables-config", "" ] ] },
+                { "Fn::Join" : [ "", [ "OVPNUDP=/etc/openvpn/openvpn_udp.conf", "" ] ] },
+                { "Fn::Join" : [ "", [ "OVPNTCP=/etc/openvpn/openvpn_tcp.conf", "" ] ] },
+                { "Fn::Join" : [ "", [ "UDPOVPNCLIENT=/u00/openvpn/client_udp.ovpn", "" ] ] },
+                { "Fn::Join" : [ "", [ "TCPOVPNCLIENT=/u00/openvpn/client_tcp.ovpn", "" ] ] },
+                { "Fn::Join" : [ "", [ "SCRIPTFILE1=/var/ec2/greeneggs.py", "" ] ] },
+                { "Fn::Join" : [ "", [ "SCRIPTFILE2=/var/ec2/s3.py", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'IPTSCEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_MODULES=\"\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_MODULES_UNLOAD=\"yes\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_SAVE_ON_STOP=\"yes\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_SAVE_ON_RESTART=\"yes\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_SAVE_COUNTER=\"no\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_STATUS_NUMERIC=\"yes\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_STATUS_VERBOSE=\"no\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTABLES_STATUS_LINENUMBERS=\"yes\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "IPTSCEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $IPTABLESSYSCONFIG", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'OVPNUDPEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "port 1194", "" ] ] },
+                { "Fn::Join" : [ "", [ "proto udp", "" ] ] },
+                { "Fn::Join" : [ "", [ "dev tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "fragment 1400", "" ] ] },
+                { "Fn::Join" : [ "", [ "ca ca.crt", "" ] ] },
+                { "Fn::Join" : [ "", [ "cert server.crt", "" ] ] },
+                { "Fn::Join" : [ "", [ "key server.key", "" ] ] },
+                { "Fn::Join" : [ "", [ "dh dh2048.pem", "" ] ] },
+                { "Fn::Join" : [ "", [ "server 5.5.16.0 255.255.240.0", "" ] ] },
+                { "Fn::Join" : [ " ", [ { "Fn::Join": [ "", [ "push \"route ", { "Ref" : "VpcNetIP" } ] ] }, { "Fn::Join": [ "", [ { "Ref" : "VpcIPnetmask" }, "\"" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ "cipher AES-256-CBC", "" ] ] },
+                { "Fn::Join" : [ "", [ "auth md5", "" ] ] },
+                { "Fn::Join" : [ "", [ "keepalive 10 120", "" ] ] },
+                { "Fn::Join" : [ "", [ "max-clients 10", "" ] ] },
+                { "Fn::Join" : [ "", [ "comp-lzo", "" ] ] },
+                { "Fn::Join" : [ "", [ "user nobody", "" ] ] },
+                { "Fn::Join" : [ "", [ "group users", "" ] ] },
+                { "Fn::Join" : [ "", [ "persist-key", "" ] ] },
+                { "Fn::Join" : [ "", [ "persist-tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "status /var/log/openvpn-status.log", "" ] ] },
+                { "Fn::Join" : [ "", [ "verb 3", "" ] ] },
+                { "Fn::Join" : [ "", [ "#duplicate-cn # (this means several users can use the same key)", "" ] ] },
+                { "Fn::Join" : [ "", [ "OVPNUDPEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $OVPNUDP", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'OVPNTCPEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "port 443", "" ] ] },
+                { "Fn::Join" : [ "", [ "proto tcp", "" ] ] },
+                { "Fn::Join" : [ "", [ "dev tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "ca ca.crt", "" ] ] },
+                { "Fn::Join" : [ "", [ "cert server.crt", "" ] ] },
+                { "Fn::Join" : [ "", [ "key server.key", "" ] ] },
+                { "Fn::Join" : [ "", [ "dh dh2048.pem", "" ] ] },
+                { "Fn::Join" : [ "", [ "server 5.5.32.0 255.255.240.0", "" ] ] },
+                { "Fn::Join" : [ " ", [ { "Fn::Join": [ "", [ "push \"route ", { "Ref" : "VpcNetIP" } ] ] }, { "Fn::Join": [ "", [ { "Ref" : "VpcIPnetmask" }, "\"" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ "cipher AES-256-CBC", "" ] ] },
+                { "Fn::Join" : [ "", [ "auth md5", "" ] ] },
+                { "Fn::Join" : [ "", [ "keepalive 10 120", "" ] ] },
+                { "Fn::Join" : [ "", [ "max-clients 10", "" ] ] },
+                { "Fn::Join" : [ "", [ "comp-lzo", "" ] ] },
+                { "Fn::Join" : [ "", [ "user nobody", "" ] ] },
+                { "Fn::Join" : [ "", [ "group users", "" ] ] },
+                { "Fn::Join" : [ "", [ "persist-key", "" ] ] },
+                { "Fn::Join" : [ "", [ "persist-tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "status /var/log/openvpn-status-tcp.log", "" ] ] },
+                { "Fn::Join" : [ "", [ "verb 3", "" ] ] },
+                { "Fn::Join" : [ "", [ "#duplicate-cn # (this means several users can use the same key)", "" ] ] },
+                { "Fn::Join" : [ "", [ "OVPNTCPEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $OVPNTCP", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "chkconfig openvpn on", "" ] ] },
+                { "Fn::Join" : [ "", [ "chkconfig iptables on", "" ] ] },
+                { "Fn::Join" : [ "", [ "sed -i -e 's/net\\.ipv4\\.ip_forward = 0/net\\.ipv4\\.ip_forward = 1/' /etc/sysctl.conf", "" ] ] },
+                { "Fn::Join" : [ "", [ "sysctl -p", "" ] ] },
+                { "Fn::Join" : [ "", [ "iptables -t nat -A POSTROUTING -j MASQUERADE", "" ] ] },
+                { "Fn::Join" : [ "", [ "mkdir -p /u00/openvpn", "" ] ] },
+                { "Fn::Join" : [ "", [ "cp -R /usr/share/openvpn/easy-rsa /u00/openvpn/", "" ] ] },
+                { "Fn::Join" : [ "", [ "cd /u00/openvpn/easy-rsa/2.0/", "" ] ] },
+                { "Fn::Join" : [ "", [ "sed -i -e 's/KEY_SIZE=1024/KEY_SIZE=2048/' -e 's/KEY_PROVINCE=\\\"CA\\\"/KEY_PROVINCE=\\\"GA\\\"/' -e 's/KEY_CITY=\\\"SanFrancisco\\\"/KEY_CITY=\\\"Alpharetta\\\"/' -e 's/KEY_ORG=\\\"Fort-Funston\\\"/KEY_ORG=\\\"Infor\\\"/' -e 's/KEY_EMAIL=\\\"me\\@myhost\\.mydomain\\\"/KEY_EMAIL=\\\"noreply\\@infor\\.com\\\"/' /u00/openvpn/easy-rsa/2.0/vars", "" ] ] },
+                { "Fn::Join" : [ "", [ ". ./vars", "" ] ] },
+                { "Fn::Join" : [ "", [ "./clean-all", "" ] ] },
+                { "Fn::Join" : [ "", [ "export EASY_RSA=\"${EASY_RSA:-.}\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "\"$EASY_RSA/pkitool\" --initca $*", "" ] ] },
+                { "Fn::Join" : [ "", [ "\"$EASY_RSA/pkitool\" --server server", "" ] ] },
+                { "Fn::Join" : [ "", [ "./build-dh", "" ] ] },
+                { "Fn::Join" : [ "", [ "chown -R openvpn.openvpn /u00/openvpn", "" ] ] },
+                { "Fn::Join" : [ "", [ "cp keys/{ca.crt,ca.key,server.crt,server.key,dh2048.pem} /etc/openvpn/", "" ] ] },
+                { "Fn::Join" : [ "", [ "\"$EASY_RSA/pkitool\" firstlight", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'UDPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ " ", [ { "Fn::Join": [ " ", [ "remote", { "Ref" : "OpenVPNEIPAddress" } ] ] }, { "Fn::Join": [ " ", [ "1194", "udp" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ "<ca>", "" ] ] },
+                { "Fn::Join" : [ "", [ "UDPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $UDPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat /etc/openvpn/ca.crt >> $UDPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'UDPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "</ca>", "" ] ] },
+                { "Fn::Join" : [ "", [ "<cert>", "" ] ] },
+                { "Fn::Join" : [ "", [ "UDPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") >> $UDPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "sed -n '/BEGIN/,$p' /u00/openvpn/easy-rsa/2.0/keys/firstlight.crt >> $UDPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'UDPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "</cert>", "" ] ] },
+                { "Fn::Join" : [ "", [ "<key>", "" ] ] },
+                { "Fn::Join" : [ "", [ "UDPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") >> $UDPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat /u00/openvpn/easy-rsa/2.0/keys/firstlight.key >> $UDPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'UDPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "</key>", "" ] ] },
+                { "Fn::Join" : [ "", [ "setenv FORWARD_COMPATIBLE 1", "" ] ] },
+                { "Fn::Join" : [ "", [ "client", "" ] ] },
+                { "Fn::Join" : [ "", [ "proto udp", "" ] ] },
+                { "Fn::Join" : [ "", [ "fragment 1400", "" ] ] },
+                { "Fn::Join" : [ "", [ "mssfix", "" ] ] },
+                { "Fn::Join" : [ "", [ "server-poll-timeout 4", "" ] ] },
+                { "Fn::Join" : [ "", [ "nobind", "" ] ] },
+                { "Fn::Join" : [ "", [ "dev tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "dev-type tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "ns-cert-type server", "" ] ] },
+                { "Fn::Join" : [ "", [ "reneg-sec 604800", "" ] ] },
+                { "Fn::Join" : [ "", [ "sndbuf 100000", "" ] ] },
+                { "Fn::Join" : [ "", [ "rcvbuf 100000", "" ] ] },
+                { "Fn::Join" : [ "", [ "#auth-user-pass", "" ] ] },
+                { "Fn::Join" : [ "", [ "auth MD5", "" ] ] },
+                { "Fn::Join" : [ "", [ "cipher AES-256-CBC", "" ] ] },
+                { "Fn::Join" : [ "", [ "comp-lzo", "" ] ] },
+                { "Fn::Join" : [ "", [ "verb 3", "" ] ] },
+                { "Fn::Join" : [ "", [ "pull", "" ] ] },
+                { "Fn::Join" : [ "", [ "UDPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") >> $UDPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'TCPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ " ", [ { "Fn::Join": [ " ", [ "remote", { "Ref" : "OpenVPNEIPAddress" } ] ] }, { "Fn::Join": [ " ", [ "443", "tcp" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ "<ca>", "" ] ] },
+                { "Fn::Join" : [ "", [ "TCPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $TCPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat /etc/openvpn/ca.crt >> $TCPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'TCPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "</ca>", "" ] ] },
+                { "Fn::Join" : [ "", [ "<cert>", "" ] ] },
+                { "Fn::Join" : [ "", [ "TCPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $TCPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "sed -n '/BEGIN/,$p' /u00/openvpn/easy-rsa/2.0/keys/firstlight.crt >> $TCPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'TCPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "</cert>", "" ] ] },
+                { "Fn::Join" : [ "", [ "<key>", "" ] ] },
+                { "Fn::Join" : [ "", [ "TCPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $TCPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat /u00/openvpn/easy-rsa/2.0/keys/firstlight.key >> $TCPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'TCPOVPNEOF'", "" ] ] },
+                { "Fn::Join" : [ "", [ "</key>", "" ] ] },
+                { "Fn::Join" : [ "", [ "setenv FORWARD_COMPATIBLE 1", "" ] ] },
+                { "Fn::Join" : [ "", [ "client", "" ] ] },
+                { "Fn::Join" : [ "", [ "proto tcp", "" ] ] },
+                { "Fn::Join" : [ "", [ "mssfix", "" ] ] },
+                { "Fn::Join" : [ "", [ "server-poll-timeout 4", "" ] ] },
+                { "Fn::Join" : [ "", [ "nobind", "" ] ] },
+                { "Fn::Join" : [ "", [ "dev tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "dev-type tun", "" ] ] },
+                { "Fn::Join" : [ "", [ "ns-cert-type server", "" ] ] },
+                { "Fn::Join" : [ "", [ "reneg-sec 604800", "" ] ] },
+                { "Fn::Join" : [ "", [ "sndbuf 100000", "" ] ] },
+                { "Fn::Join" : [ "", [ "rcvbuf 100000", "" ] ] },
+                { "Fn::Join" : [ "", [ "#auth-user-pass", "" ] ] },
+                { "Fn::Join" : [ "", [ "auth MD5", "" ] ] },
+                { "Fn::Join" : [ "", [ "cipher AES-256-CBC", "" ] ] },
+                { "Fn::Join" : [ "", [ "comp-lzo", "" ] ] },
+                { "Fn::Join" : [ "", [ "verb 3", "" ] ] },
+                { "Fn::Join" : [ "", [ "pull", "" ] ] },
+                { "Fn::Join" : [ "", [ "TCPOVPNEOF", "" ] ] },
+                { "Fn::Join" : [ "", [ ") >> $TCPOVPNCLIENT", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'EOPS1'", "" ] ] },
+                { "Fn::Join" : [ "", [ "#!/usr/bin/python26", "" ] ] },
+                { "Fn::Join" : [ "", [ "from Crypto.Cipher import ARC4", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ { "Fn::Join": [ "", [ "keyid='", { "Ref": "AWSAccessKeyIdCipher" } ] ] }, { "Fn::Join": [ "", [ "'", "" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ { "Fn::Join": [ "", [ "secretkey='", { "Ref": "AWSSecretKeyCipher" } ] ] }, { "Fn::Join": [ "", [ "'", "" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "outcreds=\"/var/ec2/samiam\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "fwrite = open(outcreds, 'w')", "" ] ] },
+                { "Fn::Join" : [ "", [ "fwrite.write('AWSAccessKeyId='+keyid+'\\n')", "" ] ] },
+                { "Fn::Join" : [ "", [ "fwrite.write('AWSSecretKey='+secretkey+'\\n')", "" ] ] },
+                { "Fn::Join" : [ "", [ "fwrite.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "EOPS1", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $SCRIPTFILE1", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "(", "" ] ] },
+                { "Fn::Join" : [ "", [ "cat <<'EOPS2'", "" ] ] },
+                { "Fn::Join" : [ "", [ "#!/usr/bin/python26", "" ] ] },
+                { "Fn::Join" : [ "", [ "import os, sys, time, types", "" ] ] },
+                { "Fn::Join" : [ "", [ "import subprocess", "" ] ] },
+                { "Fn::Join" : [ "", [ "from socket import gethostbyaddr", "" ] ] },
+                { "Fn::Join" : [ "", [ "from os.path import isfile", "" ] ] },
+                { "Fn::Join" : [ "", [ "import httplib, urllib", "" ] ] },
+                { "Fn::Join" : [ "", [ "from urlparse import urlparse", "" ] ] },
+                { "Fn::Join" : [ "", [ "import logging", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "debug=1 # Set to 1 to turn on logging", "" ] ] },
+                { "Fn::Join" : [ "", [ "force=0   # Set to 1 to force run at every startup", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def replace_all(text, dic):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    for i, j in dic.iteritems():", "" ] ] },
+                { "Fn::Join" : [ "", [ "        text = text.replace(i, j)", "" ] ] },
+                { "Fn::Join" : [ "", [ "    return text", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "def nslooky(ip):", "" ] ] },
+                { "Fn::Join" : [ "", [ "      try:", "" ] ] },
+                { "Fn::Join" : [ "", [ "           output = gethostbyaddr(ip)", "" ] ] },
+                { "Fn::Join" : [ "", [ "           return output[0]", "" ] ] },
+                { "Fn::Join" : [ "", [ "      except:", "" ] ] },
+                { "Fn::Join" : [ "", [ "           output = \"not found\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "           return output", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "log_file = '/var/ec2/initscript.log'", "" ] ] },
+                { "Fn::Join" : [ "", [ "log = logging.getLogger()", "" ] ] },
+                { "Fn::Join" : [ "", [ "ch  = logging.StreamHandler()", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "if os.path.exists(os.path.dirname(log_file)):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    fh = logging.FileHandler(log_file)", "" ] ] },
+                { "Fn::Join" : [ "", [ "else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    raise \"log directory does not exist (\" + os.path.dirname(log_file) + \")\"", "" ] ] },
+                { "Fn::Join" : [ "", [ "    sys.exit(1)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.addHandler(ch)", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.addHandler(fh)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "if debug:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.setLevel(logging.DEBUG)", "" ] ] },
+                { "Fn::Join" : [ "", [ "else:", "" ] ] },
+                { "Fn::Join" : [ "", [ "    log.setLevel(logging.INFO)", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ { "Fn::Join": [ "", [ "sigurl='", { "Ref": "OpenVPNinitWaitHandle" } ] ] }, { "Fn::Join": [ "", [ "'", "" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ { "Fn::Join": [ "", [ "awsregion='", { "Ref": "AWS::Region" } ] ] }, { "Fn::Join": [ "", [ "'", "" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ { "Fn::Join": [ "", [ "vpcid='", { "Ref" : "VpcId" } ] ] }, { "Fn::Join": [ "", [ "'", "" ] ] } ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "import boto", "" ] ] },
+                { "Fn::Join" : [ "", [ "import boto.ec2", "" ] ] },
+                { "Fn::Join" : [ "", [ "from boto.ec2.connection import EC2Connection", "" ] ] },
+                { "Fn::Join" : [ "", [ "import re", "" ] ] },
+                { "Fn::Join" : [ "", [ "from boto.s3.connection import S3Connection", "" ] ] },
+                { "Fn::Join" : [ "", [ "from boto.s3.connection import Location", "" ] ] },
+                { "Fn::Join" : [ "", [ "from boto.s3.key import Key", "" ] ] },
+                { "Fn::Join" : [ "", [ "regions = boto.ec2.regions()", "" ] ] },
+                { "Fn::Join" : [ "", [ "for index in range(len(regions)):", "" ] ] },
+                { "Fn::Join" : [ "", [ "    if regions[index].__dict__['name'] == awsregion:", "" ] ] },
+                { "Fn::Join" : [ "", [ "        regioninput = index", "" ] ] },
+                { "Fn::Join" : [ "", [ "regioninput = int(regioninput)", "" ] ] },
+                { "Fn::Join" : [ "", [ "regionconn = regions[regioninput]", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "S3conn = S3Connection()", "" ] ] },
+                { "Fn::Join" : [ "", [ "S3bucketname = 'ovpn-'+vpcid", "" ] ] },
+                { "Fn::Join" : [ "", [ "b = S3conn.create_bucket(S3bucketname, location=Location.DEFAULT)", "" ] ] },
+                { "Fn::Join" : [ "", [ "from boto.s3.key import Key", "" ] ] },
+                { "Fn::Join" : [ "", [ "k = Key(b)", "" ] ] },
+                { "Fn::Join" : [ "", [ "k.key = vpcid+'_client_udp.ovpn'", "" ] ] },
+                { "Fn::Join" : [ "", [ "k.set_contents_from_filename('/u00/openvpn/client_udp.ovpn')", "" ] ] },
+                { "Fn::Join" : [ "", [ "k.set_acl('public-read')", "" ] ] },
+                { "Fn::Join" : [ "", [ "s3url = 'https://s3.amazonaws.com/'+S3bucketname+'/'+vpcid+'_client_udp.ovpn'", "" ] ] },
+                { "Fn::Join" : [ "", [ "", "" ] ] },
+                { "Fn::Join" : [ "", [ "o = urlparse(sigurl)", "" ] ] },
+                { "Fn::Join" : [ "", [ "pathnquery = o.path + \"?\" + o.query", "" ] ] },
+                { "Fn::Join" : [ "", [ "conn = httplib.HTTPSConnection(o.netloc)", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.debug('Here we go...')", "" ] ] },
+                { "Fn::Join" : [ "", [ "body_content_success = '{\"Status\" : \"SUCCESS\",\"Reason\" : \"Configuration Complete\",\"UniqueId\" : \"OpenVPNconfURL\",\"Data\" : \"%s\"  }' % (s3url)", "" ] ] },
+                { "Fn::Join" : [ "", [ "body_content_failure = '{\"Status\" : \"FAILURE\",\"Reason\" : \"Error during deployment\",\"UniqueId\" : \"OpenVPN02102012\",\"Data\" : \"OpenVPN deployment failed.\"}'", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.debug('Made it to the end...')", "" ] ] },
+                { "Fn::Join" : [ "", [ "conn.request(\"PUT\", pathnquery, body_content_success)", "" ] ] },
+                { "Fn::Join" : [ "", [ "response = conn.getresponse()", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.debug('%s, %s', response.status, response.reason)", "" ] ] },
+                { "Fn::Join" : [ "", [ "data = response.read()", "" ] ] },
+                { "Fn::Join" : [ "", [ "log.debug('%s',data)", "" ] ] },
+                { "Fn::Join" : [ "", [ "conn.close()", "" ] ] },
+                { "Fn::Join" : [ "", [ "EOPS2", "" ] ] },
+                { "Fn::Join" : [ "", [ ") > $SCRIPTFILE2", "" ] ] },
+                { "Fn::Join" : [ "", [ "# -----------------------------------------------------------", "" ] ] },
+                { "Fn::Join" : [ "", [ "if [ -f \"$SCRIPTFILE1\" ]; then", "" ] ] },
+                { "Fn::Join" : [ "", [ "  chmod 755 $SCRIPTFILE1", "" ] ] },
+                { "Fn::Join" : [ "", [ "fi", "" ] ] },
+                { "Fn::Join" : [ "", [ "if [ -f \"$SCRIPTFILE2\" ]; then", "" ] ] },
+                { "Fn::Join" : [ "", [ "  chmod 755 $SCRIPTFILE2", "" ] ] },
+                { "Fn::Join" : [ "", [ "fi", "" ] ] },
+                { "Fn::Join" : [ "", [ "/var/ec2/greeneggs.py", "" ] ] },
+                { "Fn::Join" : [ "", [ "export AWS_CREDENTIAL_FILE=/var/ec2/samiam", "" ] ] },
+                { "Fn::Join" : [ "", [ "export PYTHONPATH=/opt/boto-2.2.1:/opt/ipaddr-2.1.10", "" ] ] },
+                { "Fn::Join" : [ "", [ "sleep 3", "" ] ] },
+                { "Fn::Join" : [ "", [ "/bin/bash -c '/var/ec2/s3.py' >> /var/ec2/s3.out 2>&1", "" ] ] },
+                { "Fn::Join" : [ "", [ "service openvpn start", "" ] ] }
+            ] ] 
+        }
+      },
+	    "SecurityGroupIds": [{ "Ref" : "SSHSG" }, { "Ref" : "OpenVPNSG" }]
+	 }
+      },
+      "SSHSG" : {
+                 "Type" : "AWS::EC2::SecurityGroup",
+                       "Properties" : {
+                            "VpcId" : { "Ref" : "VpcId" },
+                            "GroupDescription" : "SSH Security Group",
+                            "SecurityGroupIngress" : [ {
+                                 "IpProtocol" : "tcp",
+                                 "FromPort" : "22",
+                                 "ToPort" : "22",
+                                 "CidrIp" : "209.214.223.0/24"
+                                },
+                                {
+                                 "IpProtocol" : "tcp",
+                                 "FromPort" : "22",
+                                 "ToPort" : "22",
+                                 "CidrIp" : "108.213.193.25/32"
+                                } ]
+                 }
+      },
+     "OpenVPNSG" : {
+                 "Type" : "AWS::EC2::SecurityGroup",
+                       "Properties" : {
+                            "VpcId" : { "Ref" : "VpcId" },
+                            "GroupDescription" : "OpenVPN Security Group",
+                            "SecurityGroupIngress" : [ {
+                                 "IpProtocol" : "udp",
+                                 "FromPort" : "1194",
+                                 "ToPort" : "1194",
+                                 "CidrIp" : "209.214.223.0/24"
+                                },
+                                {
+                                 "IpProtocol" : "udp",
+                                 "FromPort" : "1194",
+                                 "ToPort" : "1194",
+                                 "CidrIp" : "108.213.193.25/32"
+                                } ]
+                 }
+      },
+       "OpenVPNEIPAddress" : {
+	    "Type" : "AWS::EC2::EIP",
+	    "Properties" : {
+	    "Domain" : "vpc"
+	    }
+	},
+	"OpenVPNEIPAssoc" : {
+	    "Type" : "AWS::EC2::EIPAssociation",
+	    "Properties" : {
+		"InstanceId" : { "Ref" : "OpenVPNAppEc2Instance" },
+		"AllocationId" : {"Fn::GetAtt" : [ "OpenVPNEIPAddress" , "AllocationId"] }
+	    }
+	},
+        "OpenVPNinitWaitHandle" : {
+            "Type" : "AWS::CloudFormation::WaitConditionHandle",
+            "Properties" : {
+            }
+        },
+        "OpenVPNinitWaitCondition" : {
+            "Type" : "AWS::CloudFormation::WaitCondition",
+            "DependsOn" : "OpenVPNAppEc2Instance",
+            "Properties" : {
+                "Handle" : { "Ref" : "OpenVPNinitWaitHandle" },
+                "Timeout" : "7200"
+            }
+           }
+         },
+   "Outputs":{
+      "OpenVPNinitData" : {
+            "Value" : { "Fn::GetAtt" : [ "OpenVPNinitWaitCondition", "Data" ]},
+            "Description" : "OpenVPN Initialization WaitCondition signal"
+        }
+     }
+}

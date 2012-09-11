@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+  xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	
+    <persistence-unit name="CloudSuiteDB-Test" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.infor.cloudsuite.entity.AmazonCredentials</class>
+        <class>com.infor.cloudsuite.entity.TrialEnvironment</class>
+        <class>com.infor.cloudsuite.entity.TrialInstance</class>
+        <class>com.infor.cloudsuite.entity.Product</class>
+        <class>com.infor.cloudsuite.entity.User</class>
+        <class>com.infor.cloudsuite.entity.Company</class>
+        <class>com.infor.cloudsuite.entity.Industry</class>
+        <class>com.infor.cloudsuite.entity.UserProduct</class>
+        <class>com.infor.cloudsuite.entity.Validation</class>
+        <class>com.infor.cloudsuite.entity.DomainBlacklist</class>
+        <class>com.infor.cloudsuite.entity.ConsultRequest</class>
+        <class>com.infor.cloudsuite.entity.UserTracking</class>
+        <class>com.infor.cloudsuite.entity.Region</class>
+        <class>com.infor.cloudsuite.entity.TrialRequest</class>
+        <class>com.infor.cloudsuite.entity.ProductDescription</class>
+        <class>com.infor.cloudsuite.entity.TrialProductChild</class>
+        <class>com.infor.cloudsuite.entity.UserToUser</class>
+        <class>com.infor.cloudsuite.entity.DeploymentStack</class>
+        <class>com.infor.cloudsuite.entity.DeploymentStackLog</class>
+        <class>com.infor.cloudsuite.entity.AmiDescriptor</class>
+        <class>com.infor.cloudsuite.entity.Schedule</class>
+        <class>com.infor.cloudsuite.entity.ProductVersion</class>
+        <class>com.infor.cloudsuite.entity.TokenStore</class>
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <validation-mode>NONE</validation-mode>
+        <properties>
+            <!-- tx manager for a JTA transaction manager.(Not currently using.) -->
+            <!--<property name="hibernate.transaction.manager_lookup_class" value="com.atomikos.icatch.jta.hibernate3.TransactionManagerLookup"/>-->
+            <property name="hibernate.generate_statistics" value="true"/>
+            <!--<property name="hibernate.show_sql" value=""/>-->
+            <property name="hibernate.dialect" value="com.infor.cloudsuite.platform.jpa.hibernate.ExtHSQLDialect"/>
+            <property name="javax.persistence.validation.mode" value="none"/>
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <!--<property name="hibernate.use_second_level_cache" value="true"/> controlled by shared-cache-mode -->
+            <!--<property name="hibernate.cache.use_query_cache" value="true"/>-->
+            <!-- HashtableCacheProvider is ok for Testing only!-->
+            <!--<property name="hibernate.cache.provider_class" value=""/>-->
+            <!-- ExtRegionFactoryCacheProviderBridge allows for the definition of a concurrency strategy -->
+            <!--<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>-->
+            <!-- Define a default cache concurrency stategy-->
+            <!--<property name="hibernate.cache.default_cache_concurrency_strategy" value="nonstrict-read-write"/>-->
+
+            <!-- 
+            <property name="hibernate.cache.provider_class" value="com.googlecode.hibernate.memcached.MemcachedCacheProvider"/>
+            <property name="hibernate.memcached.servers" value="192.168.126.130:11211"/>    
+             -->
+        </properties>
+        <!-- 
+        Adding more <class>f.q.c.Name</class> elements here is not required.  
+        The annotated classes will still be detected, as can be observed in the 
+        following log output:
+        
+        INFO [main] Ejb3Configuration.scanForClasses(652) | found EJB3 Entity bean: com.mycompany.model.Person
+        
+        That being said, it will still work if you do add your <class> 
+        declarations here for clarity, simply as a way to explicitly see all the 
+        classes that are mapped as persistent entities.  Do whatever blows your 
+        skirt up.
+        -->
+        
+    </persistence-unit>
+    
+</persistence>
